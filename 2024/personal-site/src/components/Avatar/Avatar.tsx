@@ -1,7 +1,20 @@
+import { useRef } from 'react';
 import classes from './avatar.module.scss';
 import avatar from '../../assets/me.svg';
 
 export const Avatar = () => {
+
+    const emailBtn = useRef<HTMLButtonElement>(null);
+
+    function handleEmailClick() {
+        navigator.clipboard.writeText('mktyler01@gmail.com');
+        if (emailBtn.current) {
+            emailBtn.current.textContent = 'Copied ✓';
+            setTimeout(() => {
+                if (emailBtn.current) emailBtn.current.textContent = 'Copy email';
+            }, 3000);
+        }
+    }
 	
 	return (
 		<div className={classes.container}>
@@ -13,6 +26,15 @@ export const Avatar = () => {
                 <p>
                     Software Engineer
                 </p>
+                <nav>
+                    <button ref={emailBtn} onClick={handleEmailClick} className={classes.contactBtn} title="Copy mktyler01@gmail.com">
+                        Copy email
+                    </button>
+                    &nbsp;|&nbsp;
+                    <a className={classes.contactLink} href="https://www.linkedin.com/in/michael-tyler-569159147/" target="_blank" title="Mike Tyler's LinkedIn page">
+                        LinkedIn
+                    </a>
+                </nav>
             </header>
         </div>
 	);

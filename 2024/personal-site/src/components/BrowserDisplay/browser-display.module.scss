@@ -1,3 +1,5 @@
+@import '../../styles/variables.scss';
+
 .container {
     background-color: #fff;
     border: 2px solid #000;
@@ -12,8 +14,12 @@
     // box-shadow: 0 0 0 0 #b3b3b3;
     // animation: lift .8s ease 1s forwards;
     box-shadow: -15px 15px 0 0 #b3b3b3;
-    @media (max-width: 1000px) {
+    @media (max-width: $screen-lg) {
         margin-left: 50px;
+    }
+    box-shadow: -15px 15px 0 0 #b3b3b3;
+    @media (max-width: $screen-md) {
+        display: none;
     }
 
     @keyframes lift {

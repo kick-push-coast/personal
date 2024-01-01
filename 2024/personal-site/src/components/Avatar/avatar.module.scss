@@ -1,5 +1,12 @@
+@import '../../styles/variables.scss';
+
 .container {
     width: 40%;
+    @media (max-width: $screen-md) {
+        width: 100%;
+        margin: 0 auto;
+        max-width: 400px;
+    }
 }
 
 .avatarImage {
@@ -19,4 +26,18 @@
     p {
         font-size: 1.8rem;
     }
+    @media (max-width: $screen-lg) {
+        h1 {
+            font-size: 2.6rem;
+        }
+        p {
+            font-size: 1.6rem;
+        }
+    }
+}
+
+.contactBtn, .contactLink {
+    font-size: 1.2rem;
+    line-height: 1.4;
+    cursor: pointer;
 }

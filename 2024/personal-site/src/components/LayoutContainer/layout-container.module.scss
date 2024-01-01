@@ -1,3 +1,5 @@
+@import '../../styles/variables.scss';
+
 .layout {
     display: flex;
     align-items: center;
@@ -6,7 +8,12 @@
     box-sizing: border-box;
     max-width: 1600px;
     margin: 0 auto;
-    @media (max-width: 1000px) {
+    @media (max-width: $screen-lg) {
         padding: 60px;
+    }
+    @media (max-width: $screen-md) {
+        padding: 30px;
+        height: auto;
+        flex-direction: column;
     }
 }

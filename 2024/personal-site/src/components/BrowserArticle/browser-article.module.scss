@@ -1,16 +1,36 @@
+@import '../../styles/variables.scss';
+
 .container {
     font-family: monospace;
-    padding: 70px;
+    padding: 70px 90px;
     h2 {
         font-size: 2.6rem;
     }
     h3 {
         font-size: 2rem;
     }    
-    p, ul {
+    p {
         font-size: 1.6rem;
     }
+    ul {
+        font-size: 1.5rem;
+    }
     ul li ul li {
-        margin: .8rem 0;
+        margin: 1.2rem 0;
+    }
+    .hideDesktop {
+        display: none;
+    }
+    @media (max-width: $screen-lg) {
+        padding: 40px;
+    }
+    @media (max-width: $screen-md) {
+        padding: 0;
+        .hideDesktop {
+            display: inline;
+        }
+        .hideMobile {
+            display: none;
+        }
     }
 }

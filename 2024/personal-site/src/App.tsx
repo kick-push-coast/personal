@@ -3,6 +3,7 @@ import { LayoutContainer } from './components/LayoutContainer'
 import { Avatar } from './components/Avatar'
 import { BrowserDisplay } from './components/BrowserDisplay'
 import { BrowserRouter } from 'react-router-dom'
+import { MobileDisplay } from './components/MobileDisplay'
 
 function App() {
 
@@ -22,6 +23,7 @@ function App() {
             <LayoutContainer>
                 <Avatar />
                 <BrowserDisplay />
+                <MobileDisplay />
             </LayoutContainer>
         </BrowserRouter>
     )

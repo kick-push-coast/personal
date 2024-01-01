@@ -20,7 +20,7 @@ const topics = new Map<ArticleTopic, ReactNode>([
         <p>
             I have 6+ years of experience as a <strong>Software Engineer</strong> with a frontend focus + 1 year of experience as a <strong>Technical PM</strong>, all in a startup/scale-up environment
         </p>
-        <p>
+        <p className={classes.hideMobile}>
             Tab around a bit to get to know me :-)
         </p>
     </>],
@@ -91,22 +91,22 @@ const topics = new Map<ArticleTopic, ReactNode>([
             Sep 2017 - Present
         </p>
         <p>
-            Cludo offers a collection of SaaS products specific to site search including automated data source scraping, developer toolsets for building search implementations, and an admin web app for managing search indices and custom search relevance.
+            Cludo offers a collection of SaaS products for building and managing site search. These include automated data source scraping, developer toolsets for creating custom search solutions, and an admin web app for configuring search indices and search relevance.
         </p>
         <ul>
             <li>
-                <strong>Technical Product Manager</strong> | Dec 2022 - Present
+                <strong>Technical Product Manager</strong><span className={classes.hideMobile}> | </span><span className={classes.hideDesktop}><br/></span>Dec 2022 - Present
                 <ul>
                     <li>Led a team of engineers focused on building developer tools</li>
                     <li>Collaborated with partner agencies to design practical component sets and APIs that meet real developer needs</li>
-                    <li>Released a React SDK that decreased development time for search UI implementations by up to 30% (documented at: <a href="//react.cludo.com" target="_blank">react.cludo.com</a>)</li>
+                    <li>Built and released a React SDK that decreased development time for search UI implementations by up to 30% (documented at: <a href="//react.cludo.com" target="_blank">react.cludo.com</a>)</li>
                     <li>Wrote public-facing technical documentation for various toolsets (cataloged at: <a href="//www.cludo.com/cludo-developer-experience-0?hs_preview=PCthItJq-87790382543" target="_blank">cludo.com/cludo-developer-experience</a>)</li>
                     <li>Continued to contribute code, code review, and consultation on software design patterns</li>
                 </ul>
             </li>
             <br/>
             <li>
-                <strong>Lead UX Engineer</strong> | May 2021 - Dec 2022
+                <strong>Lead UX Engineer</strong><span className={classes.hideMobile}> | </span><span className={classes.hideDesktop}><br/></span>May 2021 - Dec 2022
                 <ul>
                     <li>Worked jointly with the design team on a near-complete overhaul of the Cludo admin web app</li>
                     <li>Iteratively refined the most essential user journeys leading to an improvement in measured user sentiment</li>
@@ -115,7 +115,7 @@ const topics = new Map<ArticleTopic, ReactNode>([
             </li>
             <br/>
             <li>
-                <strong>Product Software Engineer</strong> | Jun 2019 - May 2021
+                <strong>Product Software Engineer</strong><span className={classes.hideMobile}> | </span><span className={classes.hideDesktop}><br/></span>Jun 2019 - May 2021
                 <ul>
                     <li>Contributed as a core engineer for the Cludo admin web app built with Angular and TypeScript</li>
                     <li>Applied various software design patterns to keep codebase robust and maintainable</li>
@@ -124,7 +124,7 @@ const topics = new Map<ArticleTopic, ReactNode>([
             </li>
             <br/>
             <li>
-                <strong>Frontend Developer</strong> | Sep 2017 - Jun 2019
+                <strong>Frontend Developer</strong><span className={classes.hideMobile}> | </span><span className={classes.hideDesktop}><br/></span>Sep 2017 - Jun 2019
                 <ul>
                     <li>Worked with clients to create custom search implementations according to their specifications</li>
                     <li>Built re-usable search UI templates in the ASP.NET web framework</li>
