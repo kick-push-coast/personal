@@ -1,7 +1,8 @@
+import { useEffect, useRef } from 'react';
 import { Route, Routes, useLocation } from 'react-router-dom';
 import { BrowserArticle, ArticleTopic } from '../BrowserArticle';
+import { DotGame } from '../DotGame';
 import classes from './browser-content.module.scss';
-import { useEffect, useRef } from 'react';
 
 export const BrowserContent = () => {
 
@@ -24,7 +25,7 @@ export const BrowserContent = () => {
                 <Route path="/skills" element={<BrowserArticle topic={ArticleTopic.Skills} />} />
                 <Route path="/experience" element={<BrowserArticle topic={ArticleTopic.Experience} />} />
                 <Route path="/education" element={<BrowserArticle topic={ArticleTopic.Education} />} />
-                <Route path="/fun" element={<div>fun</div>} />
+                <Route path="/fun" element={<DotGame />} />
             </Routes>
         </main>
 	);
