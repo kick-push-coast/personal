@@ -1,0 +1,22 @@
+.container {
+    display: flex;
+    align-items: flex-end;
+}
+
+.tab {
+    padding: 4px 15px;
+    font-family: monospace;
+    text-decoration: none;
+    display: flex;
+    font-size: 150%;
+    border-radius: 6px 6px 0 0;
+    color: #000;
+}
+
+.tab.active {
+    background: #e6e6e6;
+}
+
+.tab:not(.active):hover {
+    background: #e6e6e671;
+}

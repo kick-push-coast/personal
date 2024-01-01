@@ -1,0 +1,12 @@
+.layout {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    padding: 100px;
+    box-sizing: border-box;
+    max-width: 1600px;
+    margin: 0 auto;
+    @media (max-width: 1000px) {
+        padding: 60px;
+    }
+}
