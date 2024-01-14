@@ -5,27 +5,29 @@ export interface LayoutContainerProps {
     children: React.ReactNode;
 }
 
-export interface GlobalFunctionsContextType {
+export interface GlobalLoadedStateContextType {
+    loaded: boolean;
     setAssetsLoaded: Function;
 }
 
-export const GlobalFunctionsContext = React.createContext({} as GlobalFunctionsContextType);
+export const GlobalLoadedStateContext = React.createContext({} as GlobalLoadedStateContextType);
 
 
 export const LayoutContainer = (props: LayoutContainerProps) => {
     const [loadedState, setLoadedState] = useState(false);
 
-    const globalFunctions: GlobalFunctionsContextType = {
+    const globalLoadedState: GlobalLoadedStateContextType = {
+        loaded: loadedState,
         setAssetsLoaded: (loaded: boolean) => {
             setLoadedState(loaded);
         }
     }
 	
 	return (
-        <GlobalFunctionsContext.Provider value={globalFunctions}>
+        <GlobalLoadedStateContext.Provider value={globalLoadedState}>
             <div className={classes.layout + (loadedState ? ' ' + classes.loaded : '')}>
                 { props.children }
             </div>
-        </GlobalFunctionsContext.Provider>
+        </GlobalLoadedStateContext.Provider>
 	);
 };
