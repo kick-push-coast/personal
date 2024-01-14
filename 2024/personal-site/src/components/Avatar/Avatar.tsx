@@ -1,10 +1,12 @@
-import { useRef } from 'react';
+import { useContext, useRef } from 'react';
+import { GlobalFunctionsContext } from '../LayoutContainer';
 import classes from './avatar.module.scss';
 import avatar from '../../assets/me.svg';
 
 export const Avatar = () => {
 
     const emailBtn = useRef<HTMLButtonElement>(null);
+    const globalFunctionsContext = useContext(GlobalFunctionsContext)
 
     function handleEmailClick() {
         navigator.clipboard.writeText('mktyler01@gmail.com');
@@ -18,7 +20,7 @@ export const Avatar = () => {
 	
 	return (
 		<div className={classes.container}>
-            <img className={classes.avatarImage} src={avatar} />
+            <img onLoad={() => { globalFunctionsContext.setAssetsLoaded(true) }} className={classes.avatarImage} src={avatar} />
             <header className={classes.avatarHeader}>
                 <h1>
                     Mike Tyler
