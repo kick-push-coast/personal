@@ -79,6 +79,13 @@ const topics = new Map<ArticleTopic, ReactNode>([
             <li>CI/CD</li>
             <li>Agile</li>
         </ul>
+        <br/>
+        <br/>
+        <h3>
+            <a href="./resume.pdf" target="_blank">
+                Full resume &#8594;
+            </a>
+        </h3>
     </>],
     [ArticleTopic.Experience,
     <>
@@ -155,6 +162,13 @@ const topics = new Map<ArticleTopic, ReactNode>([
         <p>
             Helped maintain development servers and assisted in hardware migrations. Wrote and managed build scripts for various developer environments.
         </p>
+        <br/>
+        <br/>
+        <h3>
+            <a href="./resume.pdf" target="_blank">
+                Full resume &#8594;
+            </a>
+        </h3>
     </>],
     [ArticleTopic.Education,
     <>
@@ -169,6 +183,13 @@ const topics = new Map<ArticleTopic, ReactNode>([
             Class of 2015<br/>
             Minor: New Media Studies
         </p>
+        <br/>
+        <br/>
+        <h3>
+            <a href="./resume.pdf" target="_blank">
+                Full resume &#8594;
+            </a>
+        </h3>
     </>]
 ])
 
