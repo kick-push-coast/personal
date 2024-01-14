@@ -30,26 +30,22 @@ const topics = new Map<ArticleTopic, ReactNode>([
             Skills 🪄
         </h2>
         <h3>
-            Languages
+            Languages & Frameworks
         </h3>
         <ul>
             <li>JavaScript</li>
             <li>TypeScript</li>
+            <li>React</li>
+            <li>Angular</li>
+            <li>Node.js</li>
             <li>PHP</li>
-            <li>C#</li>
             <li>HTML</li>
             <li>CSS</li>
             <li>SCSS</li>
-        </ul>
-        <h3>
-            Libraries & Frameworks
-        </h3>
-        <ul>
-            <li>React</li>
-            <li>Angular</li>
-            <li>ASP.NET</li>
             <li>Bootstrap</li>
             <li>Tailwind</li>
+            <li>C#</li>
+            <li>ASP.NET</li>
         </ul>
         <h3>
             Tools & Platforms
@@ -66,6 +62,7 @@ const topics = new Map<ArticleTopic, ReactNode>([
             <li>Figma</li>
             <li>Storybook</li>
             <li>Jira</li>
+            <li>TeamCity</li>
         </ul>
         <h3>
             Concepts
@@ -76,8 +73,10 @@ const topics = new Map<ArticleTopic, ReactNode>([
             <li>Software Design Patterns</li>
             <li>REST Principles</li>
             <li>UX/UI Fundamentals</li>
+            <li>Design Systems</li>
             <li>Competitor Analysis</li>
             <li>User Research</li>
+            <li>CI/CD</li>
             <li>Agile</li>
         </ul>
     </>],
@@ -93,7 +92,7 @@ const topics = new Map<ArticleTopic, ReactNode>([
             Sep 2017 - Present
         </p>
         <p>
-        Cludo provides B2B SaaS products for enterprise-level site search, offering automated data source scraping, developer toolsets, and an admin web app for configuring search indices and relevance.
+            Cludo provides B2B SaaS products for enterprise-level site search, offering automated data source scraping, developer toolsets, and an admin web app for configuring search indices and relevance.
         </p>
         <ul>
             <li>
@@ -129,7 +128,7 @@ const topics = new Map<ArticleTopic, ReactNode>([
                 <strong>Frontend Developer</strong><span className={classes.hideMobile}> | </span><span className={classes.hideDesktop}><br/></span>Sep 2017 - Jun 2019
                 <ul>
                     <li>Worked jointly with clients to create tailored search implementations</li>
-                    <li>Developed reusable search UI templates in ASP.NET</li>
+                    <li>Developed reusable, portable search UIs with ASP.NET templates and vanilla JavaScript</li>
                     <li>Offered ongoing technical support and consultation for clients</li>
                 </ul>
             </li>

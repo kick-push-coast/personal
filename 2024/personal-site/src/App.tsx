@@ -7,18 +7,7 @@ import { MobileDisplay } from './components/MobileDisplay'
 
 function App() {
 
-    return (
-
-        /**
-         * - Layout
-         *  - Avatar
-         *  - Browser
-         *      - BrowserToolbar
-         *      - BrowserContent
-         * 
-         * 
-         */
-        
+    return (        
         <BrowserRouter>
             <LayoutContainer>
                 <Avatar />
