@@ -41,6 +41,7 @@ export class DotGame extends HTMLElement {
             </div>
         `
         this.canvas = this.querySelector('canvas');
+        this.timer = this.querySelector('game-timer');
         this.container = this.querySelector('#game-container');
         this.ctx = this.canvas.getContext('2d');
         this.canvas.width = this.container.offsetWidth;
@@ -71,6 +72,7 @@ export class DotGame extends HTMLElement {
             this.evil.checkKeys(this.keys)
         } else if (this.keys[' ']) {
             this.resetGame();
+            this.timer.setAttribute('game-state', 'init');
             this.gameIsStarted = true;
         }
     }

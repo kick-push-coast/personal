@@ -1,9 +1,30 @@
 export class GameTimer extends HTMLElement {
 
+    static get observedAttributes() { 
+        return ['game-state']; 
+    }
+
     constructor() {
         super();
         this.timeStart = new Date();
         this.timeHasStarted = false;
+    }
+
+    attributeChangedCallback(name, oldValue, newValue) {
+        console.log(newValue);
+        if (name === 'game-state') {
+            switch(newValue) {
+                case 'init':
+                    this.resetAndStartTime();
+                    break;
+                case 'start':
+                    this.startTime();
+                    break;
+                case 'pause':
+                    this.pauseTime();
+                    break;
+            }
+        }
     }
 
     connectedCallback() {
