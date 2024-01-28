@@ -12,9 +12,9 @@ export const MobileDisplay = () => {
 	
 	return (
 		<div className={classes.container}>
-            { topics.map((topic) => {
+            { topics.map((topic, i) => {
                 return (
-                    <div className={classes.article}>
+                    <div key={i} className={classes.article}>
                         <BrowserArticle topic={topic} />
                     </div>
                 )

@@ -2,6 +2,7 @@ import { Ball } from "./classes/ball.js";
 import { Evil} from "./classes/evil.js";
 import { random } from "./utilities/math.js";
 import "./components/game-timer.js";
+import "./components/game-menu.js";
 
 export class DotGame extends HTMLElement {
 
@@ -37,6 +38,7 @@ export class DotGame extends HTMLElement {
             </style>
             <div id="game-container">
                <game-timer></game-timer>
+               <game-menu></game-menu>
                <canvas></canvas>
             </div>
         `
