@@ -1,6 +1,6 @@
 import { Ball } from "./classes/ball.js";
 import { Evil} from "./classes/evil.js";
-import { random } from "./utilities/utility-functions.js";
+import { random } from "./utilities/math.js";
 
 export class DotGame extends HTMLElement {
 
@@ -39,13 +39,13 @@ export class DotGame extends HTMLElement {
             if (document.activeElement === this.canvas) {
                 e.preventDefault();
             }
-            this.keys[e.keyCode] = true;
+            this.keys[e.key] = true;
         }.bind(this));
         window.addEventListener("keyup", function (e) {
             if (document.activeElement === this.canvas) {
                 e.preventDefault();
             }
-            this.keys[e.keyCode] = false;
+            this.keys[e.key] = false;
         }.bind(this));
 
         this.initGame();
@@ -58,10 +58,7 @@ export class DotGame extends HTMLElement {
     checkPressedKeys() {
         if (this.gameStarted) {
             this.evil.checkKeys(this.keys)
-        } else if (this.keys[32]) {
-            // timeStart = new Date();
-            // totalTimeAway = 0;
-            // menu.style.display = 'none';
+        } else if (this.keys[' ']) {
             this.reset();
             this.gameIsStarted = true;
         }
@@ -145,11 +142,9 @@ export class DotGame extends HTMLElement {
         if (this.gameIsStarted) {
             this.ctx.fillStyle = '#fafafa';
             this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
-
             if (!this.ballsAreCreated) {
                 this.initiateBalls();
             }
-
             for (let i = 0; i < this.balls.length; i++) {
                 this.balls[i].update();
             }
@@ -159,9 +154,6 @@ export class DotGame extends HTMLElement {
             for (let i = 0; i < this.balls.length; i++) {
                 this.balls[i].collisionDetect(this.balls);
             }
-            // if (this.evil.free) {
-            //     updateTime();
-            // }
             this.evil.checkKeys(this.keys);
             this.evil.update();
             this.evil.draw(this.ctx);

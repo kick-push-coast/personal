@@ -42,23 +42,23 @@ export class Evil extends Shape {
     }
 
     checkKeys(keys) {
-        if (keys[37]) {
+        if (keys['ArrowLeft']) {
             if (this.velX > -this.maxSpeed) {
                 this.velX -= 0.6;
             }
         }
     
-        if (keys[39]) {
+        if (keys['ArrowRight']) {
             if (this.velX < this.maxSpeed) {
                 this.velX += 0.6;
             }
         }
-        if (keys[40]) {
+        if (keys['ArrowDown']) {
             if (this.velY < this.maxSpeed) {
                 this.velY += 0.6;
             }
         }
-        if (keys[38]) {
+        if (keys['ArrowUp']) {
             if (this.velY > -this.maxSpeed) {
                 this.velY -= 0.6;
             }
