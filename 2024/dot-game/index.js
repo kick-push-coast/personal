@@ -44,6 +44,7 @@ export class DotGame extends HTMLElement {
         `
         this.canvas = this.querySelector('canvas');
         this.timer = this.querySelector('game-timer');
+        this.menu = this.querySelector('game-menu');
         this.container = this.querySelector('#game-container');
         this.ctx = this.canvas.getContext('2d');
         this.canvas.width = this.container.offsetWidth;
@@ -85,6 +86,7 @@ export class DotGame extends HTMLElement {
         } else if (this.keys[' ']) {
             this.resetGame();
             this.timer.setAttribute('game-state', 'start');
+            this.menu.setAttribute('game-state', 'start');
             this.gameIsStarted = true;
         }
     }
@@ -202,6 +204,7 @@ export class DotGame extends HTMLElement {
             this.balls[i].velY = 0;
         }
         this.timer.setAttribute('game-state', 'stop');
+        this.menu.setAttribute('game-state', 'stop');
         this.gameIsStarted = false;
     }
 

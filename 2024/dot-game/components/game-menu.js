@@ -1,7 +1,24 @@
 export class GameMenu extends HTMLElement {
 
+    static get observedAttributes() { 
+        return ['game-state']; 
+    }
+
     constructor() {
         super();
+    }
+    
+    attributeChangedCallback(name, oldValue, newValue) {
+        if (name === 'game-state') {
+            switch(newValue) {
+                case 'stop':
+                    this.stopGame();
+                    break;
+                case 'start':
+                    this.startGame();
+                    break;
+            }
+        }
     }
 
     connectedCallback() {
@@ -137,7 +154,7 @@ export class GameMenu extends HTMLElement {
                 width: 150px;
               }
             </style>
-            <div class="menu">
+            <div id="start-menu" class="menu">
                 <div class="menuTitle">
                     <h2>Protect your dot</h2>
                 </div>
@@ -159,7 +176,7 @@ export class GameMenu extends HTMLElement {
                     </div>
                 </div>
             </div>
-            <div class="menu gameover">
+            <div id="gameover-menu" class="menu gameover">
                 <div class="menuTitle">
                     <h2>Game Over</h2>
                 </div>
@@ -174,6 +191,17 @@ export class GameMenu extends HTMLElement {
                 </div>
             </div>
         `
+        this.startMenuElement = this.querySelector('#start-menu');
+        this.gameoverMenuElement = this.querySelector('#gameover-menu');
+    }
+
+    startGame() {
+        this.startMenuElement.style.display = 'none';
+        this.gameoverMenuElement.style.display = 'none';
+    }
+
+    stopGame() {
+        this.gameoverMenuElement.style.display = 'flex';
     }
 
 }
