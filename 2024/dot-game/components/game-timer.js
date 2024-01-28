@@ -11,11 +11,10 @@ export class GameTimer extends HTMLElement {
     }
 
     attributeChangedCallback(name, oldValue, newValue) {
-        console.log(newValue);
         if (name === 'game-state') {
             switch(newValue) {
-                case 'init':
-                    this.resetAndStartTime();
+                case 'stop':
+                    this.stopTime();
                     break;
                 case 'start':
                     this.startTime();
@@ -96,18 +95,24 @@ export class GameTimer extends HTMLElement {
         this.timerElement.appendChild(this.timerCountElement);
     }
 
-    pauseTime() {
+    stopTime() {
         this.timeHasStarted = false;
     }
 
-    startTime() {
-        this.timeHasStarted = true;
-        this.loopTime();
+    pauseTime() {
+        this.stopTime();
+        this.timePaused = new Date();
     }
 
-    resetAndStartTime() {
-        this.timeStart = new Date();
-        this.startTime();
+    startTime() {
+        if (this.timePaused) {
+            this.timeStart = new Date() - (this.timePaused - this.timeStart);
+            this.timePaused = null;
+        } else {
+            this.timeStart = new Date();
+        }
+        this.timeHasStarted = true;
+        this.loopTime();
     }
 
     loopTime() {

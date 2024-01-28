@@ -47,6 +47,15 @@ export class DotGame extends HTMLElement {
         this.canvas.width = this.container.offsetWidth;
         this.canvas.height = this.container.offsetHeight;
 
+        this.addEventListeners();
+        this.initGame();
+    }
+
+    disconnectedCallback() {
+        console.log('disconnected', this);
+    }
+
+    addEventListeners() {
         window.addEventListener("keydown", function (e) {
             if (document.activeElement === this.canvas) {
                 e.preventDefault();
@@ -59,12 +68,13 @@ export class DotGame extends HTMLElement {
             }
             this.keys[e.key] = false;
         }.bind(this));
-
-        this.initGame();
-    }
-
-    disconnectedCallback() {
-        console.log('disconnected', this);
+        document.addEventListener("visibilitychange", function() {
+            if (document.hidden) {
+                this.timer.setAttribute('game-state', 'pause');
+            } else if (this.gameIsStarted) {
+                this.timer.setAttribute('game-state', 'start')
+            }
+        }.bind(this));
     }
 
     checkPressedKeys() {
@@ -72,7 +82,7 @@ export class DotGame extends HTMLElement {
             this.evil.checkKeys(this.keys)
         } else if (this.keys[' ']) {
             this.resetGame();
-            this.timer.setAttribute('game-state', 'init');
+            this.timer.setAttribute('game-state', 'start');
             this.gameIsStarted = true;
         }
     }
@@ -189,6 +199,7 @@ export class DotGame extends HTMLElement {
             this.balls[i].velX = 0;
             this.balls[i].velY = 0;
         }
+        this.timer.setAttribute('game-state', 'stop');
         this.gameIsStarted = false;
     }
 
