@@ -1,3 +1,5 @@
+const HI_SCORE_KEY = "dotGameHiScore"; 
+
 export class GameTimer extends HTMLElement {
 
     static get observedAttributes() { 
@@ -94,7 +96,7 @@ export class GameTimer extends HTMLElement {
         this.timerCountElement.setAttribute('class', 'count');
         this.timerCountElement.textContent = "0.0";
         this.timerElement.appendChild(this.timerCountElement);
-        this.hiScore = 0;
+        this.hiScore = localStorage.getItem(HI_SCORE_KEY) || 0;
         this.hiScoreElement = this.querySelector('.hi-score');
     }
 
@@ -102,6 +104,7 @@ export class GameTimer extends HTMLElement {
         this.timeHasStarted = false;
         if (this.timeDiff > this.hiScore) {
             this.hiScore = this.timeDiff;
+            localStorage.setItem(HI_SCORE_KEY, this.hiScore);
             this.hiScoreElement.style.display = 'flex';
         }
     }
@@ -130,7 +133,9 @@ export class GameTimer extends HTMLElement {
             let timeCurrent = new Date();
             this.timeDiff = timeCurrent - this.timeStart;
             this.timerCountElement.textContent = (this.timeDiff / 1000).toFixed(1);
-            requestAnimationFrame(this.loopTime.bind(this));
+            setTimeout(() => {
+                requestAnimationFrame(this.loopTime.bind(this));
+            }, 100);
         }
     }
 
