@@ -154,10 +154,10 @@ export class DotGame extends HTMLElement {
                 this.balls[i].update();
             }
             for (let i = 0; i < this.balls.length; i++) {
-                this.balls[i].collisionDetect(this.balls);
+                this.balls[i].draw(this.ctx);
             }
             for (let i = 0; i < this.balls.length; i++) {
-                this.balls[i].draw(this.ctx);
+                this.balls[i].collisionDetect(this.balls);
             }
             // if (this.evil.free) {
             //     updateTime();
