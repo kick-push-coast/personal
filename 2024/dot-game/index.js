@@ -21,14 +21,20 @@ export class DotGame extends HTMLElement {
         this.keys = [];
         this.colors = ['#636363'];
 
+    }
+
+    connectedCallback() {
         this.innerHTML = `
+            <style>
+               #game-container, dot-game, canvas {
+                   height: 100%;
+                   width: 100%;
+               }
+            </style>
             <div id="game-container">
                 <canvas></canvas>
             </div>
         `
-    }
-
-    connectedCallback() {
         this.canvas = this.querySelector('canvas');
         this.container = this.querySelector('#game-container');
         this.ctx = this.canvas.getContext('2d');

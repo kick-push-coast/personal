@@ -31,5 +31,6 @@ export class Shape {
                 }
             }
         }
+        return false;
     }
 }
