@@ -44,12 +44,13 @@ export class GameTimer extends HTMLElement {
                 flex-direction: column;
                 justify-content: center;
                 z-index: 1;
+                font-family: monospace;
             }
             .timer span {
                 font-weight: bold;
                 letter-spacing: 0.07em;
             }
-            .hiScore {
+            .hi-score {
                 position: absolute;
                 top: 40px;
                 right: -40px;
@@ -66,7 +67,7 @@ export class GameTimer extends HTMLElement {
                 z-index: 1;
                 transform: rotate(-20deg);
             }
-            .hiScore:before, .hiScore:after {
+            .hi-score:before, .hi-score:after {
                 content: "";
                 position: absolute;
                 top: 0;
@@ -76,15 +77,15 @@ export class GameTimer extends HTMLElement {
                 background: #000;
                 z-index: -1;
             }
-            .hiScore:before {  
+            .hi-score:before {  
                 transform: rotate(30deg);
             }
-            .hiScore:after {
+            .hi-score:after {
                 transform: rotate(60deg);
             }
             </style>
             <div class="timer">
-                <div class="hiScore">NEW HI SCORE</div>
+                <div class="hi-score">NEW HI SCORE</div>
                 <span>TIME</span>
             </div>
         `
@@ -93,15 +94,23 @@ export class GameTimer extends HTMLElement {
         this.timerCountElement.setAttribute('class', 'count');
         this.timerCountElement.textContent = "0.0";
         this.timerElement.appendChild(this.timerCountElement);
+        this.hiScore = 0;
+        this.hiScoreElement = this.querySelector('.hi-score');
     }
 
     stopTime() {
         this.timeHasStarted = false;
+        if (this.timeDiff > this.hiScore) {
+            this.hiScore = this.timeDiff;
+            this.hiScoreElement.style.display = 'flex';
+        }
     }
 
     pauseTime() {
-        this.stopTime();
-        this.timePaused = new Date();
+        if (this.timeHasStarted) {
+            this.timeHasStarted = false;
+            this.timePaused = new Date();
+        }
     }
 
     startTime() {
@@ -111,6 +120,7 @@ export class GameTimer extends HTMLElement {
         } else {
             this.timeStart = new Date();
         }
+        this.hiScoreElement.style.display = 'none';
         this.timeHasStarted = true;
         this.loopTime();
     }
@@ -118,8 +128,8 @@ export class GameTimer extends HTMLElement {
     loopTime() {
         if (this.timeHasStarted) {      
             let timeCurrent = new Date();
-            let timeDiff = timeCurrent - this.timeStart;
-            this.timerCountElement.textContent = (timeDiff / 1000).toFixed(1);
+            this.timeDiff = timeCurrent - this.timeStart;
+            this.timerCountElement.textContent = (this.timeDiff / 1000).toFixed(1);
             requestAnimationFrame(this.loopTime.bind(this));
         }
     }
