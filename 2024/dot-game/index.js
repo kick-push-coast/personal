@@ -1,6 +1,7 @@
 import { Ball } from "./classes/ball.js";
 import { Evil} from "./classes/evil.js";
 import { random } from "./utilities/math.js";
+import "./components/game-timer.js";
 
 export class DotGame extends HTMLElement {
 
@@ -30,9 +31,13 @@ export class DotGame extends HTMLElement {
                    height: 100%;
                    width: 100%;
                }
+               #game-container {
+                   position: relative;
+               }
             </style>
             <div id="game-container">
-                <canvas></canvas>
+               <game-timer></game-timer>
+               <canvas></canvas>
             </div>
         `
         this.canvas = this.querySelector('canvas');
@@ -65,7 +70,7 @@ export class DotGame extends HTMLElement {
         if (this.gameStarted) {
             this.evil.checkKeys(this.keys)
         } else if (this.keys[' ']) {
-            this.reset();
+            this.resetGame();
             this.gameIsStarted = true;
         }
     }
@@ -185,7 +190,7 @@ export class DotGame extends HTMLElement {
         this.gameIsStarted = false;
     }
 
-    reset() {
+    resetGame() {
         this.evil.x = this.canvas.width/2;
         this.evil.y = this.canvas.height/2;
         this.evil.free = true;
