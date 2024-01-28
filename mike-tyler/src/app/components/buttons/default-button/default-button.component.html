@@ -1,6 +1,0 @@
-<button [attr.type]="type" class="btn-default position-relative" [attr.disabled]="disabled ? 'true' : null">
-    <span [ngClass]="{ 'invisible' : loading }">
-        <ng-content></ng-content>
-    </span>
-    <div *ngIf="loading" class="button-loader"></div>
-</button>

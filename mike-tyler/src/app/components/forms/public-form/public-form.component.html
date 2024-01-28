@@ -1,8 +1,0 @@
-<form (ngSubmit)="submit()" [formGroup]="formModel">
-    <div *ngFor="let input of formInputs">
-        <app-form-input [inputModel]="input" [form]="formModel"></app-form-input>
-    </div>
-    <div class="text-right">
-        <app-default-button [type]="submit" [disabled]="!formModel.valid" [loading]="loading">Sign Up</app-default-button>
-    </div>
-</form>
