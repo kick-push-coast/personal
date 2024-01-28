@@ -1,0 +1,14 @@
+.container {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    font-family: monospace;
+    align-items: center;
+    padding: 4px 8px;
+    background-color: #e6e6e6;
+}
+.details {
+    padding: 0;
+    margin: 0;
+    font-weight: bold;
+}
