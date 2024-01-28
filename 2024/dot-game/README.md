@@ -2,7 +2,7 @@
 
 A fun little experiment in animation and physics using only web standard technology.
 
-## Technology used
+## Built with
 
 * Vanilla JS
 * HTML Canvas
