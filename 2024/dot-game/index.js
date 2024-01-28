@@ -1,66 +1,97 @@
+import { Ball } from "./classes/ball.js";
+import { Evil} from "./classes/evil.js";
+import { random } from "./utilities/utility-functions.js";
+
 export class DotGame extends HTMLElement {
-
-    evil;
-    canvas;
-    container;
-    ctx;
-    width;
-    height;
-    loopStarted;
-    ballDiameter = 3;
-    mainDiameter = 6;
-    ballsCount = 100;
-    maxBallSpeed = 2;
-    maxMainSpeed = 6;
-
-    ballsAreCreated = false;
-    gameIsStarted = false;
-    bestTime = 0.0;
-
-    balls = [];
-    keys = [];
-    colors = ['#636363'];
 
     constructor() {
         super();
 
+        this.ballDiameter = 3;
+        this.mainDiameter = 6;
+        this.ballsCount = 100;
+        this.maxBallSpeed = 2;
+        this.maxMainSpeed = 6;
+    
+        this.loopIsStarted = false;
+        this.ballsAreCreated = false;
+        this.gameIsStarted = false;
+    
+        this.balls = [];
+        this.keys = [];
+        this.colors = ['#636363'];
+
+        this.innerHTML = `
+            <div id="game-container">
+                <canvas></canvas>
+            </div>
+        `
     }
 
     connectedCallback() {
-        this.canvas = document.querySelector('canvas');
-        this.container = document.querySelector('.gameContainer');
-        this.ctx = canvas.getContext('2d');
+        this.canvas = this.querySelector('canvas');
+        this.container = this.querySelector('#game-container');
+        this.ctx = this.canvas.getContext('2d');
+        this.canvas.width = this.container.offsetWidth;
+        this.canvas.height = this.container.offsetHeight;
+
+        window.addEventListener("keydown", function (e) {
+            if (document.activeElement === this.canvas) {
+                e.preventDefault();
+            }
+            this.keys[e.keyCode] = true;
+        }.bind(this));
+        window.addEventListener("keyup", function (e) {
+            if (document.activeElement === this.canvas) {
+                e.preventDefault();
+            }
+            this.keys[e.keyCode] = false;
+        }.bind(this));
+
+        this.initGame();
     }
 
     disconnectedCallback() {
         console.log('disconnected', this);
     }
 
+    checkPressedKeys() {
+        if (this.gameStarted) {
+            this.evil.checkKeys(this.keys)
+        } else if (this.keys[32]) {
+            // timeStart = new Date();
+            // totalTimeAway = 0;
+            // menu.style.display = 'none';
+            this.reset();
+            this.gameIsStarted = true;
+        }
+    }
+
     initiateBalls() {
-        let circ = ((width - 40) + (height - 40)) * 2;
-        let side1 = width - 40;
-        let side2 = height - 40;
-        let side3 = width - 40;
-        let side4 = height - 40;
+        let circ = ((this.canvas.width - 40) + (this.canvas.height - 40)) * 2;
+        let side1 = this.canvas.width - 40;
+        let side2 = this.canvas.height - 40;
+        let side3 = this.canvas.width - 40;
+        let side4 = this.canvas.height - 40;
         let xPlacement = 20;
         let yPlacement = 20;
-        let seg = (circ / (ballsCount));
+        let seg = (circ / (this.ballsCount));
 
-        while (balls.length < ballsCount && !ballsAreCreated) {
+        while (this.balls.length < this.ballsCount && !this.ballsAreCreated) {
             let ball = new Ball(
                 xPlacement,
                 yPlacement,
-                random(-maxBallSpeed, maxBallSpeed),
-                random(-maxBallSpeed, maxBallSpeed),
-                // 'rgb(' + random(0,255) + ',' + random(0,255) + ',' + random(0,255) +')',
-                colors[random(0, colors.length)],
-                ballDiameter,
-                true
+                random(-this.maxBallSpeed, this.maxBallSpeed),
+                random(-this.maxBallSpeed, this.maxBallSpeed),
+                this.colors[random(0, this.colors.length)],
+                this.ballDiameter,
+                true,
+                this.canvas
             );
-            balls.push(ball);
+            this.balls.push(ball);
 
             if (side1 > 0) {
-                if ((xPlacement + seg) <= (width - 20)) {
+                if ((xPlacement + seg) <= (this.canvas.width - 20)) {
                     xPlacement += seg;
                     side1 -= seg;
                 }
@@ -68,11 +99,11 @@ export class DotGame extends HTMLElement {
                     yPlacement += (seg - side1);
                     side2 -= (seg - side1);
                     side1 = 0;
-                    xPlacement = (width - 20);
+                    xPlacement = (this.canvas.width - 20);
                 }
             }
             else if (side2 > 0) {
-                if ((yPlacement + seg) <= (height - 20)) {
+                if ((yPlacement + seg) <= (this.canvas.height - 20)) {
                     yPlacement += seg;
                     side2 -= seg;
                 }
@@ -80,7 +111,7 @@ export class DotGame extends HTMLElement {
                     xPlacement -= (seg - side2);
                     side3 -= (seg - side2);
                     side2 = 0;
-                    yPlacement = (height - 20);
+                    yPlacement = (this.canvas.height - 20);
                 }
             }
             else if (side3 > 0) {
@@ -103,58 +134,77 @@ export class DotGame extends HTMLElement {
             }
 
         }
-        for (let i = 0; i < balls.length; i++) {
-            balls[i].draw();
+        for (let i = 0; i < this.balls.length; i++) {
+            this.balls[i].draw(this.ctx);
         }
-        evil.draw();
-        ballsAreCreated = true;
+        this.evil.draw(this.ctx);
+        this.ballsAreCreated = true;
     }
 
     loop() {
-        if (gameIsStarted) {
-            ctx.fillStyle = '#fafafa';
-            ctx.fillRect(0, 0, width, height);
+        if (this.gameIsStarted) {
+            this.ctx.fillStyle = '#fafafa';
+            this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
 
-            if (!ballsAreCreated) {
-                initiateBalls();
+            if (!this.ballsAreCreated) {
+                this.initiateBalls();
             }
 
-            for (let i = 0; i < balls.length; i++) {
-                balls[i].update();
+            for (let i = 0; i < this.balls.length; i++) {
+                this.balls[i].update();
             }
-            for (let i = 0; i < balls.length; i++) {
-                balls[i].collisionDetect();
+            for (let i = 0; i < this.balls.length; i++) {
+                this.balls[i].collisionDetect(this.balls);
             }
-            for (let i = 0; i < balls.length; i++) {
-                balls[i].draw();
+            for (let i = 0; i < this.balls.length; i++) {
+                this.balls[i].draw(this.ctx);
             }
-            if (evil.free) {
-                updateTime();
-            }
-            evil.draw();
-            evil.update();
-            requestAnimationFrame(loop);
+            // if (this.evil.free) {
+            //     updateTime();
+            // }
+            this.evil.checkKeys(this.keys);
+            this.evil.update();
+            this.evil.draw(this.ctx);
+            if (this.evil.collisionDetect(this.balls)) {
+                this.stopGame();
+            };
+            requestAnimationFrame(this.loop.bind(this));
         }
         else {
-            checkPressedKeys();
-            requestAnimationFrame(loop);
+            this.checkPressedKeys();
+            requestAnimationFrame(this.loop.bind(this));
         }
+    }
+
+    stopGame() {
+        this.evil.velX = 0;
+        this.evil.velY = 0;
+        this.evil.free = false;
+        for (let i = 0; i < this.balls.length; i++) {
+            this.balls[i].velX = 0;
+            this.balls[i].velY = 0;
+        }
+        this.gameIsStarted = false;
+    }
+
+    reset() {
+        this.evil.x = this.canvas.width/2;
+        this.evil.y = this.canvas.height/2;
+        this.evil.free = true;
+        this.evil.velX = 0;
+        this.evil.velY = 0;
+        this.balls = [];
+        this.ballsAreCreated = false;
     }
 
     initGame() {
         this.gameIsStarted = false;
-        canvas.width = container.offsetWidth;
-        canvas.height = container.offsetHeight;
-        width = canvas.width;
-        height = canvas.height;
-
-        ballsCount = Math.ceil(width / 10);
-
-        evil = new Evil();
-        initiateBalls();
-        if (!loopStarted) {
-            loop();
-            loopStarted = true;
+        this.ballsCount = Math.ceil(this.canvas.width / 10);
+        this.evil = new Evil(this.canvas);
+        this.initiateBalls();
+        if (!this.loopIsStarted) {
+            this.loop();
+            this.loopIsStarted = true;
         }
     }
 

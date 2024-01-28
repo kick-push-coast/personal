@@ -1,22 +1,4 @@
-
-
-//Handle Bounce
 export function handleBounce(ball1, ball2) {
-
-    if (ball1.type === "Evil") {
-        gameover.style.display = 'flex';
-        if (timeDiff > bestTime) {
-            bestTime = timeDiff;
-            hiScore.style.display = 'flex';
-        }
-        ball1.velX = 0;
-        ball1.velY = 0;
-        ball1.free = false;
-        for (let i = 0; i < balls.length; i++) {
-            balls[i].velX = 0;
-            balls[i].velY = 0;
-        }
-    }
 
     let dx = ball1.x - ball2.x;
     let dy = ball1.y - ball2.y;
