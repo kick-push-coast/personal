@@ -14,7 +14,7 @@ export const BrowserFun = () => {
             </div>
             <div className={classes.details}>
                 <Routes>
-                    <Route path="/" element={<ProjectDetails tech={['Vanilla JS', 'HTML Canvas', 'Web Components']} githubLink='https://github.com/kick-push-coast/personal-site/tree/master/2024/dot-game' />} />
+                    <Route path="/" element={<ProjectDetails tech={['Vanilla JS', 'HTML Canvas', 'Web Components']} githubLink='https://github.com/kick-push-coast/personal/tree/master/dot-game' />} />
                 </Routes>
             </div>
         </div>

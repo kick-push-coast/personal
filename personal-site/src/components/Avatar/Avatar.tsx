@@ -36,6 +36,10 @@ export const Avatar = () => {
                     <a className={classes.contactLink} href="https://www.linkedin.com/in/michael-tyler-569159147/" target="_blank" title="Mike Tyler's LinkedIn page">
                         LinkedIn
                     </a>
+                    &nbsp;|&nbsp;
+                    <a className={classes.contactLink} href="https://github.com/kick-push-coast/personal/tree/master" target="_blank" title="Mike Tyler's GitHib page">
+                        GitHub
+                    </a>
                 </nav>
             </header>
         </div>

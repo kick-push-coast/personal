@@ -81,7 +81,7 @@ export class DotGame extends HTMLElement {
     }
 
     checkPressedKeys() {
-        if (this.gameStarted) {
+        if (this.gameIsStarted) {
             this.evil.checkKeys(this.keys)
         } else if (this.keys[' ']) {
             this.resetGame();
