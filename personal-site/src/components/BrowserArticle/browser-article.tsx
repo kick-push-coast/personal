@@ -68,7 +68,7 @@ const topics = new Map<ArticleTopic, ReactNode>([
         </ul>
         <br/>
         <br/>
-        <h3>
+        <h3 className={classes.hideMobile}>
             <a href="./resume.pdf" target="_blank">
                 Full resume &#8594;
             </a>
@@ -77,7 +77,7 @@ const topics = new Map<ArticleTopic, ReactNode>([
     [ArticleTopic.Experience,
     <>
         <h2>
-            Experience 🧪
+            Experience 🔧
         </h2>
         <h3>
             Cludo
@@ -151,7 +151,7 @@ const topics = new Map<ArticleTopic, ReactNode>([
         </p>
         <br/>
         <br/>
-        <h3>
+        <h3 className={classes.hideMobile}>
             <a href="./resume.pdf" target="_blank">
                 Full resume &#8594;
             </a>

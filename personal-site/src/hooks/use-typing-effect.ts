@@ -1,18 +1,18 @@
 import { useEffect, useState } from "react";
 
-const useTypingEffect = (value: string, delay = 0, chunkSize = 3, interval = 80) => {
+export interface TypingEffectState {
+    text: string,
+    isAnimating: boolean;
+    startTyping: (value: string, delay: number, chunkSize: number, interval: number) => void;
+}
+
+const useTypingEffect = (): TypingEffectState => {
     const [text, setText] = useState('');
     const [isAnimating, setIsAnimating] = useState(false);
-    const [hasRun, setHasRun] = useState(false);
 
 
 
-    useEffect(() => {
-        if (hasRun) {
-            return;
-        }
-        setHasRun(true);
-
+    const startTyping = (value: string, delay = 0, chunkSize = 3, interval = 80) => {
         let intervalId: NodeJS.Timeout;
         let i = 0;
 
@@ -36,10 +36,9 @@ const useTypingEffect = (value: string, delay = 0, chunkSize = 3, interval = 80)
                 });
             }, interval);
         }, delay);
-    }, [])
+    }
 
-
-    return {text, isAnimating};
+    return {text, isAnimating, startTyping};
 };
 
 export default useTypingEffect;

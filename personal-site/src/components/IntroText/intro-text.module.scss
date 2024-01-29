@@ -1,11 +1,5 @@
 @import '../../styles/variables.scss';
 
-@media (max-width: $screen-md) {
-    .hideMobile {
-        display: none;
-    }
-}
-
 .typing:after {
     content: '';
     min-width: 8px;

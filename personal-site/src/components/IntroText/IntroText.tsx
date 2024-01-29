@@ -1,24 +1,39 @@
-import useTypingEffect from '../../hooks/use-typing-effect';
+import { useContext, useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
+import { GlobalLoadedStateContext } from '../LayoutContainer';
+import useTypingEffect from '../../hooks/use-typing-effect';
 import classes from './intro-text.module.scss';
-import { useEffect, useState } from 'react';
 
 enum TextSections {
     none = '',
     greeting = 'Howdy 👋',
     intro = 'My name is Mike.',
-    summary = 'I\'m an experienced software engineer with a focus in frontend who enjoys practical code, web technologies, and fluid, accessible user experiences.',
+    summary = 'I\'m an experienced, frontend-focused software engineer who enjoys practical code, web technologies, and fluid user experiences.',
     signoff = 'Tab around a bit to get to know me :-)'
 }
 
 export const IntroText = () => {
+    const globalLoadedStateContext = useContext(GlobalLoadedStateContext);
     const location = useLocation();
-    const shouldAnimate = !location?.state?.introTyped;
+    const shouldAnimate = !location?.state?.introWasTyped;
+
+    const [hasTyped, setHasTyped] = useState(false);
     const [currentlyTyping, setCurrentlyTyping] = useState(TextSections.none);
-    const greetingTyper = useTypingEffect(TextSections.greeting, 1000, 2, 60);
-    const introTyper = useTypingEffect(TextSections.intro, 2800, 1, 40);
-    const summaryTyper = useTypingEffect(TextSections.summary, 5500, 2, 60);
-    const signoffTyper = useTypingEffect(TextSections.signoff, 11000, 2, 80);
+
+    const greetingTyper = useTypingEffect();
+    const introTyper = useTypingEffect();
+    const summaryTyper = useTypingEffect();
+    const signoffTyper = useTypingEffect();
+
+    useEffect(() => {
+        if (globalLoadedStateContext.loaded && !hasTyped) {
+            greetingTyper.startTyping(TextSections.greeting, 1000, 2, 60);
+            introTyper.startTyping(TextSections.intro, 2800, 1, 40);
+            summaryTyper.startTyping(TextSections.summary, 5500, 2, 60);
+            signoffTyper.startTyping(TextSections.signoff, 11000, 2, 80);
+            setHasTyped(true);
+        }
+    }, [globalLoadedStateContext.loaded])
 
     useEffect(() => {
         if (greetingTyper.isAnimating && shouldAnimate) {

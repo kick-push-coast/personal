@@ -24,7 +24,7 @@ export const ProjectDetails = (props: ProjectDetailsProps) => {
                     })
                 }
             </p>
-            <a href={props.githubLink} target="_blank">View on Github &#8594;</a>
+            <a href={props.githubLink} target="_blank">View on GitHub &#8594;</a>
         </div>
 	);
 };

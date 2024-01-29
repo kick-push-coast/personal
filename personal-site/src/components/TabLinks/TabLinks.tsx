@@ -6,7 +6,7 @@ const links = [
         url: '/',
         label: 'Welcome',
         state: {
-            introTyped: true
+            introWasTyped: true
         }
     },
     {
