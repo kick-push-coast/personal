@@ -11,5 +11,6 @@ My name is Mike Tyler and this is a small collection of side projects I've put t
 
 You can find more information about me at [miketyler.us](https://miketyler.us) or get in touch through...
 
+* [My website](https://miketyler.us)
 * [LinkedIn](https://www.linkedin.com/in/michael-tyler-569159147/)
-* [Email](mailto:mktyler01@gmail.com) (mktyler01@gmail.com) 
+* [Email](mailto:mktyler01@gmail.com) \(mktyler01@gmail.com\) 
