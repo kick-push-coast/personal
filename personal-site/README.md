@@ -1,6 +1,6 @@
 # The Personal Site 🏠
 
-A teeny, tiny resume site that reflecs my experience, skillset, some personal projects, and some ways to get in contact with me.
+A teeny, tiny resume site that reflects my experience, skillset, some personal projects, and some ways to get in contact with me.
 
 ## Built with
 
