@@ -1,5 +1,6 @@
 import { ReactNode } from 'react';
 import classes from './browser-article.module.scss';
+import { IntroText } from '../IntroText';
 
 export enum ArticleTopic {
     Home,
@@ -9,21 +10,7 @@ export enum ArticleTopic {
 }
 
 const topics = new Map<ArticleTopic, ReactNode>([
-    [ArticleTopic.Home,
-    <>
-        <h2>
-            Howdy 👋
-        </h2>
-        <h3>
-            My name is Mike
-        </h3>
-        <p>
-            I have 5+ years of experience as a <strong>Software Engineer</strong> with a frontend focus + 1 year of experience as a <strong>Technical PM</strong>, all in a startup/scale-up environment. I enjoy writing practical, robust code that helps users accomplish tasks and fluidly interact with systems.
-        </p>
-        <p className={classes.hideMobile}>
-            Tab around a bit to get to know me :-)
-        </p>
-    </>],
+    [ArticleTopic.Home, <IntroText/>],
     [ArticleTopic.Skills,
     <>
         <h2>

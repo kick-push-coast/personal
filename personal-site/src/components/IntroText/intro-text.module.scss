@@ -1,0 +1,22 @@
+@import '../../styles/variables.scss';
+
+@media (max-width: $screen-md) {
+    .hideMobile {
+        display: none;
+    }
+}
+
+.typing:after {
+    content: '';
+    min-width: 8px;
+    margin: 0 0 -2px 4px;
+    display: inline-block;
+    background-color: black;
+    opacity: 1;
+    animation: type .6s step-end infinite;
+}
+
+@keyframes type { 
+  from, to { visibility: hidden }
+  50% { visibility: visible }
+}

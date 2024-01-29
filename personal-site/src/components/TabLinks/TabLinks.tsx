@@ -4,7 +4,10 @@ import classes from './tab-links.module.scss';
 const links = [
     {
         url: '/',
-        label: 'Welcome'
+        label: 'Welcome',
+        state: {
+            introTyped: true
+        }
     },
     {
         url: '/skills',
@@ -29,7 +32,7 @@ export const TabLinks = () => {
 	return (
         <nav className={classes.container}>
             { links.map((link, i) =>
-                <NavLink key={i} to={link.url} className={({ isActive }) => (isActive ? classes.active + ' ' + classes.tab : classes.tab)}>
+                <NavLink key={i} to={link.url} state={link.state} className={({ isActive }) => (isActive ? classes.active + ' ' + classes.tab : classes.tab)}>
                     { link.label }
                 </NavLink>
             )}
