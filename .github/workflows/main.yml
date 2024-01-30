@@ -25,6 +25,7 @@ jobs:
       - name: Start node server
         run: |
           npm install forever -g
+          forever stopall
           forever restart server.js
         working-directory: ./drawing-board/drawing-board-server
     env:
