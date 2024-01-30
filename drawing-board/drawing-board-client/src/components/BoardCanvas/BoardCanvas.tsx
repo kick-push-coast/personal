@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import { io } from 'socket.io-client';
 import classes from './board-canvas.module.scss';
 
 export interface BoardCanvasProps { }
@@ -20,6 +21,16 @@ export const BoardCanvas = (props: BoardCanvasProps) => {
 
         const canvasOffsetX = canvasRef.current.getBoundingClientRect().left;
         const canvasOffsetY = canvasRef.current.getBoundingClientRect().top;
+        let drawTimeout: NodeJS.Timeout;
+        const socket = io('http://localhost:3000');
+
+        socket.on('drawing-board-update', (data) => {
+            let image = new Image();
+            image.onload = () => {
+                ctx.drawImage(image, 0, 0);
+            }
+            image.src = data;
+        })
 
         const draw = (e: MouseEvent) => {
             if (!isPainting) {
@@ -29,8 +40,15 @@ export const BoardCanvas = (props: BoardCanvasProps) => {
             ctx.lineCap = 'round';            
             ctx.lineTo(e.clientX - canvasOffsetX, e.clientY - canvasOffsetY);
             ctx.stroke();
-        }
 
+            if (drawTimeout) clearTimeout(drawTimeout);
+            drawTimeout = setTimeout(() => {
+                if (!canvasRef.current) return;
+                let data = canvasRef.current.toDataURL('image/png');
+                socket.emit('drawing-board-update', data);
+            })
+        }
+        
         canvasRef.current.width = containerRef.current.offsetWidth;
         canvasRef.current.height = containerRef.current.offsetHeight;
 
@@ -52,7 +70,7 @@ export const BoardCanvas = (props: BoardCanvasProps) => {
 
     return (
         <div ref={containerRef} className={classes.container}>
-            <canvas ref={canvasRef}></canvas>
+            <canvas ref={canvasRef} className={classes.canvas}></canvas>
         </div>
     );
 };
