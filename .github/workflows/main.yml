@@ -23,7 +23,7 @@ jobs:
           chmod 644 ~/.ssh/known_hosts
           scp -r * root@$SERVER_IP:/srv/www/miketyler.us
       - name: Start node server
-        run: node server.js
+        run: forever restart server.js
         working-directory: ./drawing-board/drawing-board-server
     env:
       SSH_PRIVATE_KEY: ${{secrets.SSH_KEY}}
