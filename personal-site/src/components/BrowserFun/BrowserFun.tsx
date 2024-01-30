@@ -1,23 +1,52 @@
-import { Route, Routes } from 'react-router-dom';
 import { DotGame } from '../DotGame';
-import classes from './browser-fun.module.scss';
+import { BoardContainer } from '../../../../drawing-board/drawing-board-client/src/components/BoardContainer';
 import { ProjectDetails } from '../ProjectDetails';
+import classes from './browser-fun.module.scss';
 
-export const BrowserFun = () => {
+export enum FunMode {
+    dotGame,
+    drawingBoard
+}
+
+interface FunDetails {
+    component: React.ReactNode;
+    tech: string[];
+    githubLink: string;
+}
+
+const FunMap = new Map<FunMode, FunDetails>([
+    [
+        FunMode.dotGame, 
+        {
+            component: <DotGame />,
+            tech: ['Vanilla JS', 'HTML Canvas', 'Web Components'],
+            githubLink: 'https://github.com/kick-push-coast/personal/tree/master/dot-game'
+        }
+    ],
+    [
+        FunMode.drawingBoard,
+        {
+            component: <BoardContainer />,
+            tech: ['React', 'Node.js', 'Web Sockets'],
+            githubLink: 'https://github.com/kick-push-coast/personal/tree/master/drawing-board'
+        }
+    ]
+]);
+
+export const BrowserFun = (props: {mode: FunMode}) => {
+
+    const selectedFun = FunMap.get(props.mode);
 	
 	return (
+        selectedFun ?
 		<div className={classes.container}>
             <div className={classes.content}>
-                <Routes>
-                    <Route path="/" element={<DotGame />} />
-                </Routes>
+                {selectedFun.component}
             </div>
             <div className={classes.details}>
-                <Routes>
-                    <Route path="/" element={<ProjectDetails tech={['Vanilla JS', 'HTML Canvas', 'Web Components']} githubLink='https://github.com/kick-push-coast/personal/tree/master/dot-game' />} />
-                </Routes>
+                <ProjectDetails tech={selectedFun.tech} githubLink={selectedFun.githubLink} />
             </div>
-        </div>
+        </div> : null
 	);
 
 };

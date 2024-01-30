@@ -22,8 +22,12 @@ const links = [
         label: 'Education'
     },
     {
-        url: '/fun',
-        label: 'Fun'
+        url: '/play',
+        label: 'Play'
+    },
+    {
+        url: '/draw',
+        label: 'Draw'
     }
 
 ]
