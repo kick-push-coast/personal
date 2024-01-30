@@ -18,13 +18,16 @@ export const BoardCanvas = (props: BoardCanvasProps) => {
         const ctx = canvasRef.current.getContext('2d');
         if (!ctx) return;
 
+        const canvasOffsetX = canvasRef.current.getBoundingClientRect().left;
+        const canvasOffsetY = canvasRef.current.getBoundingClientRect().top;
+
         const draw = (e: MouseEvent) => {
             if (!isPainting) {
                 return;
             }
             ctx.lineWidth = lineWidth;
             ctx.lineCap = 'round';            
-            ctx.lineTo(e.clientX, e.clientY);
+            ctx.lineTo(e.clientX - canvasOffsetX, e.clientY - canvasOffsetY);
             ctx.stroke();
         }
 
