@@ -2,17 +2,13 @@ import { useEffect, useRef } from 'react';
 import { io } from 'socket.io-client';
 import classes from './board-canvas.module.scss';
 
-export interface BoardCanvasProps { }
-
-export const BoardCanvas = (props: BoardCanvasProps) => {
+export const BoardCanvas = () => {
 
     const containerRef = useRef<HTMLDivElement>(null);
     const canvasRef = useRef<HTMLCanvasElement>(null);
 
     let isPainting = false;
     let lineWidth = 5;
-    let startX;
-    let startY;
 
     useEffect(() => {
         if (!canvasRef.current || !containerRef.current) return;
@@ -22,7 +18,7 @@ export const BoardCanvas = (props: BoardCanvasProps) => {
         const canvasOffsetX = canvasRef.current.getBoundingClientRect().left;
         const canvasOffsetY = canvasRef.current.getBoundingClientRect().top;
         let drawTimeout: NodeJS.Timeout;
-        const socket = io('http://localhost:3000');
+        const socket = io(':3000');
 
         socket.on('drawing-board-update', (data) => {
             let image = new Image();
@@ -52,10 +48,8 @@ export const BoardCanvas = (props: BoardCanvasProps) => {
         canvasRef.current.width = containerRef.current.offsetWidth;
         canvasRef.current.height = containerRef.current.offsetHeight;
 
-        canvasRef.current.addEventListener('mousedown', (e) => {
+        canvasRef.current.addEventListener('mousedown', () => {
             isPainting = true;
-            startX = e.clientX;
-            startY = e.clientY;
         });        
         canvasRef.current.addEventListener('mouseup', () => {
             isPainting = false;

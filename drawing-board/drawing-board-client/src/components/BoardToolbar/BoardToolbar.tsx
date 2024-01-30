@@ -1,8 +1,6 @@
-import classes from './board-toolbar.module.scss';
-
 export interface BoardToolbarProps {}
 
-export const BoardToolbar = (props: BoardToolbarProps) => {
+export const BoardToolbar = () => {
 	
 	return (
 		<div></div>

@@ -25,10 +25,10 @@ const links = [
         url: '/play',
         label: 'Play'
     },
-    {
-        url: '/draw',
-        label: 'Draw'
-    }
+    // {
+    //     url: '/draw',
+    //     label: 'Draw'
+    // }
 
 ]
 
