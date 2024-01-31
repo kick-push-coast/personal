@@ -1,9 +1,18 @@
 {
   "name": "drawing-board-client",
-  "proxy": "http://localhost:5000",
-  "private": true,
-  "version": "0.0.0",
-  "type": "module",
+  "version": "0.0.5",
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "main": "./dist/BoardContainer.umd.js",
+  "module": "./dist/BoardContainer.es.js",
+  "exports": {
+    ".": {
+      "import": "./dist/BoardContainer.es.js",
+      "require": "./dist/BoardContainer.umd.js"
+    }
+  },
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
@@ -11,8 +20,6 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
     "socket.io-client": "^4.7.4"
   },
   "devDependencies": {
@@ -25,8 +32,15 @@
     "eslint": "^8.55.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.5",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "sass": "^1.70.0",
     "typescript": "^5.2.2",
-    "vite": "^5.0.8"
+    "vite": "^5.0.8",
+    "vite-plugin-dts": "^3.7.2"
+  },
+  "peerDependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   }
 }

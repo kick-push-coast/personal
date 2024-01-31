@@ -1,6 +1,6 @@
 import { DotGame } from '../DotGame';
-import { BoardContainer } from '../../../../drawing-board/drawing-board-client/src/components/BoardContainer';
 import { ProjectDetails } from '../ProjectDetails';
+import { BoardContainer } from 'drawing-board-client';
 import classes from './browser-fun.module.scss';
 
 export enum FunMode {

@@ -1,1 +1,1 @@
-export * from './BoardContainer';
+export { BoardContainer } from './BoardContainer';
