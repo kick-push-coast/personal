@@ -18,7 +18,7 @@ export const BoardCanvas = () => {
         const canvasOffsetX = canvasRef.current.getBoundingClientRect().left;
         const canvasOffsetY = canvasRef.current.getBoundingClientRect().top;
         let drawTimeout: NodeJS.Timeout;
-        const socket = io('159.203.99.164:3000', {secure: true});
+        const socket = io('/drawing-socket', {secure: true});
 
         socket.on('drawing-board-update', (data) => {
             let image = new Image();
