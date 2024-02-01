@@ -18,7 +18,7 @@ export const BoardCanvas = () => {
         const canvasOffsetX = canvasRef.current.getBoundingClientRect().left;
         const canvasOffsetY = canvasRef.current.getBoundingClientRect().top;
         let drawTimeout: NodeJS.Timeout;
-        const socket = io('/drawing-socket', {secure: true});
+        const socket = io('https://miketyler.us');
 
         socket.on('drawing-board-update', (data) => {
             let image = new Image();
@@ -42,7 +42,7 @@ export const BoardCanvas = () => {
                 if (!canvasRef.current) return;
                 let data = canvasRef.current.toDataURL('image/png');
                 socket.emit('drawing-board-update', data);
-            })
+            }, 200);
         }
         
         canvasRef.current.width = containerRef.current.offsetWidth;
