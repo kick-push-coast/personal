@@ -1,3 +1,4 @@
+import { Fragment } from 'react';
 import classes from './project-details.module.scss';
 
 export interface ProjectDetailsProps {
@@ -13,12 +14,12 @@ export const ProjectDetails = (props: ProjectDetailsProps) => {
                 {
                     props.tech.map((t, i) => {
                         return (
-                            <>
+                            <Fragment key={i}>
                                 {
                                     i > 0 ? <span>-&nbsp;</span> : null
                                 }
-                                <span className={classes.tech} key={i}>{t} </span>
-                            </>
+                                <span className={classes.tech}>{t} </span>
+                            </Fragment>
 
                         )
                     })
