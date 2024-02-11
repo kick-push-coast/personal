@@ -55,8 +55,8 @@ export const BoardCanvas = () => {
             }, 200);
         }
         
-        canvasRef.current.width = containerRef.current.offsetWidth - 1;
-        canvasRef.current.height = containerRef.current.offsetHeight - 1;
+        canvasRef.current.width = Math.floor(containerRef.current.getBoundingClientRect().width);
+        canvasRef.current.height = Math.floor(containerRef.current.getBoundingClientRect().height);
 
         canvasRef.current.addEventListener('mousedown', () => {
             isPainting = true;
