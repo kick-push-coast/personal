@@ -20,20 +20,33 @@ io.on('connection', (socket) => {
     console.log('a user connected');
     socket.on('drawing-room-create', (id, roomState) => {
         socket.join(id);
-        console.log(roomState);
         roomInitialStates[id] = roomState;
         console.log('a user created room ' + id);
     })
-    socket.on('drawing-room-join', (id, setInitialState) => {
-        socket.join(id);
-        setInitialState(roomInitialStates[id]);
-        console.log('a user joined room ' + id);
+    socket.on('drawing-room-join', (id, callbackFn) => {
+        if (io.sockets.adapter.rooms.get(id)) {
+            socket.join(id);
+            callbackFn(roomInitialStates[id]);
+            console.log('a user joined room ' + id);
+        } else {
+            callbackFn(null);
+        }
     })
     socket.on('drawing-board-update', (id, data)=> {
-        roomInitialStates[id].image = data;
+        if (roomInitialStates[id]) {
+            roomInitialStates[id].image = data;
+        }
         socket.to(id).emit('drawing-board-update', data);
         console.log('a user updated room ' + id);
         
+    })
+    socket.on('disconnecting', (id)=> {
+        // Clean up initial state object on disconnect
+        for (const roomId of socket.rooms) {
+            if (io.sockets.adapter.rooms.get(roomId).size <= 1) {
+                delete roomInitialStates[roomId];
+            }
+        }
     })
 });
 

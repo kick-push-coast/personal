@@ -41,13 +41,25 @@ export const BoardCanvas = () => {
             console.log('Created drawing room: ' + roomId);
         }
         function joinSocketRoom(roomId: string) {
-            roomIdRef.current = roomId;
-            socket.emit('drawing-room-join', roomId, (initialState: InitialCanvasState) => {
-                setCanvasDimensions(initialState.height, initialState.width);
-                setCanvasImage(initialState.image)
-            });
-            console.log('Joined drawing room: ' + roomId);
-            subscribeToSocketRoom();
+            socket.emit(
+                'drawing-room-join',
+                roomId, 
+                function afterJoinRoom(initialState: InitialCanvasState) {
+                    if (initialState !== null) {
+                        roomIdRef.current = roomId;
+                        setCanvasDimensions(initialState?.height, initialState?.width);
+                        setCanvasImage(initialState?.image)
+                        console.log('Joined drawing room: ' + roomId);
+                        subscribeToSocketRoom();
+                    } else {
+                        setCanvasDimensions();
+                        const url = new URL(window.location.href);
+                        url.searchParams.delete('drawingSession');
+                        window.history.pushState({}, document.title, url);
+                        alert('Drawing session ' + roomId + ' has ended. Click "draw with a friend" to begin a new session.');
+                    }
+                }
+            );
         }
         function subscribeToSocketRoom() {
             socket.on('drawing-board-update', (data) => {
@@ -56,7 +68,7 @@ export const BoardCanvas = () => {
         }
 
         function setCanvasImage(data: any) {
-            if (!ctx) return;
+            if (!ctx || !data) return;
             let image = new Image();
             image.onload = () => {
                 ctx.drawImage(image, 0, 0);
@@ -66,7 +78,7 @@ export const BoardCanvas = () => {
 
         /**Detect existing room ID */
         const urlParams = new URLSearchParams(window.location.search);
-        const existingRoomId = urlParams.get('drawingRoom');
+        const existingRoomId = urlParams.get('drawingSession');
         if (existingRoomId) {
             joinSocketRoom(existingRoomId);
         } else {
@@ -104,12 +116,12 @@ export const BoardCanvas = () => {
 
         /**Set up canvas dimensions */
         function setCanvasDimensions(height?: number, width?: number) {
-            console.log(height);
-            console.log(width);
             if (!canvasRef.current || !containerRef.current) return;
             canvasRef.current.width = width || Math.floor(containerRef.current.getBoundingClientRect().width);
             canvasRef.current.height = height || Math.floor(containerRef.current.getBoundingClientRect().height);
         }
+
+        return() => { socket.disconnect() };
         
     }, [])    
 
