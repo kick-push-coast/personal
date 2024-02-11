@@ -16,10 +16,15 @@ app.get('/', (req, res) => {
 
 io.on('connection', (socket) => {
     console.log('a user connected');
-    socket.on('drawing-board-update', (data)=> {
-        socket.broadcast.emit('drawing-board-update', data);
+    socket.on('drawing-room-join', (id) => {
+        socket.join(id);
+        console.log('a user joined room ' + id);
+    })
+    socket.on('drawing-board-update', (id, data)=> {
+        socket.to(id).emit('drawing-board-update', data);
+        console.log('a user updated room ' + id);
         
-  })
+    })
 });
 
 server.listen(3000, () => {

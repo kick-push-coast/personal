@@ -8,36 +8,54 @@ export const BoardCanvas = () => {
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const canvasOffsetX = useRef(0);
     const canvasOffsetY = useRef(0);
+    const roomIdRef = useRef('');
 
     let isPainting = false;
     let lineWidth = 5;
-
-    function setCanvaseOffset() {
-        setTimeout(() => {
-            if (!canvasRef.current) return;
-            canvasOffsetX.current = canvasRef.current.getBoundingClientRect().left;
-            canvasOffsetY.current = canvasRef.current.getBoundingClientRect().top;
-        }, 1200);
-    }
 
     useEffect(() => {
         if (!canvasRef.current || !containerRef.current) return;
         const ctx = canvasRef.current.getContext('2d');
         if (!ctx) return;
 
-        setCanvaseOffset();
+        /**Set up socket handlers */
+        // const socket = io('https://miketyler.us');
+        const socket = io('localhost:3000', {
+            path: '/drawing-socket'
+        });
+        function createSocketRoom() {
+            const roomId = crypto.randomUUID();
+            console.log('Created drawing room: ' + roomId);
+            joinSocketRoom(roomId);
+        }
+        function joinSocketRoom(roomId: string) {
+            roomIdRef.current = roomId;
+            socket.emit('drawing-room-join', roomId);
+            console.log('Joined drawing room: ' + roomId);
+            subscribeToSocketRoom();
+        }
+        function subscribeToSocketRoom() {
+            socket.on('drawing-board-update', (data) => {
+                if (!ctx) return;
+                let image = new Image();
+                image.onload = () => {
+                    ctx.drawImage(image, 0, 0);
+                }
+                image.src = data;
+            })
+        }
 
-        let drawTimeout: NodeJS.Timeout;
-        const socket = io('https://miketyler.us');
+        /**Detect existing room ID */
+        const urlParams = new URLSearchParams(window.location.search);
+        const existingRoomId = urlParams.get('drawingRoom');
+        if (existingRoomId) {
+            joinSocketRoom(existingRoomId);
+        } else {
+            createSocketRoom();
+        }
 
-        socket.on('drawing-board-update', (data) => {
-            let image = new Image();
-            image.onload = () => {
-                ctx.drawImage(image, 0, 0);
-            }
-            image.src = data;
-        })
-
+        /**Define draw behavior */
+        let drawTimeout: NodeJS.Timeout; 
         const draw = (e: MouseEvent) => {
             if (!isPainting) {
                 return;
@@ -51,13 +69,9 @@ export const BoardCanvas = () => {
             drawTimeout = setTimeout(() => {
                 if (!canvasRef.current) return;
                 let data = canvasRef.current.toDataURL('image/png');
-                socket.emit('drawing-board-update', data);
+                socket.emit('drawing-board-update', roomIdRef.current, data);
             }, 200);
         }
-        
-        canvasRef.current.width = Math.floor(containerRef.current.getBoundingClientRect().width);
-        canvasRef.current.height = Math.floor(containerRef.current.getBoundingClientRect().height);
-
         canvasRef.current.addEventListener('mousedown', () => {
             isPainting = true;
         });        
@@ -67,8 +81,20 @@ export const BoardCanvas = () => {
             ctx.beginPath();
         });    
         canvasRef.current.addEventListener('mousemove', draw);
-        window.addEventListener('resize', setCanvaseOffset);
+        
 
+        /**Set up canvas dimensions */
+        canvasRef.current.width = Math.floor(containerRef.current.getBoundingClientRect().width);
+        canvasRef.current.height = Math.floor(containerRef.current.getBoundingClientRect().height);
+        function setCanvasOffset() {
+            setTimeout(() => {
+                if (!canvasRef.current) return;
+                canvasOffsetX.current = canvasRef.current.getBoundingClientRect().left;
+                canvasOffsetY.current = canvasRef.current.getBoundingClientRect().top;
+            }, 1200);
+        }
+        setCanvasOffset();
+        window.addEventListener('resize', setCanvasOffset);
         
     }, [])    
 
