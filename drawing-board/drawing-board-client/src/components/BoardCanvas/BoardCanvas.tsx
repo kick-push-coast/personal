@@ -6,17 +6,27 @@ export const BoardCanvas = () => {
 
     const containerRef = useRef<HTMLDivElement>(null);
     const canvasRef = useRef<HTMLCanvasElement>(null);
+    const canvasOffsetX = useRef(0);
+    const canvasOffsetY = useRef(0);
 
     let isPainting = false;
     let lineWidth = 5;
+
+    function setCanvaseOffset() {
+        setTimeout(() => {
+            if (!canvasRef.current) return;
+            canvasOffsetX.current = canvasRef.current.getBoundingClientRect().left;
+            canvasOffsetY.current = canvasRef.current.getBoundingClientRect().top;
+        }, 1200);
+    }
 
     useEffect(() => {
         if (!canvasRef.current || !containerRef.current) return;
         const ctx = canvasRef.current.getContext('2d');
         if (!ctx) return;
 
-        const canvasOffsetX = canvasRef.current.getBoundingClientRect().left;
-        const canvasOffsetY = canvasRef.current.getBoundingClientRect().top;
+        setCanvaseOffset();
+
         let drawTimeout: NodeJS.Timeout;
         const socket = io('https://miketyler.us');
 
@@ -34,7 +44,7 @@ export const BoardCanvas = () => {
             }
             ctx.lineWidth = lineWidth;
             ctx.lineCap = 'round';            
-            ctx.lineTo(e.clientX - canvasOffsetX, e.clientY - canvasOffsetY);
+            ctx.lineTo(e.clientX - canvasOffsetX.current, e.clientY - canvasOffsetY.current);
             ctx.stroke();
 
             if (drawTimeout) clearTimeout(drawTimeout);
@@ -45,8 +55,8 @@ export const BoardCanvas = () => {
             }, 200);
         }
         
-        canvasRef.current.width = containerRef.current.offsetWidth;
-        canvasRef.current.height = containerRef.current.offsetHeight;
+        canvasRef.current.width = containerRef.current.offsetWidth - 1;
+        canvasRef.current.height = containerRef.current.offsetHeight - 1;
 
         canvasRef.current.addEventListener('mousedown', () => {
             isPainting = true;
@@ -57,6 +67,7 @@ export const BoardCanvas = () => {
             ctx.beginPath();
         });    
         canvasRef.current.addEventListener('mousemove', draw);
+        window.addEventListener('resize', setCanvaseOffset);
 
         
     }, [])    
