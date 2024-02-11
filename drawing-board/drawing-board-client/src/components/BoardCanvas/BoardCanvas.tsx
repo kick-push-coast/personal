@@ -2,12 +2,16 @@ import { useEffect, useRef } from 'react';
 import { io } from 'socket.io-client';
 import classes from './board-canvas.module.scss';
 
+interface InitialCanvasState {
+    height: number;
+    width: number;
+    image: any;
+}
+
 export const BoardCanvas = () => {
 
     const containerRef = useRef<HTMLDivElement>(null);
     const canvasRef = useRef<HTMLCanvasElement>(null);
-    const canvasOffsetX = useRef(0);
-    const canvasOffsetY = useRef(0);
     const roomIdRef = useRef('');
 
     let isPainting = false;
@@ -24,25 +28,40 @@ export const BoardCanvas = () => {
             path: '/drawing-socket'
         });
         function createSocketRoom() {
+            if (!canvasRef.current || !containerRef.current) return;
             const roomId = crypto.randomUUID();
+            roomIdRef.current = roomId;
+            setCanvasDimensions();
+            socket.emit('drawing-room-create', roomId, {
+                image: canvasRef.current.toDataURL('image/png'),
+                height: canvasRef.current.height,
+                width: canvasRef.current.width 
+            } as InitialCanvasState);
+            subscribeToSocketRoom();
             console.log('Created drawing room: ' + roomId);
-            joinSocketRoom(roomId);
         }
         function joinSocketRoom(roomId: string) {
             roomIdRef.current = roomId;
-            socket.emit('drawing-room-join', roomId);
+            socket.emit('drawing-room-join', roomId, (initialState: InitialCanvasState) => {
+                setCanvasDimensions(initialState.height, initialState.width);
+                setCanvasImage(initialState.image)
+            });
             console.log('Joined drawing room: ' + roomId);
             subscribeToSocketRoom();
         }
         function subscribeToSocketRoom() {
             socket.on('drawing-board-update', (data) => {
-                if (!ctx) return;
-                let image = new Image();
-                image.onload = () => {
-                    ctx.drawImage(image, 0, 0);
-                }
-                image.src = data;
+                setCanvasImage(data);
             })
+        }
+
+        function setCanvasImage(data: any) {
+            if (!ctx) return;
+            let image = new Image();
+            image.onload = () => {
+                ctx.drawImage(image, 0, 0);
+            }
+            image.src = data;
         }
 
         /**Detect existing room ID */
@@ -62,7 +81,7 @@ export const BoardCanvas = () => {
             }
             ctx.lineWidth = lineWidth;
             ctx.lineCap = 'round';            
-            ctx.lineTo(e.clientX - canvasOffsetX.current, e.clientY - canvasOffsetY.current);
+            ctx.lineTo(e.offsetX, e.offsetY);
             ctx.stroke();
 
             if (drawTimeout) clearTimeout(drawTimeout);
@@ -84,17 +103,13 @@ export const BoardCanvas = () => {
         
 
         /**Set up canvas dimensions */
-        canvasRef.current.width = Math.floor(containerRef.current.getBoundingClientRect().width);
-        canvasRef.current.height = Math.floor(containerRef.current.getBoundingClientRect().height);
-        function setCanvasOffset() {
-            setTimeout(() => {
-                if (!canvasRef.current) return;
-                canvasOffsetX.current = canvasRef.current.getBoundingClientRect().left;
-                canvasOffsetY.current = canvasRef.current.getBoundingClientRect().top;
-            }, 1200);
+        function setCanvasDimensions(height?: number, width?: number) {
+            console.log(height);
+            console.log(width);
+            if (!canvasRef.current || !containerRef.current) return;
+            canvasRef.current.width = width || Math.floor(containerRef.current.getBoundingClientRect().width);
+            canvasRef.current.height = height || Math.floor(containerRef.current.getBoundingClientRect().height);
         }
-        setCanvasOffset();
-        window.addEventListener('resize', setCanvasOffset);
         
     }, [])    
 

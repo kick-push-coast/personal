@@ -10,17 +10,27 @@ const io = new Server(server, {
     }
 });
 
+let roomInitialStates = {};
+
 app.get('/', (req, res) => {
   res.send('<h1>Hello world</h1>');
 });
 
 io.on('connection', (socket) => {
     console.log('a user connected');
-    socket.on('drawing-room-join', (id) => {
+    socket.on('drawing-room-create', (id, roomState) => {
         socket.join(id);
+        console.log(roomState);
+        roomInitialStates[id] = roomState;
+        console.log('a user created room ' + id);
+    })
+    socket.on('drawing-room-join', (id, setInitialState) => {
+        socket.join(id);
+        setInitialState(roomInitialStates[id]);
         console.log('a user joined room ' + id);
     })
     socket.on('drawing-board-update', (id, data)=> {
+        roomInitialStates[id].image = data;
         socket.to(id).emit('drawing-board-update', data);
         console.log('a user updated room ' + id);
         
