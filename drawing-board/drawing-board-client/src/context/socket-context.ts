@@ -16,16 +16,20 @@ export class SocketContext {
     }
 
 
-    createSocketRoom(initialState: InitialCanvasState) {
+    createSocketRoom(initialState: InitialCanvasState, callback?: Function) {
         const roomId = crypto.randomUUID();
         this.roomId = roomId;
         this.initialCanvasState = initialState;
         this.socket.emit('drawing-room-create', roomId, initialState);
+
         this.subscribeToSocketRoom();
+        this.setUrlParams(roomId);
+        callback && callback(roomId);
+
         console.log('Created drawing session: ' + roomId);
     }
 
-    joinSocketRoom(roomId: string, callback: Function) {
+    joinSocketRoom(roomId: string, callback?: Function) {
         this.socket.emit(
             'drawing-room-join',
             roomId,
@@ -36,14 +40,22 @@ export class SocketContext {
                     this.subscribeToSocketRoom();
                     console.log('Joined drawing session: ' + roomId);
                 } else {
-                    const url = new URL(window.location.href);
-                    url.searchParams.delete('drawingSession');
-                    window.history.pushState({}, document.title, url);
+                    this.setUrlParams();
                     alert('Drawing session ' + roomId + ' has ended. Click "draw with a friend" to begin a new session.');
                 }
-                callback();
+                callback && callback();
             }
         );
+    }
+
+    setUrlParams(roomId?: string) {
+        const url = new URL(window.location.href);
+        if (roomId) {
+            url.searchParams.set('drawingSession', roomId);
+        } else {
+            url.searchParams.delete('drawingSession');
+        }
+        window.history.pushState({}, document.title, url);
     }
 
     emitDrawing(data: string) {

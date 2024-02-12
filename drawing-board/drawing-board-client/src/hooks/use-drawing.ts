@@ -82,11 +82,6 @@ export default function useDrawing() {
         /**Otherwise, just initialize default canvas */
         } else {
             setCanvasDimensions();
-            socketContext.createSocketRoom({
-                height: canvasRef.current.height,
-                width: canvasRef.current.width,
-                image: canvasRef.current.toDataURL('image/png')
-            })
         }
     }
 

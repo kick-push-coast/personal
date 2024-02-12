@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react';
 import classes from './board-canvas.module.scss';
 import useDrawing from '../../hooks/use-drawing';
+import { ShareButton } from '../ShareButton';
 
 export interface InitialCanvasState {
     height: number;
@@ -24,6 +25,7 @@ export const BoardCanvas = () => {
     return (
         <div ref={containerRef} className={classes.container}>
             <canvas ref={canvasRef} className={classes.canvas}></canvas>
+            <ShareButton canvas={canvasRef}/>
         </div>
     );
 };
