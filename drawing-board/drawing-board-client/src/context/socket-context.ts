@@ -22,7 +22,7 @@ export class SocketContext {
         this.initialCanvasState = initialState;
         this.socket.emit('drawing-room-create', roomId, initialState);
         this.subscribeToSocketRoom();
-        console.log('Created drawing room: ' + roomId);
+        console.log('Created drawing session: ' + roomId);
     }
 
     joinSocketRoom(roomId: string, callback: Function) {
@@ -34,7 +34,7 @@ export class SocketContext {
                     this.roomId = roomId;
                     this.initialCanvasState = initialState;
                     this.subscribeToSocketRoom();
-                    console.log('Joined drawing room: ' + roomId);
+                    console.log('Joined drawing session: ' + roomId);
                 } else {
                     const url = new URL(window.location.href);
                     url.searchParams.delete('drawingSession');

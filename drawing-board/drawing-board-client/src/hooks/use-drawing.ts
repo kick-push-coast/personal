@@ -67,7 +67,7 @@ export default function useDrawing() {
     function setSocketRoom() {
         if (!canvasRef.current || !containerRef.current) return;
         
-        /**Detect existing room ID */
+        /**Detect existing room and get initial state */
         const urlParams = new URLSearchParams(window.location.search);
         const existingRoomId = urlParams.get('drawingSession');
         if (existingRoomId) {
@@ -75,8 +75,11 @@ export default function useDrawing() {
                 if (socketContext.roomId && socketContext.initialCanvasState) {
                     setCanvasDimensions(socketContext.initialCanvasState.height, socketContext.initialCanvasState.width);
                     setCanvasImage(socketContext.initialCanvasState.image);
+                } else {
+                    setCanvasDimensions();
                 }
             });
+        /**Otherwise, just initialize default canvas */
         } else {
             setCanvasDimensions();
             socketContext.createSocketRoom({
