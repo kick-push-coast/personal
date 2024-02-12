@@ -1,6 +1,6 @@
 {
   "name": "drawing-board-client",
-  "version": "0.0.10",
+  "version": "0.1.1",
   "files": [
     "dist",
     "README.md"

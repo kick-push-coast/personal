@@ -9,10 +9,7 @@ export class SocketContext {
     private drawEventCallbacks: ((image: string) => any)[] = [];
 
     constructor() {
-        // this.socket = io('https://miketyler.us');
-        this.socket = io('localhost:3000', {
-            path: '/drawing-socket'
-        });
+        this.socket = io('https://miketyler.us');
     }
 
 
