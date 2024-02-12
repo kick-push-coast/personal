@@ -31,12 +31,12 @@ export const ShareButton = (props: {canvas: React.RefObject<HTMLCanvasElement>})
         if (shareBtn.current) {
             shareBtn.current.textContent = 'Share link copied ✓';
             setTimeout(() => {
-                if (shareBtn.current) shareBtn.current.textContent = 'Draw with a friend';
+                if (shareBtn.current) shareBtn.current.textContent = 'Draw with a friend ♥';
             }, 3000);
         }
     }
 	
 	return (
-		<button className={classes.button} ref={shareBtn} onClick={handleShareClick}>Draw with a friend</button>
+		<button className={classes.button} ref={shareBtn} onClick={handleShareClick}>Draw with a friend ♥</button>
 	);
 };

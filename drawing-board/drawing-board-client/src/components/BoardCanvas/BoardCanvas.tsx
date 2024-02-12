@@ -23,9 +23,11 @@ export const BoardCanvas = () => {
 
 
     return (
-        <div ref={containerRef} className={classes.container}>
-            <canvas ref={canvasRef} className={classes.canvas}></canvas>
+        <>
+            <div ref={containerRef} className={classes.container}>
+                <canvas ref={canvasRef} className={classes.canvas}></canvas>
+            </div>
             <ShareButton canvas={canvasRef}/>
-        </div>
+        </>
     );
 };

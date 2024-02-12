@@ -6,9 +6,14 @@
 .container {
     position: relative;
     overflow: auto;
+    background-color: #eeeeee;
 }
 
 .canvas {
     box-sizing: border-box;
-    box-shadow: 0 0 8px rgba(0,0,0,.5);
+    background-color: #fff;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
 }
