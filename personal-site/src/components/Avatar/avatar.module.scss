@@ -2,6 +2,9 @@
 
 .container {
     width: 40%;
+    @media (max-width: $screen-lg) {
+        width: 36%;
+    }
     @media (max-width: $screen-md) {
         width: 100%;
         margin: 0 auto;
