@@ -1,6 +1,5 @@
-// import { useContext } from "react";
-// import { LineContextInstance } from "../BoardContainer/BoardContainer";
-import { useState } from 'react';
+import { useContext, useState } from "react";
+import { LineContextInstance } from "../BoardContainer/BoardContainer";
 import classes from './board-toolbar.module.scss';
 
 export const BoardToolbar = () => {
@@ -9,7 +8,7 @@ export const BoardToolbar = () => {
     let [widthOpen, setWidthOpen] = useState(false);
     let [dashOpen, setDashOpen] = useState(false);
 
-    // let lineContext = useContext(LineContextInstance);
+    let lineContext = useContext(LineContextInstance);
 
     function toggleWidth() {
         if (widthOpen) {
@@ -28,26 +27,27 @@ export const BoardToolbar = () => {
             setWidthOpen(false);
         }
     }
-	
-	return (
-		<div className={classes.container}>
+
+    return (
+        <div className={classes.container}>
             <button className={classes.button}>
                 Color
             </button>
             <div className={classes.option}>
-                <button onClick={toggleWidth} className={classes.button}>
+                <label htmlFor="width-input" onClick={toggleWidth} className={classes.button + (widthOpen ? ' ' + classes.buttonOpen : '')}>
                     Width
-                </button>
-                <div className={classes.input + (widthOpen ? ' ' + classes.inputOpen : '')}>
+                </label>
+                <div className={classes.inputContainer + (widthOpen ? ' ' + classes.inputOpen : '')}>
+                    <input id="width-input" className={classes.input} type="range" min="2" max="20" defaultValue={lineContext.width} onChange={(e) => lineContext.updateWidth(parseInt(e.currentTarget.value))} />
                 </div>
             </div>
             <div className={classes.option}>
-                <button onClick={toggleDash} className={classes.button}>
+                <button onClick={toggleDash} className={classes.button + (dashOpen ? ' ' + classes.buttonOpen : '')}>
                     Dash
                 </button>
-                <div className={classes.input + (dashOpen ? ' ' + classes.inputOpen : '')}>
+                <div className={classes.inputContainer + (dashOpen ? ' ' + classes.inputOpen : '')}>
                 </div>
             </div>
         </div>
-	);
+    );
 };
