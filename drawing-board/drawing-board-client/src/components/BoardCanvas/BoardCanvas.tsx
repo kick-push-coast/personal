@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
-import classes from './board-canvas.module.scss';
-import useDrawing from '../../hooks/use-drawing';
 import { ShareButton } from '../ShareButton';
+import useDrawing from '../../hooks/use-drawing';
+import classes from './board-canvas.module.scss';
 
 export interface InitialCanvasState {
     height: number;
