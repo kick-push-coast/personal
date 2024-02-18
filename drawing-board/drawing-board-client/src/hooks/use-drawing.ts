@@ -1,11 +1,11 @@
 import { useContext, useRef } from "react";
-import { SocketContextInstance } from "../components/BoardContainer/BoardContainer";
+import { LineContextInstance, SocketContextInstance } from "../components/BoardContainer/BoardContainer";
 
 export default function useDrawing() {
     let isPainting = false;
-    let lineWidth = 5;
-
+    
     const socketContext = useContext(SocketContextInstance);
+    const lineContext = useContext(LineContextInstance);
 
     const containerRef = useRef<HTMLDivElement | null>(null);
     const canvasRef = useRef<HTMLCanvasElement | null>(null);
@@ -24,8 +24,10 @@ export default function useDrawing() {
         if (!isPainting || !ctxRef.current || !canvasRef.current) {
             return;
         }
-        ctxRef.current.lineWidth = lineWidth;
         ctxRef.current.lineCap = 'round';
+        ctxRef.current.lineWidth = lineContext.width;
+        ctxRef.current.setLineDash(lineContext.dash);
+        ctxRef.current.strokeStyle = lineContext.color;
         ctxRef.current.lineTo(e.offsetX, e.offsetY);
         ctxRef.current.stroke();
 
