@@ -8,13 +8,18 @@ import classes from './line-dash-picker.module.scss';
 
 export interface LineDashPickerProps { }
 
-export const LineDashPicker = () => {
+export const LineDashPicker = (props: {onSelect?: Function}) => {
     const lineContext = useContext(LineContextInstance);
+
+    function handleChange(dashType: LineDash) {
+        lineContext.updateDash(dashType);
+        props.onSelect && props.onSelect();
+    }
 
     return (
         <>
             <input
-                onChange={(e) => lineContext.updateDash(e.target.value as LineDash)}
+                onChange={(e) => handleChange(e.target.value as LineDash)}
                 defaultChecked={lineContext.dashType === LineDash.none}
                 className={classes.input}
                 id="dash-input-none"
@@ -25,7 +30,7 @@ export const LineDashPicker = () => {
                 <img src={lineNoneSvg}/>
             </label>
             <input
-                onChange={(e) => lineContext.updateDash(e.target.value as LineDash)}
+                onChange={(e) => handleChange(e.target.value as LineDash)}
                 defaultChecked={lineContext.dashType === LineDash.short}
                 className={classes.input}
                 id="dash-input-short"
@@ -36,7 +41,7 @@ export const LineDashPicker = () => {
                 <img src={lineShortSvg}/>
             </label>
             <input
-                onChange={(e) => lineContext.updateDash(e.target.value as LineDash)}
+                onChange={(e) => handleChange(e.target.value as LineDash)}
                 defaultChecked={lineContext.dashType === LineDash.long}
                 className={classes.input}
                 id="dash-input-long"
