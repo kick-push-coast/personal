@@ -1,33 +1,25 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { LineContextInstance } from "../BoardContainer/BoardContainer";
+import { LineDashPicker } from "../LineDashPicker";
 import classes from './board-toolbar.module.scss';
-import { LineDash } from "../../context/line-context";
+import useClickOutside from "../../hooks/use-click-outside";
 
 export const BoardToolbar = () => {
 
+    const widthRef = useRef<HTMLDivElement>(null);
+    const dashRef = useRef<HTMLDivElement>(null);
+
     // let [colorOpen, setColorOpen] = useState(false);
-    let [widthOpen, setWidthOpen] = useState(false);
-    let [dashOpen, setDashOpen] = useState(false);
+    const [widthOpen, setWidthOpen] = useState(false);
+    const [dashOpen, setDashOpen] = useState(false);
 
-    let lineContext = useContext(LineContextInstance);
+    const lineContext = useContext(LineContextInstance);
+    const registerClickOutside = useClickOutside();
 
-    function toggleWidth() {
-        if (widthOpen) {
-            setWidthOpen(false);
-        } else {
-            setWidthOpen(true);
-            setDashOpen(false);
-        }
-    }
-
-    function toggleDash() {
-        if (dashOpen) {
-            setDashOpen(false);
-        } else {
-            setDashOpen(true);
-            setWidthOpen(false);
-        }
-    }
+    useEffect(() => {
+        widthRef.current && registerClickOutside(widthRef.current, () => setWidthOpen(false));
+        dashRef.current && registerClickOutside(dashRef.current, () => setDashOpen(false));
+    }, [])
 
     return (
         <div className={classes.container}>
@@ -35,49 +27,22 @@ export const BoardToolbar = () => {
                 Color
                 <input className={classes.inputColor} type="color" defaultValue={lineContext.color} onChange={(e) => lineContext.updateColor(e.target.value)} />
             </label>
-            <div className={classes.option}>
-                <label htmlFor="width-input" onClick={toggleWidth} className={classes.label + (widthOpen ? ' ' + classes.labelOpen : '')}>
+
+            <div ref={widthRef} className={classes.option}>
+                <label onClick={() => setWidthOpen(true)} htmlFor="width-input" className={classes.label + (widthOpen ? ' ' + classes.labelOpen : '')}>
                     Width
                 </label>
                 <div className={classes.inputContainer + ' ' + classes.inputContainerRotated + (widthOpen ? ' ' + classes.inputOpen : '')}>
                     <input id="width-input" className={classes.input} type="range" min="2" max="20" defaultValue={lineContext.width} onChange={(e) => lineContext.updateWidth(parseInt(e.currentTarget.value))} />
                 </div>
             </div>
-            <div className={classes.option}>
-                <label onClick={toggleDash} className={classes.label + (dashOpen ? ' ' + classes.labelOpen : '')}>
+
+            <div ref={dashRef} className={classes.option}>
+                <label onClick={() => setDashOpen(true)} className={classes.label + (dashOpen ? ' ' + classes.labelOpen : '')}>
                     Dash
                 </label>
                 <div className={classes.inputContainer + (dashOpen ? ' ' + classes.inputOpen : '')}>
-                        <label className={classes.labelRadio} htmlFor="dash-input-none">
-                            None
-                        </label>
-                        <input
-                            onChange={(e) => lineContext.updateDash(e.target.value as LineDash)}
-                            defaultChecked={lineContext.dashType === LineDash.none}
-                            id="dash-input-none"
-                            name="dash-inputs"
-                            type="radio"
-                            value={LineDash.none}/>
-                        <label className={classes.labelRadio} htmlFor="dash-input-short">
-                            Short
-                        </label>
-                        <input
-                            onChange={(e) => lineContext.updateDash(e.target.value as LineDash)}
-                            defaultChecked={lineContext.dashType === LineDash.short}
-                            id="dash-input-short"
-                            name="dash-inputs"
-                            type="radio"
-                            value={LineDash.short}/>
-                        <label className={classes.labelRadio} htmlFor="dash-input-long">
-                            Long
-                        </label>
-                        <input
-                            onChange={(e) => lineContext.updateDash(e.target.value as LineDash)}
-                            defaultChecked={lineContext.dashType === LineDash.long}
-                            id="dash-input-long"
-                            name="dash-inputs"
-                            type="radio"
-                            value={LineDash.long}/>
+                    <LineDashPicker />
                 </div>
             </div>
         </div>
