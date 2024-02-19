@@ -6,7 +6,7 @@ import classes from './board-canvas.module.scss';
 export interface InitialCanvasState {
     height: number;
     width: number;
-    image: any;
+    image: string;
 }
 
 export const BoardCanvas = () => {
