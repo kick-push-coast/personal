@@ -6,11 +6,9 @@ interface RegisteredRef {
 }
 
 export default function useClickOutside() {
-    // const [registeredRefs, setRegisteredRefs] = useState<RegisteredRef[]>([]);
     const registeredRefs = useRef<RegisteredRef[]>([]);
 
     function register(el: HTMLElement, fn: Function) {
-        // setRegisteredRefs([...registeredRefs].concat([{element: el, callback: fn}]));
         registeredRefs.current.push({element: el, callback: fn});
     }
     

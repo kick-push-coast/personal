@@ -1,15 +1,16 @@
 import { useContext, useEffect, useRef, useState } from "react";
 import { LineContextInstance } from "../BoardContainer/BoardContainer";
 import { LineDashPicker } from "../LineDashPicker";
-import classes from './board-toolbar.module.scss';
 import useClickOutside from "../../hooks/use-click-outside";
+import classes from './board-toolbar.module.scss';
 
 export const BoardToolbar = () => {
 
+    const colorRef = useRef<HTMLDivElement>(null);
     const widthRef = useRef<HTMLDivElement>(null);
     const dashRef = useRef<HTMLDivElement>(null);
 
-    // let [colorOpen, setColorOpen] = useState(false);
+    const [colorOpen, setColorOpen] = useState(false);
     const [widthOpen, setWidthOpen] = useState(false);
     const [dashOpen, setDashOpen] = useState(false);
 
@@ -17,19 +18,22 @@ export const BoardToolbar = () => {
     const registerClickOutside = useClickOutside();
 
     useEffect(() => {
+        colorRef.current && registerClickOutside(colorRef.current, () => setColorOpen(false));
         widthRef.current && registerClickOutside(widthRef.current, () => setWidthOpen(false));
         dashRef.current && registerClickOutside(dashRef.current, () => setDashOpen(false));
     }, [])
 
     return (
         <div className={classes.container}>
-            <label className={classes.label}>
-                Color
-                <input className={classes.inputColor} type="color" defaultValue={lineContext.color} onChange={(e) => lineContext.updateColor(e.target.value)} />
-            </label>
+            <div ref={colorRef}>
+                <label tabIndex={0} onClick={() => setColorOpen(true)} className={classes.label + (colorOpen ? ' ' + classes.labelOpen : '')}>
+                    Color
+                    <input className={classes.inputColor} type="color" defaultValue={lineContext.color} onChange={(e) => lineContext.updateColor(e.target.value)} />
+                </label>
+            </div>
 
             <div ref={widthRef} className={classes.option}>
-                <label onClick={() => setWidthOpen(true)} htmlFor="width-input" className={classes.label + (widthOpen ? ' ' + classes.labelOpen : '')}>
+                <label tabIndex={0} onClick={() => setWidthOpen(true)} className={classes.label + (widthOpen ? ' ' + classes.labelOpen : '')}>
                     Width
                 </label>
                 <div className={classes.inputContainer + ' ' + classes.inputContainerRotated + (widthOpen ? ' ' + classes.inputOpen : '')}>
@@ -38,7 +42,7 @@ export const BoardToolbar = () => {
             </div>
 
             <div ref={dashRef} className={classes.option}>
-                <label onClick={() => setDashOpen(true)} className={classes.label + (dashOpen ? ' ' + classes.labelOpen : '')}>
+                <label tabIndex={0} onClick={() => setDashOpen(true)} className={classes.label + (dashOpen ? ' ' + classes.labelOpen : '')}>
                     Dash
                 </label>
                 <div className={classes.inputContainer + (dashOpen ? ' ' + classes.inputOpen : '')}>
