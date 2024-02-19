@@ -13,11 +13,17 @@ export default function useClickOutside() {
     }
     
     function handleClickOutside(e: MouseEvent) {
+        console.log(e.target);
         registeredRefs.current.forEach(ref => {
-            if (ref.element &&  e.target instanceof HTMLElement && !ref.element.contains(e.target)) {
+            if (ref.element && isClickOutside(e, ref.element)) {
                 ref.callback();
             }
         })
+    }
+
+    function isClickOutside(e: MouseEvent, el: HTMLElement) {
+        // Check if click is on non-HTML element OR on HTML element outside of registered element
+        return !(e.target instanceof HTMLElement) || (e.target instanceof HTMLElement && !el.contains(e.target))
     }
 
     useEffect(() => {

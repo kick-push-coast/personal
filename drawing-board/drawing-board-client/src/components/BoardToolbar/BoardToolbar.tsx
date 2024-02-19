@@ -22,7 +22,6 @@ export const BoardToolbar = () => {
     const [dashOpen, setDashOpen] = useState(false);
     const [lineWidth, setLineWidth] = useState(lineContext.width);
 
-
     const lineSvg = (() => {
         switch(lineContext.dashType) {
             case LineDash.none:
@@ -33,6 +32,12 @@ export const BoardToolbar = () => {
                 return lineLongSvg;
         }
     })()
+
+    useEffect(() => {
+        colorRef.current && registerClickOutside(colorRef.current, () => setColorOpen(false));
+        widthRef.current && registerClickOutside(widthRef.current, () => {console.log('closing'); setWidthOpen(false)});
+        dashRef.current && registerClickOutside(dashRef.current, () => setDashOpen(false));
+    }, [])
 
     function handleColorClick(e: MouseEvent) {
         if (e.target instanceof HTMLElement && e.target.nodeName === 'INPUT') {
@@ -45,12 +50,6 @@ export const BoardToolbar = () => {
             setColorOpen(false);
         }
     }
-
-    useEffect(() => {
-        colorRef.current && registerClickOutside(colorRef.current, () => setColorOpen(false));
-        widthRef.current && registerClickOutside(widthRef.current, () => setWidthOpen(false));
-        dashRef.current && registerClickOutside(dashRef.current, () => setDashOpen(false));
-    }, [])
 
     function handleWidthChange(value: number) {
         lineContext.updateWidth(value);
