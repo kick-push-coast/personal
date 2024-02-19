@@ -2,7 +2,9 @@
     background-color: #efefef;
 }
 
-.button {
+.label {
+    font-size: 1.2rem;
+    font-family: monospace;
     width: 4rem;
     height: 4rem;
     display: flex;
@@ -13,8 +15,13 @@
     border-bottom: 1px solid #cfcfcf;
 }
 
-.button:hover, .buttonOpen {
+.label:hover, .labelOpen {
     background-color: #cfcfcf;
+}
+
+.labelRadio {
+    font-size: 1.2rem;
+    font-family: monospace;
 }
 
 .option {
@@ -29,10 +36,20 @@
     padding: 10px;
     background: #cfcfcf;
     display: none;
+    width: 4rem;
+    box-sizing: border-box;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.inputContainerRotated {
     transform: rotate(-90deg) translateX(-100%);
     transform-origin: top left;
+    width: auto;
+    height: 4rem;
 }
 
 .inputOpen {
-    display: block;
+    display: flex;
 }

@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
 import { LineContextInstance } from "../BoardContainer/BoardContainer";
 import classes from './board-toolbar.module.scss';
+import { LineDash } from "../../context/line-context";
 
 export const BoardToolbar = () => {
 
@@ -30,22 +31,52 @@ export const BoardToolbar = () => {
 
     return (
         <div className={classes.container}>
-            <button className={classes.button}>
+            <button className={classes.label}>
                 Color
             </button>
             <div className={classes.option}>
-                <label htmlFor="width-input" onClick={toggleWidth} className={classes.button + (widthOpen ? ' ' + classes.buttonOpen : '')}>
+                <label htmlFor="width-input" onClick={toggleWidth} className={classes.label + (widthOpen ? ' ' + classes.labelOpen : '')}>
                     Width
                 </label>
-                <div className={classes.inputContainer + (widthOpen ? ' ' + classes.inputOpen : '')}>
+                <div className={classes.inputContainer + ' ' + classes.inputContainerRotated + (widthOpen ? ' ' + classes.inputOpen : '')}>
                     <input id="width-input" className={classes.input} type="range" min="2" max="20" defaultValue={lineContext.width} onChange={(e) => lineContext.updateWidth(parseInt(e.currentTarget.value))} />
                 </div>
             </div>
             <div className={classes.option}>
-                <button onClick={toggleDash} className={classes.button + (dashOpen ? ' ' + classes.buttonOpen : '')}>
+                <label htmlFor="dash-input" onClick={toggleDash} className={classes.label + (dashOpen ? ' ' + classes.labelOpen : '')}>
                     Dash
-                </button>
+                </label>
                 <div className={classes.inputContainer + (dashOpen ? ' ' + classes.inputOpen : '')}>
+                        <label className={classes.labelRadio} htmlFor="dash-input-none">
+                            None
+                        </label>
+                        <input
+                            onChange={(e) => lineContext.updateDash(e.target.value as LineDash)}
+                            defaultChecked={lineContext.dashType === LineDash.none}
+                            id="dash-input-none"
+                            name="dash-inputs"
+                            type="radio"
+                            value={LineDash.none}/>
+                        <label className={classes.labelRadio} htmlFor="dash-input-short">
+                            Short
+                        </label>
+                        <input
+                            onChange={(e) => lineContext.updateDash(e.target.value as LineDash)}
+                            defaultChecked={lineContext.dashType === LineDash.short}
+                            id="dash-input-short"
+                            name="dash-inputs"
+                            type="radio"
+                            value={LineDash.short}/>
+                        <label className={classes.labelRadio} htmlFor="dash-input-long">
+                            Long
+                        </label>
+                        <input
+                            onChange={(e) => lineContext.updateDash(e.target.value as LineDash)}
+                            defaultChecked={lineContext.dashType === LineDash.long}
+                            id="dash-input-long"
+                            name="dash-inputs"
+                            type="radio"
+                            value={LineDash.long}/>
                 </div>
             </div>
         </div>

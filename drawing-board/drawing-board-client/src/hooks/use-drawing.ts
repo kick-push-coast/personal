@@ -26,7 +26,7 @@ export default function useDrawing() {
         }
         ctxRef.current.lineCap = 'round';
         ctxRef.current.lineWidth = lineContext.width;
-        ctxRef.current.setLineDash(lineContext.dash);
+        ctxRef.current.setLineDash(lineContext.dashValue);
         ctxRef.current.strokeStyle = lineContext.color;
         ctxRef.current.lineTo(e.offsetX, e.offsetY);
         ctxRef.current.stroke();
