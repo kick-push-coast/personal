@@ -3,11 +3,13 @@
 }
 
 .label {
-    font-size: 1.2rem;
+    padding: 4px;
+    font-size: 1.1rem;
     font-family: monospace;
     width: 4rem;
     height: 4rem;
     display: flex;
+    flex-direction: column;
     position: relative;
     align-items: center;
     justify-content: center;
@@ -24,6 +26,15 @@
     position: relative;
 }
 
+.widthIconContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 4px;
+    height: 20px;
+    width: 20px
+}
+
 .inputColor {
     position: absolute;
     left: 100%;
@@ -38,7 +49,7 @@
     padding: 10px;
     background: #cfcfcf;
     display: none;
-    width: 4rem;
+    width: 4.8rem;
     box-sizing: border-box;
     flex-direction: column;
     align-items: center;
