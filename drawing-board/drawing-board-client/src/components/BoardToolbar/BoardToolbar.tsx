@@ -31,9 +31,10 @@ export const BoardToolbar = () => {
 
     return (
         <div className={classes.container}>
-            <button className={classes.label}>
+            <label className={classes.label}>
                 Color
-            </button>
+                <input className={classes.inputColor} type="color" defaultValue={lineContext.color} onChange={(e) => lineContext.updateColor(e.target.value)} />
+            </label>
             <div className={classes.option}>
                 <label htmlFor="width-input" onClick={toggleWidth} className={classes.label + (widthOpen ? ' ' + classes.labelOpen : '')}>
                     Width
@@ -43,7 +44,7 @@ export const BoardToolbar = () => {
                 </div>
             </div>
             <div className={classes.option}>
-                <label htmlFor="dash-input" onClick={toggleDash} className={classes.label + (dashOpen ? ' ' + classes.labelOpen : '')}>
+                <label onClick={toggleDash} className={classes.label + (dashOpen ? ' ' + classes.labelOpen : '')}>
                     Dash
                 </label>
                 <div className={classes.inputContainer + (dashOpen ? ' ' + classes.inputOpen : '')}>

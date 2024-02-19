@@ -8,6 +8,7 @@
     width: 4rem;
     height: 4rem;
     display: flex;
+    position: relative;
     align-items: center;
     justify-content: center;
     cursor: pointer;
@@ -26,6 +27,12 @@
 
 .option {
     position: relative;
+}
+
+.inputColor {
+    position: absolute;
+    left: 100%;
+    bottom: 100%;
 }
 
 .inputContainer {
