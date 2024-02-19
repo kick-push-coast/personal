@@ -1,5 +1,6 @@
 .container {
     background-color: #efefef;
+    border-right: 1px solid #cfcfcf;
 }
 
 .label {
@@ -46,7 +47,6 @@
     left: 100%;
     top: -1px;
     z-index: 1;
-    padding: 10px;
     background: #cfcfcf;
     display: none;
     width: 4.8rem;
@@ -60,7 +60,9 @@
     transform: rotate(-90deg) translateX(-100%);
     transform-origin: top left;
     width: auto;
-    height: 4rem;
+    padding: 10px;
+    height: 4.8rem;
+    flex-direction: row;
 }
 
 .inputOpen {

@@ -12,7 +12,7 @@ export class LineContext {
 
     constructor () {
         // default values
-        this.width = 10;
+        this.width = 12;
         this.dashType = LineDash.none;
         this.dashValue = [0, 0];
         this.color = '#000000';
