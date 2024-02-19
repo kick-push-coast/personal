@@ -24,11 +24,15 @@ export class LineContext {
 
     updateWidth(width: number) {
         this.width = width;
+        this.setDashValue(this.dashType);
     }
 
     updateDash(dashType: LineDash) {
         this.dashType = dashType;
-        console.log(this.dashType);
+        this.setDashValue(dashType)
+    }
+
+    private setDashValue(dashType: LineDash) {
         switch(dashType) {
             case LineDash.none:
                 this.dashValue = [0, 0];
