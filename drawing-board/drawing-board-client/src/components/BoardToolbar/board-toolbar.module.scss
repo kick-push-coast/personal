@@ -4,11 +4,10 @@
 }
 
 .label {
-    padding: 4px;
     font-size: 1.1rem;
     font-family: monospace;
-    width: 4rem;
-    height: 4rem;
+    width: 4.8rem;
+    height: 4.8rem;
     display: flex;
     flex-direction: column;
     position: relative;
@@ -17,6 +16,7 @@
     cursor: pointer;
     border: 0;
     border-bottom: 1px solid #cfcfcf;
+    box-sizing: border-box;
 }
 
 .label:hover, .labelOpen {
@@ -33,7 +33,7 @@
     align-items: center;
     margin-bottom: 4px;
     height: 20px;
-    width: 20px
+    width: 20px;
 }
 
 .inputColor {
@@ -67,4 +67,9 @@
 
 .inputOpen {
     display: flex;
+}
+
+.dashImg {
+    width: 24px;
+    height: 24px;
 }

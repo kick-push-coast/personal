@@ -31,17 +31,6 @@ export const LineDashPicker = (props: {onSelect?: Function}) => {
             </label>
             <input
                 onChange={(e) => handleChange(e.target.value as LineDash)}
-                defaultChecked={lineContext.dashType === LineDash.short}
-                className={classes.input}
-                id="dash-input-short"
-                name="dash-inputs"
-                type="radio"
-                value={LineDash.short} />
-            <label className={classes.labelRadio} htmlFor="dash-input-short">
-                <img src={lineShortSvg}/>
-            </label>
-            <input
-                onChange={(e) => handleChange(e.target.value as LineDash)}
                 defaultChecked={lineContext.dashType === LineDash.long}
                 className={classes.input}
                 id="dash-input-long"
@@ -50,6 +39,17 @@ export const LineDashPicker = (props: {onSelect?: Function}) => {
                 value={LineDash.long} />
             <label className={classes.labelRadio} htmlFor="dash-input-long">
                 <img src={lineLongSvg}/>
+            </label>
+            <input
+                onChange={(e) => handleChange(e.target.value as LineDash)}
+                defaultChecked={lineContext.dashType === LineDash.short}
+                className={classes.input}
+                id="dash-input-short"
+                name="dash-inputs"
+                type="radio"
+                value={LineDash.short} />
+            <label className={classes.labelRadio} htmlFor="dash-input-short">
+                <img src={lineShortSvg}/>
             </label>
         </>
     );

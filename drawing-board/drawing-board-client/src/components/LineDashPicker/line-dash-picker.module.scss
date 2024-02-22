@@ -1,8 +1,16 @@
 .labelRadio {
     cursor: pointer;
-    padding: 10px;
+    height: 4.8rem;
+    width: 4.8rem;
     box-sizing: border-box;
     border: 2px solid transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.labelRadio:hover {
+    background-color: #a9a9a9
 }
 
 .input {
@@ -13,4 +21,8 @@
 
 .input:checked + .labelRadio {
     border: 2px solid #000;
+}
+
+.input:checked + .labelRadio:hover {
+    background-color: inherit;
 }
