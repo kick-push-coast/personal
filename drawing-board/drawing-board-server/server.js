@@ -2,6 +2,10 @@ const express = require('express');
 const app = express();
 const http = require('http');
 const server = http.createServer(app);
+
+import OpenAI from "openai";
+const openai = new OpenAI();
+
 const { Server } = require("socket.io");
 const io = new Server(server, {
     cors: {
@@ -9,10 +13,22 @@ const io = new Server(server, {
     }
 });
 
+
 let roomInitialStates = {};
 
-app.get('/', (req, res) => {
-  res.send('<h1>Hello world</h1>');
+app.post('/generate-image', async (req, res) => {
+    const promptPrefix = 'simple 2-color logo-style one-line drawing of ';
+    const { prompt } = req.body;
+    const fullPrompt = promptPrefix + prompt;
+
+    const response = await openai.images.generate({
+        model: "dall-e-2",
+        prompt: fullPrompt,
+        n: 1,
+        size: "1024x1024",
+    });
+
+    res.send(response);
 });
 
 io.on('connection', (socket) => {
