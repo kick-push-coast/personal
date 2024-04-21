@@ -37,7 +37,7 @@ export const Avatar = () => {
                         LinkedIn
                     </a>
                     &nbsp;|&nbsp;
-                    <a className={classes.contactLink} href="https://github.com/kick-push-coast/personal/tree/master" target="_blank" title="Mike Tyler's GitHib page">
+                    <a className={classes.contactLink} href="https://github.com/kick-push-coast/personal/tree/master" target="_blank" title="Mike Tyler's GitHub page">
                         GitHub
                     </a>
                 </nav>

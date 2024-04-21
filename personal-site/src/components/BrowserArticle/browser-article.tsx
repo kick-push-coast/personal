@@ -43,6 +43,7 @@ const topics = new Map<ArticleTopic, ReactNode>([
             <li>NPM</li>
             <li>Webpack</li>
             <li>Vite</li>
+            <li>OpenAI</li>
             <li>Jest</li>
             <li>Jasmine + Karma</li>
             <li>Swagger</li>
@@ -61,6 +62,8 @@ const topics = new Map<ArticleTopic, ReactNode>([
             <li>REST Principles</li>
             <li>UX/UI Fundamentals</li>
             <li>Design Systems</li>
+            <li>Generative AI</li>
+            <li>Prompt Design</li>
             <li>Competitor Analysis</li>
             <li>User Research</li>
             <li>CI/CD</li>
@@ -86,15 +89,16 @@ const topics = new Map<ArticleTopic, ReactNode>([
             Sep 2017 - Present
         </p>
         <p>
-            Cludo provides B2B SaaS products for enterprise-level site search, offering automated data source scraping, developer toolsets, and an admin web app for configuring search indices and relevance.
+            Cludo provides B2B SaaS products for enterprise-level site search, offering automated data source scraping, AI-assisted content discovery, developer toolsets, and an admin web app for configuring search indices and relevance.
         </p>
         <ul>
             <li>
                 <strong>Technical Product Manager</strong><span className={classes.hideMobile}> | </span><span className={classes.hideDesktop}><br/></span>Dec 2022 - Present
                 <ul>
-                    <li>Led a team of engineers focused on creating developer tools</li>
-                    <li>Collaborated with partner agencies to design practical component sets and APIs</li>
-                    <li>Developed and launched a React SDK reducing search UI implementation time by up to 30% (documented at: <a href="//react.cludo.com" target="_blank">react.cludo.com</a>)</li>
+                    <li>Led a team of engineers focused on creating developer tools and end user-facing search modules</li>
+                    <li>Produced a search module for providing generative AI answers to queries, reducing average content discovery time by up to 5 seconds</li>
+                    <li>Collaborated with partner agencies and customers to design practical component sets and APIs</li>
+                    <li>Developed and launched a React component library reducing search UI implementation time by up to 30% (documented at: <a href="//react.cludo.com" target="_blank">react.cludo.com</a>)</li>
                     <li>Authored public-facing technical documentation for developer toolsets (cataloged at: <a href="//www.cludo.com/cludo-developer-experience-0?hs_preview=PCthItJq-87790382543" target="_blank">cludo.com/cludo-developer-experience</a>)</li>
                     <li>Continued code contributions, code reviews, and software design consultations</li>
                 </ul>
