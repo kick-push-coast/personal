@@ -35,12 +35,11 @@ export const BoardToolbar = () => {
 
     useEffect(() => {
         colorRef.current && registerClickOutside(colorRef.current, () => setColorOpen(false));
-        widthRef.current && registerClickOutside(widthRef.current, () => {setWidthOpen(false)});
+        widthRef.current && registerClickOutside(widthRef.current, () => setWidthOpen(false));
         dashRef.current && registerClickOutside(dashRef.current, () => setDashOpen(false));
     }, [])
 
     function handleColorClick(e: MouseEvent) {
-        console.log(e.target);
         if (e.target instanceof HTMLElement && e.target.nodeName === 'INPUT') {
             return;
         }
