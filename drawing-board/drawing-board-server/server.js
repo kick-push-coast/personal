@@ -1,18 +1,20 @@
-const express = require('express');
-const app = express();
-const http = require('http');
-const server = http.createServer(app);
-
+import express from 'express';
 import OpenAI from "openai";
-const openai = new OpenAI();
+import cors from 'cors';
+import { createServer } from "http";
+import { Server } from "socket.io";
 
-const { Server } = require("socket.io");
+const app = express();
+app.use(express.json({ type: '*/*' }));
+app.use(cors());
+const server = createServer(app);
+
+const openai = new OpenAI({apiKey: ''});
 const io = new Server(server, {
     cors: {
         origin: '*',
     }
 });
-
 
 let roomInitialStates = {};
 
