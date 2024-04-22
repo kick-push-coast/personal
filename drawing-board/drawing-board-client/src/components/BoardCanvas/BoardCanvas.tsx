@@ -20,8 +20,7 @@ export const BoardCanvas = () => {
     useEffect(() => {
         if (!canvasRef.current || !containerRef.current) return;
         drawer.registerCanvas(containerRef.current, canvasRef.current);        
-    }, [])    
-
+    }, [])
 
     return (
         <>
@@ -29,7 +28,7 @@ export const BoardCanvas = () => {
                 <canvas ref={canvasRef} className={classes.canvas}></canvas>
             </div>
             <ShareButton canvas={canvasRef}/>
-            <GenerateButton />
+            <GenerateButton onLoad={drawer.setCanvasImageData} />
         </>
     );
 };

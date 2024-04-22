@@ -87,5 +87,18 @@ export default function useDrawing() {
         }
     }
 
-    return { registerCanvas };
+    function setCanvasImageData(imageData: ImageData) {
+        const tempCanvas = document.createElement('canvas');
+        const tempContext = tempCanvas.getContext('2d');
+        tempCanvas.width = imageData.width;
+        tempCanvas.height = imageData.height;
+        const finalImageDimension = canvasRef.current?.height || 1024;
+        const currentCanvasWidth = canvasRef.current?.width || 1024;
+        const xOffset = (currentCanvasWidth - finalImageDimension) / 2;
+
+        tempContext && tempContext.putImageData(imageData, 0, 0);
+        ctxRef.current && ctxRef.current.drawImage(tempCanvas, xOffset, 0, finalImageDimension, finalImageDimension);
+    }
+
+    return { registerCanvas, setCanvasImageData };
 }
