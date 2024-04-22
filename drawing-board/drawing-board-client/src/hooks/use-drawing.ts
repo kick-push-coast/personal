@@ -98,6 +98,7 @@ export default function useDrawing() {
 
         tempContext && tempContext.putImageData(imageData, 0, 0);
         ctxRef.current && ctxRef.current.drawImage(tempCanvas, xOffset, 0, finalImageDimension, finalImageDimension);
+        canvasRef.current && socketContext.emitDrawing(canvasRef.current.toDataURL('image/png'));
     }
 
     return { registerCanvas, setCanvasImageData };

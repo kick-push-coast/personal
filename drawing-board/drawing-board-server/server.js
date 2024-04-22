@@ -9,7 +9,7 @@ app.use(express.json({ type: '*/*' }));
 app.use(cors());
 const server = createServer(app);
 
-const openai = new OpenAI({apiKey: ''});
+const openai = new OpenAI();
 const io = new Server(server, {
     cors: {
         origin: '*',
@@ -18,7 +18,7 @@ const io = new Server(server, {
 
 let roomInitialStates = {};
 
-app.post('/generate-image', async (req, res) => {
+app.post('/generate-drawing', async (req, res) => {
     const promptPrefix = 'simple 2-color logo-style one-line drawing of ';
     const { prompt } = req.body;
     const fullPrompt = promptPrefix + prompt;

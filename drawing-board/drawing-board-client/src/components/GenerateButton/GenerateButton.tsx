@@ -1,19 +1,25 @@
 import classes from './generate-button.module.scss';
 
-export interface DallEDataResponse {
+interface DallEDataResponse {
     created: Number,
     data: {
         b64_json: string;
     } []
 }
 
+enum GenerationStates {
+    loading = 'Loading',
+    preparing = 'Preparing',
+    ready = 'Ready'
+}
+
 export const GenerateButton = (props: {onLoad: (image: ImageData) => any}) => {
 
     async function handleGenerateClick() {
         const requestBody = {
-            prompt: 'a pineapple'
+            prompt: 'evil monkey'
         };
-        const response = await fetch('http://localhost:3000/generate-image',
+        const response = await fetch('http://localhost:3000/generate-drawing',
             {
                 method: 'POST',
                 body: JSON.stringify(requestBody),
@@ -23,13 +29,13 @@ export const GenerateButton = (props: {onLoad: (image: ImageData) => any}) => {
             }
         );
         const res = await response.json() as DallEDataResponse;
-        processAndReturnImage(res.data[0].b64_json);
+        res?.data[0]?.b64_json && processAndReturnImage(res.data[0].b64_json);
     }
 
     async function processAndReturnImage(b64String: string) {
         const imageData = await getImageDataFromB64(b64String);
-        // const whiteRemovedImage = removeWhiteFromImage(imageData);
-        props.onLoad(imageData);
+        const whiteRemovedImage = removeWhiteFromImage(imageData);
+        props.onLoad(whiteRemovedImage);
     }
 
     async function getImageDataFromB64(b64String: string): Promise<ImageData> {
@@ -53,9 +59,25 @@ export const GenerateButton = (props: {onLoad: (image: ImageData) => any}) => {
         }
     }
 
-    // function removeWhiteFromImage(imageData: ImageData): ImageData {
+    function removeWhiteFromImage(imageData: ImageData): ImageData {
+        const pixelData = imageData.data;
+        const transparentColor = {r:0, g:0, b:0, a:0};
+    
+        for (var i = 0, n = pixelData.length; i <n; i += 4) {
+            let r = pixelData[i],
+                g = pixelData[i+1],
+                b = pixelData[i+2];
+        
+            if(r >=230 && g >= 230 && b >= 230) {
+                pixelData[i] = transparentColor.r;
+                pixelData[i+1] = transparentColor.g;
+                pixelData[i+2] = transparentColor.b;
+                pixelData[i+3] = transparentColor.a;
+            }
+        }
 
-    // }
+        return imageData;
+    }
 	
 	return (
 		<button className={classes.button} onClick={handleGenerateClick} >
