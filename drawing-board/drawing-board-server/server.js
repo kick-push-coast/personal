@@ -28,6 +28,7 @@ app.post('/generate-image', async (req, res) => {
         prompt: fullPrompt,
         n: 1,
         size: "1024x1024",
+        response_format: "b64_json"
     });
 
     res.send(response);
