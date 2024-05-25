@@ -1,6 +1,7 @@
 import { DotGame } from '../DotGame';
 import { ProjectDetails } from '../ProjectDetails';
-import { BoardContainer } from 'drawing-board-client';
+// import { BoardContainer } from 'drawing-board-client';
+import { BoardContainer } from '../../../../drawing-board/drawing-board-client/src/components/BoardContainer';
 import classes from './browser-fun.module.scss';
 
 export enum FunMode {
@@ -27,7 +28,7 @@ const FunMap = new Map<FunMode, FunDetails>([
         FunMode.drawingBoard,
         {
             component: <BoardContainer />,
-            tech: ['React', 'Node.js', 'Web Sockets'],
+            tech: ['React', 'Node.js', 'OpenAI API', 'Web Sockets'],
             githubLink: 'https://github.com/kick-push-coast/personal/tree/master/drawing-board'
         }
     ]
