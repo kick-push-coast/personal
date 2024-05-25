@@ -1,9 +1,9 @@
 import { useContext } from 'react';
-import { LineDash } from '../../context/line-context';
-import { LineContextInstance } from '../BoardContainer/BoardContainer';
-import lineNoneSvg from "../../assets/line-None.svg";
-import lineShortSvg from "../../assets/line-Short.svg";
-import lineLongSvg from "../../assets/line-Long.svg";
+import { LineDash } from '../../../../../context/line-context';
+import { LineContextInstance } from '../../../../BoardContainer/BoardContainer';
+import lineNoneSvg from "../../../../../assets/line-None.svg";
+import lineShortSvg from "../../../../../assets/line-Short.svg";
+import lineLongSvg from "../../../../../assets/line-Long.svg";
 import classes from './line-dash-picker.module.scss';
 
 export interface LineDashPickerProps { }
