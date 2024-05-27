@@ -1,6 +1,7 @@
 import express from 'express';
 import OpenAI from "openai";
 import cors from 'cors';
+import fetch from 'node-fetch';
 import { createServer } from "http";
 import { Server } from "socket.io";
 
@@ -19,19 +20,41 @@ const io = new Server(server, {
 let roomInitialStates = {};
 
 app.post('/generate-drawing', async (req, res) => {
+    const { prompt, recaptchaToken } = req.body;
+    const recaptchSecretKey = process.env.RECAPTCHA_SECRET_KEY;
     const promptPrefix = 'simple 2-color logo-style one-line drawing of ';
-    const { prompt } = req.body;
     const fullPrompt = promptPrefix + prompt;
 
-    const response = await openai.images.generate({
-        model: "dall-e-2",
-        prompt: fullPrompt,
-        n: 1,
-        size: "1024x1024",
-        response_format: "b64_json"
+    const recaptchaVerifyUrl =
+        `https://www.google.com/recaptcha/api/siteverify?secret=${recaptchSecretKey}&response=${recaptchaToken}`;
+
+    // RECAPTCHA VERIFY REQUEST
+    fetch(recaptchaVerifyUrl, {
+        method: "post",
+    })
+    .then((response) => response.json())
+    .then((google_response) => {
+        if (google_response.success !== true || google_response.score < 0.6) {
+            return res.send({ response: 'error' });
+        }
+    })
+    .catch(() => {
+        return res.send({ response: 'error' });
     });
 
-    res.send(response);
+    // OPENAI GEN REQUEST
+    try {
+        const response = await openai.images.generate({
+            model: "dall-e-2",
+            prompt: fullPrompt,
+            n: 1,
+            size: "1024x1024",
+            response_format: "b64_json"
+        });
+    
+        return res.send(response);
+    } catch {
+    }
 });
 
 io.on('connection', (socket) => {
@@ -50,15 +73,15 @@ io.on('connection', (socket) => {
             callbackFn(null);
         }
     })
-    socket.on('drawing-board-update', (id, data)=> {
+    socket.on('drawing-board-update', (id, data) => {
         if (roomInitialStates[id]) {
             roomInitialStates[id].image = data;
         }
         socket.to(id).emit('drawing-board-update', data);
         console.log('a user updated room ' + id);
-        
+
     })
-    socket.on('disconnecting', (id)=> {
+    socket.on('disconnecting', (id) => {
         // Clean up initial state object on disconnect
         for (const roomId of socket.rooms) {
             if (io.sockets.adapter.rooms.get(roomId).size <= 1) {
@@ -69,5 +92,5 @@ io.on('connection', (socket) => {
 });
 
 server.listen(3000, () => {
-  console.log('listening on *:3000');
+    console.log('listening on *:3000');
 });
