@@ -2,6 +2,9 @@
     background-color: #efefef;
     border-right: 1px solid #cfcfcf;
     font-family: monospace;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .label {

@@ -6,9 +6,10 @@ interface DallEDataResponse {
     } []
 }
 
-export async function generateImage(prompt: string) {
+export async function generateImage(prompt: string, recaptchaToken: string) {
     const requestBody = {
-        prompt: prompt
+        prompt: prompt,
+        recaptchaToken: recaptchaToken
     };
     const response = await fetch('http://localhost:3000/generate-drawing',
         {

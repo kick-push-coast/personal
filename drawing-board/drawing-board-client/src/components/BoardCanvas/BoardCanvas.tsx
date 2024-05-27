@@ -2,7 +2,6 @@ import { useEffect, useRef } from 'react';
 import { ShareButton } from '../ShareButton';
 import useDrawing from '../../hooks/use-drawing';
 import classes from './board-canvas.module.scss';
-import { GenerateButton } from '../GenerateButton';
 
 interface BoardCanvasProps {
     generatedImage?: ImageData
@@ -35,7 +34,6 @@ export const BoardCanvas = (props: BoardCanvasProps) => {
                 <canvas ref={canvasRef} className={classes.canvas}></canvas>
             </div>
             <ShareButton canvas={canvasRef}/>
-            {/* <GenerateButton onLoad={drawer.setCanvasImageData} /> */}
         </>
     );
 };
