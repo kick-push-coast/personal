@@ -3,8 +3,6 @@ import { LineContextInstance } from '../../../BoardContainer/BoardContainer';
 import useClickOutside from '../../../../hooks/use-click-outside';
 import classes from '../../board-toolbar.module.scss';
 
-export interface WidthPickerProps { }
-
 export const WidthPicker = () => {
 
     const lineContext = useContext(LineContextInstance);
@@ -38,21 +36,23 @@ export const WidthPicker = () => {
 
             </label>
             <div className={classes.inputContainer + ' ' + classes.inputContainerRotated + (widthOpen ? ' ' + classes.inputOpen : '')}>
-                <div style={{
-                    backgroundColor: '#000',
-                    borderRadius: '50%',
-                    width: '4px',
-                    height: '4px',
-                    marginRight: '8px'
-                }}></div>
-                <input id="width-input" className={classes.inputRange} type="range" min="4" max="20" defaultValue={lineContext.width} onInput={(e) => handleWidthChange(parseInt(e.currentTarget.value))} />
-                <div style={{
-                    backgroundColor: '#000',
-                    borderRadius: '50%',
-                    width: '20px',
-                    height: '20px',
-                    marginLeft: '8px'
-                }}></div>
+                <div className={classes.inputMargin + ' ' + classes.inputCenter}>
+                    <div style={{
+                        backgroundColor: '#000',
+                        borderRadius: '50%',
+                        width: '4px',
+                        height: '4px',
+                        marginRight: '8px'
+                    }}></div>
+                    <input id="width-input" className={classes.inputRange} type="range" min="4" max="20" defaultValue={lineContext.width} onInput={(e) => handleWidthChange(parseInt(e.currentTarget.value))} />
+                    <div style={{
+                        backgroundColor: '#000',
+                        borderRadius: '50%',
+                        width: '20px',
+                        height: '20px',
+                        marginLeft: '8px'
+                    }}></div>
+                </div>
             </div>
         </div>
     );

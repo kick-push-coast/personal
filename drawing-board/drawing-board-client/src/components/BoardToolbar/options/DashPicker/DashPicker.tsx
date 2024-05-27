@@ -8,8 +8,6 @@ import lineShortSvg from "../../../../assets/line-Short.svg";
 import lineLongSvg from "../../../../assets/line-Long.svg";
 import classes from '../../board-toolbar.module.scss';
 
-export interface DashPickerProps { }
-
 export const DashPicker = () => {
     
     const lineContext = useContext(LineContextInstance);

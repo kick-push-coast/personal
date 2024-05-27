@@ -4,13 +4,16 @@ import useDrawing from '../../hooks/use-drawing';
 import classes from './board-canvas.module.scss';
 import { GenerateButton } from '../GenerateButton';
 
+interface BoardCanvasProps {
+    generatedImage?: ImageData
+}
 export interface InitialCanvasState {
     height: number;
     width: number;
     image: string;
 }
 
-export const BoardCanvas = () => {
+export const BoardCanvas = (props: BoardCanvasProps) => {
 
     const drawer = useDrawing();
     const containerRef = useRef<HTMLDivElement>(null);
@@ -22,13 +25,17 @@ export const BoardCanvas = () => {
         drawer.registerCanvas(containerRef.current, canvasRef.current);        
     }, [])
 
+    useEffect(() => {
+        props.generatedImage && drawer.setCanvasImageData(props.generatedImage);
+    }, [props.generatedImage])
+
     return (
         <>
             <div ref={containerRef} className={classes.container}>
                 <canvas ref={canvasRef} className={classes.canvas}></canvas>
             </div>
             <ShareButton canvas={canvasRef}/>
-            <GenerateButton onLoad={drawer.setCanvasImageData} />
+            {/* <GenerateButton onLoad={drawer.setCanvasImageData} /> */}
         </>
     );
 };

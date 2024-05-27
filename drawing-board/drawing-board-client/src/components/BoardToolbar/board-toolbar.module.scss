@@ -1,13 +1,13 @@
 .container {
     background-color: #efefef;
     border-right: 1px solid #cfcfcf;
+    font-family: monospace;
 }
 
 .label {
     font-size: 1.1rem;
-    font-family: monospace;
-    width: 4.8rem;
-    height: 4.8rem;
+    width: 4.9rem;
+    height: 4.9rem;
     display: flex;
     flex-direction: column;
     position: relative;
@@ -31,7 +31,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 4px;
+    margin-bottom: 2px;
     height: 20px;
     width: 20px;
 }
@@ -49,20 +49,32 @@
     z-index: 1;
     background: #cfcfcf;
     display: none;
-    width: 4.8rem;
+    min-height: 4.9rem;
     box-sizing: border-box;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
 }
 
+.inputMargin {
+    margin: 15px;
+}
+
+.inputCenter {
+    display: flex;
+    align-items: center;
+}
+
+// .inputContainer.inputHorizontal {
+//     width: auto;
+// }
+
 .inputContainerRotated {
-    transform: rotate(-90deg) translateX(-100%);
-    transform-origin: top left;
-    width: auto;
-    padding: 10px;
-    height: 4.8rem;
-    flex-direction: row;
+    // transform: rotate(-90deg) translateX(-100%);
+    // transform-origin: top left;
+    // width: auto;
+    // padding: 10px;
+    // height: 4.8rem;
+    // flex-direction: row;
 }
 
 .inputOpen {
