@@ -6,7 +6,8 @@ import { ClearPrompt } from "./options/ClearPrompt";
 import classes from './board-toolbar.module.scss';
 
 interface BoardToolbarProps {
-    onImageGenerate: (image: ImageData | undefined) => void
+    onImageGenerate: (image: ImageData | undefined) => void,
+    onImageClear: () => void
 }
 
 export const BoardToolbar = (props: BoardToolbarProps) => {
@@ -20,7 +21,7 @@ export const BoardToolbar = (props: BoardToolbarProps) => {
                 <GeneratePrompt onImageGenerate={props.onImageGenerate} />
             </div>
             <div>
-                <ClearPrompt onImageGenerate={props.onImageGenerate} />
+                <ClearPrompt onImageClear={props.onImageClear} />
             </div>
         </div>
     );

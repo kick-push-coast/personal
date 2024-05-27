@@ -4,7 +4,8 @@ import useDrawing from '../../hooks/use-drawing';
 import classes from './board-canvas.module.scss';
 
 interface BoardCanvasProps {
-    generatedImage?: ImageData
+    generatedImage?: ImageData,
+    clearImage: boolean
 }
 export interface InitialCanvasState {
     height: number;
@@ -27,6 +28,10 @@ export const BoardCanvas = (props: BoardCanvasProps) => {
     useEffect(() => {
         props.generatedImage && drawer.setCanvasImageData(props.generatedImage);
     }, [props.generatedImage])
+    
+    useEffect(() => {
+        props.clearImage && drawer.clearImage();
+    }, [props.clearImage])
 
     return (
         <>

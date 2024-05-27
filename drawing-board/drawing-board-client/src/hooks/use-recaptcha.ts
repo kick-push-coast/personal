@@ -4,21 +4,26 @@ const CLIENT_KEY = '6LfOyugpAAAAALpdn3wY7z1aTO2kt4ETFc5r4hiU';
 
 declare global {
     interface Window {
-        grecaptcha: any;
+        grecaptcha: {
+            ready: (fn: Function) => void,
+            execute: (key: string, body: any) => Promise<string>        };
     }
 }
 
 export default function useRecaptcha() {
-    const [recaptchaToken, setRecaptchaToken] = useState('');
+    const [loaded, setLoaded] = useState(false);
 
-    const handleLoaded = () => {
-        window.grecaptcha.ready(() => {
-            window.grecaptcha
-                .execute(CLIENT_KEY, { action: 'homepage' })
-                .then((token: string) => {
-                    setRecaptchaToken(token);
-                })
-        })
+    function prepareRecaptcha() {
+        window.grecaptcha.ready(() => setLoaded(true))
+    }
+
+    async function getToken() {
+        if (!loaded) return;
+        return window.grecaptcha
+            .execute(CLIENT_KEY, { action: 'homepage' })
+            .then((token: string) => {
+                return token;
+            });
     }
 
     useEffect(() => {
@@ -27,10 +32,10 @@ export default function useRecaptcha() {
         style.appendChild(css);
         const script = document.createElement('script');
         script.src = 'https://www.google.com/recaptcha/api.js?render=' + CLIENT_KEY;
-        script.addEventListener('load', handleLoaded);
+        script.addEventListener('load', prepareRecaptcha);
         document.head.appendChild(style);
         document.body.appendChild(script);
     }, [])
 
-    return recaptchaToken;
+    return getToken;
 }

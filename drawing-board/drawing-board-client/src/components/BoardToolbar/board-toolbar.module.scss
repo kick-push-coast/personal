@@ -39,6 +39,12 @@
     width: 20px;
 }
 
+.title {
+    text-align: center;
+    margin-top: 0;
+    white-space: nowrap;
+}
+
 .inputColor {
     position: absolute;
     left: 100%;
@@ -56,6 +62,11 @@
     box-sizing: border-box;
     align-items: center;
     justify-content: center;
+}
+
+.inputContainer.inputBottom {
+    top: auto;
+    bottom: 0;
 }
 
 .inputMargin {

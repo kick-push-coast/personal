@@ -15,11 +15,12 @@ let generateTimer: NodeJS.Timeout;
 export const GeneratePrompt = (props: GeneratePromptProps) => {
     
     const registerClickOutside = useClickOutside();
-    const recaptchaToken = useRecaptcha();
+    const getToken = useRecaptcha();
     const generateRef = useRef<HTMLDivElement>(null);
     const [generateOpen, setGenerateOpen] = useState(false);
     const [generateLoading, setGenerateLoading] = useState(false);
     const [generateLabel, setGenerateLabel] = useState(<>Generate</>);
+    const [errorMsg, setErrorMsg] = useState<string|null>(null);
 
     useEffect(() => {
         generateRef.current && registerClickOutside(generateRef.current, () => setGenerateOpen(false));
@@ -30,10 +31,24 @@ export const GeneratePrompt = (props: GeneratePromptProps) => {
         const form = e.target as HTMLFormElement;
         const input = form.elements[0] as HTMLInputElement;
         setGenerateLoading(true);
-        const image = await generateImage(input.value, recaptchaToken);
+        let recaptchaToken = await getToken();
+        if (recaptchaToken) {
+            handleGenerateImage(input.value, recaptchaToken);
+        } else {
+            handleError();
+        }
+    }
+
+    async function handleGenerateImage(prompt: string, token: string) {
+        const image = await generateImage(prompt, token);
         setGenerateLoading(false);
         props.onImageGenerate(image);
         setGenerateOpen(false);
+    }
+
+    function handleError(message?: string) {
+        const error = message || 'Something went wrong. Try refreshing the page.';
+        setErrorMsg(error);
     }
 
     useEffect(() => {
@@ -64,11 +79,16 @@ export const GeneratePrompt = (props: GeneratePromptProps) => {
             </label>
             <div className={classes.inputContainer + ' ' + (generateOpen ? ' ' + classes.inputOpen : '')}>
                 <form onSubmit={handleSubmit} className={classes.inputMargin}>
-                    <h2 className={formClasses.title}>&nbsp;&nbsp; Generate a drawing ✨</h2>
-                    <input required className={formClasses.input} name="prompt" type='text' autoComplete='off' placeholder='Enter a description' />
+                    <h2 className={classes.title}>&nbsp;&nbsp; Describe a drawing to generate ✨</h2>
+                    <input disabled={generateLoading} required className={formClasses.input} name="prompt" type='text' autoComplete='off' placeholder='i.e. "evil monkey on a horse"' />
                     <button className={formClasses.submit} type='submit'>
                         {generateLabel}
                     </button>
+                    { errorMsg && 
+                        <span>
+                            {errorMsg}
+                        </span>
+                    }
                 </form>
             </div>
         </div>

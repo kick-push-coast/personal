@@ -101,5 +101,11 @@ export default function useDrawing() {
         canvasRef.current && socketContext.emitDrawing(canvasRef.current.toDataURL('image/png'));
     }
 
-    return { registerCanvas, setCanvasImageData };
+    function clearImage() {
+        if (ctxRef.current && canvasRef.current) {
+            ctxRef.current.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height);
+        }
+    }
+
+    return { registerCanvas, setCanvasImageData, clearImage };
 }

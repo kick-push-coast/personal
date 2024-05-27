@@ -1,0 +1,19 @@
+.options {
+    display: flex;
+    justify-content: space-around;
+}
+
+.button {
+    font-size: 1.2rem;
+    line-height: 1.4;
+    cursor: pointer;
+    font-family: monospace;
+    min-width: 120px;
+    text-align: center;
+}
+
+.button.cancel {
+    background-color: transparent;
+    outline: none;
+    border: none;
+}
