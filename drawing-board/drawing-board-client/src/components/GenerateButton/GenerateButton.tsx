@@ -7,12 +7,6 @@ interface DallEDataResponse {
     } []
 }
 
-enum GenerationStates {
-    loading = 'Loading',
-    preparing = 'Preparing',
-    ready = 'Ready'
-}
-
 export const GenerateButton = (props: {onLoad: (image: ImageData) => any}) => {
 
     async function handleGenerateClick() {
