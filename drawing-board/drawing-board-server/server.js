@@ -1,4 +1,3 @@
-import 'dotenv/config';
 import express from 'express';
 import OpenAI from "openai";
 import cors from 'cors';
@@ -22,12 +21,12 @@ let roomInitialStates = {};
 
 app.post('/generate-drawing', async (req, res) => {
     const { prompt, recaptchaToken } = req.body;
-    const recaptchSecretKey = process.env.RECAPTCHA_SECRET_KEY;
+    const recaptchaSecretKey = process.env.RECAPTCHA_SECRET_KEY;
     const promptPrefix = 'simple 2-color logo-style one-line drawing of ';
     const fullPrompt = promptPrefix + prompt;
 
     const recaptchaVerifyUrl =
-        `https://www.google.com/recaptcha/api/siteverify?secret=${recaptchSecretKey}&response=${recaptchaToken}`;
+        `https://www.google.com/recaptcha/api/siteverify?secret=${recaptchaSecretKey}&response=${recaptchaToken}`;
 
     // RECAPTCHA VERIFY REQUEST
     fetch(recaptchaVerifyUrl, {
