@@ -103,7 +103,8 @@ export default function useDrawing() {
 
     function clearImage() {
         if (ctxRef.current && canvasRef.current) {
-            ctxRef.current.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height);
+            ctxRef.current.fillStyle = 'white';
+            ctxRef.current.fillRect(0, 0, canvasRef.current.width, canvasRef.current.height);
             socketContext.emitDrawing(canvasRef.current.toDataURL('image/png'));
         }
     }
