@@ -89,26 +89,25 @@ const topics = new Map<ArticleTopic, ReactNode>([
             Sep 2017 - Present
         </p>
         <p>
-            Cludo provides B2B SaaS products for enterprise-level site search, offering automated data source scraping, AI-assisted content discovery, developer toolsets, and an admin web app for configuring search indices and relevance.
+        A B2B SaaS provider specialized in enterprise search – data indexing, AI-enabled content discovery, and client SDKs for creating search UIs.
         </p>
         <ul>
             <li>
-                <strong>Technical Product Manager</strong><span className={classes.hideMobile}> | </span><span className={classes.hideDesktop}><br/></span>Dec 2022 - Present
+                <strong>Technical Product Manager</strong><span className={classes.hideMobile}> | </span><span className={classes.hideDesktop}><br/></span>Jan 2023 - Present
                 <ul>
-                    <li>Led a team of engineers focused on creating developer tools and end user-facing search modules</li>
-                    <li>Produced a search module for providing generative AI answers to queries, reducing average content discovery time by up to 5 seconds</li>
-                    <li>Collaborated with partner agencies and customers to design practical component sets and APIs</li>
-                    <li>Developed and launched a React component library reducing search UI implementation time by up to 30% (documented at: <a href="//react.cludo.com" target="_blank">react.cludo.com</a>)</li>
-                    <li>Authored public-facing technical documentation for developer toolsets (cataloged at: <a href="//www.cludo.com/cludo-developer-experience-0?hs_preview=PCthItJq-87790382543" target="_blank">cludo.com/cludo-developer-experience</a>)</li>
-                    <li>Continued code contributions, code reviews, and software design consultations</li>
+                    <li>Led a team of engineers to develop a React SDK for creating custom search UIs (documented at: <a href="//react.cludo.com" target="_blank">react.cludo.com</a>)</li>
+                    <li>Conducted user research and iterated on technical designs for components and APIs</li>
+                    <li>Contributed code and mentored junior engineers throughout the process</li>
+                    <li>Saw a transformation in how developers interface with Cludo search, with the SDK becoming the method of choice for most</li>
+                    <li>Authored public-facing technical documentation for the SDK and other developer resources (cataloged at: <a href="//www.cludo.com/cludo-developer-experience-0?hs_preview=PCthItJq-87790382543" target="_blank">cludo.com/cludo-developer-experience</a>)</li>
                 </ul>
             </li>
             <br/>
             <li>
-                <strong>Lead UX Engineer</strong><span className={classes.hideMobile}> | </span><span className={classes.hideDesktop}><br/></span>May 2021 - Dec 2022
+                <strong>Senior UX Engineer</strong><span className={classes.hideMobile}> | </span><span className={classes.hideDesktop}><br/></span>May 2021 - Jan 2023
                 <ul>
-                    <li>Collaborated on revamping the Cludo admin web app with the design team</li>
-                    <li>Improved critical user journeys, positively impacting measured user sentiment</li>
+                    <li>Collaborated with designers on a partial redesign of the Cludo web app</li>
+                    <li>Improved critical user journeys and introduced a new onboarding process to help new users learn the app</li>
                     <li>Maintained parity between Figma-designed components and code</li>
                 </ul>
             </li>
@@ -116,8 +115,8 @@ const topics = new Map<ArticleTopic, ReactNode>([
             <li>
                 <strong>Product Software Engineer</strong><span className={classes.hideMobile}> | </span><span className={classes.hideDesktop}><br/></span>Jun 2019 - May 2021
                 <ul>
-                    <li>Contributed as a core engineer for the Cludo admin web app using Angular and TypeScript</li>
-                    <li>Applied software design patterns for code robustness and maintainability</li>
+                    <li>Contributed as a core engineer for the admin web app using Angular and TypeScript</li>
+                    <li>Applied suitable software design patterns to keep the web app robust and maintainable</li>
                     <li>Ensured comprehensive test coverage with Jasmine and Karma</li>
                 </ul>
             </li>
@@ -125,7 +124,7 @@ const topics = new Map<ArticleTopic, ReactNode>([
             <li>
                 <strong>Frontend Developer</strong><span className={classes.hideMobile}> | </span><span className={classes.hideDesktop}><br/></span>Sep 2017 - Jun 2019
                 <ul>
-                    <li>Worked jointly with clients to create tailored search implementations</li>
+                    <li>Worked jointly with clients to create custom search implementations</li>
                     <li>Developed reusable, portable search UIs with ASP.NET templates and vanilla JavaScript</li>
                     <li>Offered ongoing technical support and consultation for clients</li>
                 </ul>

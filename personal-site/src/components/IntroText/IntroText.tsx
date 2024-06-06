@@ -28,9 +28,9 @@ export const IntroText = () => {
     useEffect(() => {
         if (globalLoadedStateContext.loaded && !hasTyped) {
             greetingTyper.startTyping(TextSections.greeting, 1000, 2, 60);
-            introTyper.startTyping(TextSections.intro, 2800, 1, 40);
-            summaryTyper.startTyping(TextSections.summary, 5500, 2, 60);
-            signoffTyper.startTyping(TextSections.signoff, 11000, 2, 80);
+            introTyper.startTyping(TextSections.intro, 2600, 1, 40);
+            summaryTyper.startTyping(TextSections.summary, 5200, 2, 60);
+            signoffTyper.startTyping(TextSections.signoff, 10600, 2, 80);
             setHasTyped(true);
         }
     }, [globalLoadedStateContext.loaded])
