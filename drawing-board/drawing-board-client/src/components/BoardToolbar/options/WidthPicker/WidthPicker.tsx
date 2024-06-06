@@ -23,11 +23,9 @@ export const WidthPicker = () => {
 
     return (
         <div ref={widthRef} className={classes.option}>
-            <label tabIndex={0} onClick={() => setWidthOpen(!widthOpen)} className={classes.label + (widthOpen ? ' ' + classes.labelOpen : '')}>
+            <label title="Line width" tabIndex={0} onClick={() => setWidthOpen(!widthOpen)} className={classes.label + (widthOpen ? ' ' + classes.labelOpen : '')}>
                 <div className={classes.widthIconContainer}>
-                    <div style={{
-                        backgroundColor: '#000',
-                        borderRadius: '50%',
+                    <div className={classes.widthIcon} style={{
                         width: lineWidth,
                         height: lineWidth
                     }}></div>
@@ -36,7 +34,7 @@ export const WidthPicker = () => {
 
             </label>
             <div className={classes.inputContainer + ' ' + classes.inputContainerRotated + (widthOpen ? ' ' + classes.inputOpen : '')}>
-                <div className={classes.inputMargin + ' ' + classes.inputCenter}>
+                <div className={classes.inputCenter}>
                     <div style={{
                         backgroundColor: '#000',
                         borderRadius: '50%',

@@ -25,15 +25,18 @@ export const ClearPrompt = (props: ClearPromptProps) => {
 	
 	return (
         <div ref={clearRef} className={classes.option}>
-            <label tabIndex={0} onClick={() => setClearOpen(!clearOpen)} className={classes.label + (clearOpen ? ' ' + classes.labelOpen : '')}>
+            <label title="Clear" tabIndex={0} onClick={() => setClearOpen(!clearOpen)} className={classes.label + ' ' + classes.labelBottom + (clearOpen ? ' ' + classes.labelOpen : '')}>
                 <img className={classes.dashImg} src={trashSvg} />
             </label>
             <div className={classes.inputContainer + ' ' + classes.inputBottom + ' ' + (clearOpen ? ' ' + classes.inputOpen : '')}>
                 <div className={classes.inputMargin}>
-                    <h2 className={classes.title}>&nbsp;&nbsp; Clear drawing board? ☠️</h2>
+                    <h2 className={classes.title}>Clear drawing board? ☠️</h2>
                     <div className={promptClasses.options}>
                         <button className={promptClasses.button} onClick={handleClear}>
                             Yes, clear
+                        </button>
+                        <button className={promptClasses.button + ' ' + promptClasses.cancel} onClick={() => setClearOpen(false)}>
+                            Cancel
                         </button>
                     </div>
                 </div>

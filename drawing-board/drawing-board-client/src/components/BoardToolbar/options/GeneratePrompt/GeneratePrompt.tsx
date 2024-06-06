@@ -74,12 +74,12 @@ export const GeneratePrompt = (props: GeneratePromptProps) => {
     
     return (
         <div ref={generateRef} className={classes.option}>
-            <label tabIndex={0} onClick={() => setGenerateOpen(!generateOpen)} className={classes.label + (generateOpen ? ' ' + classes.labelOpen : '')}>
+            <label title="Drawing generator" tabIndex={0} onClick={() => setGenerateOpen(!generateOpen)} className={classes.label + (generateOpen ? ' ' + classes.labelOpen : '')}>
                 <img className={classes.dashImg} src={openAiSvg} />
             </label>
             <div className={classes.inputContainer + ' ' + (generateOpen ? ' ' + classes.inputOpen : '')}>
                 <form onSubmit={handleSubmit} className={classes.inputMargin}>
-                    <h2 className={classes.title}>&nbsp;&nbsp; Describe a drawing to generate ✨</h2>
+                    <h2 className={classes.title}>Describe a drawing to generate ✨</h2>
                     <input disabled={generateLoading} required className={formClasses.input} name="prompt" type='text' autoComplete='off' placeholder='i.e. "evil monkey on a horse"' />
                     <button className={formClasses.submit} type='submit'>
                         {generateLabel}

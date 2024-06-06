@@ -9,6 +9,19 @@
     align-items: center;
 }
 
+.labelRadio img {
+    width: 20px;
+    height: 20px;
+}
+
+.labelRadio:first-of-type {
+    border-radius: 0 10px 0 0;
+}
+
+.labelRadio:last-of-type {
+    border-radius: 0 0 10px 0;
+}
+
 .labelRadio:hover {
     background-color: #a9a9a9
 }

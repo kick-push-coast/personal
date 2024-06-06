@@ -30,13 +30,27 @@
     position: relative;
 }
 
+.labelBottom {
+    border-bottom: none;
+    border-top: 1px solid #cfcfcf;
+}
+
 .widthIconContainer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 2px;
-    height: 20px;
-    width: 20px;
+    position: relative;
+    margin-bottom: 1px;
+    height: 19px;
+    width: 19px;
+    border: 2px solid #000;
+    border-radius: 50%;
+}
+
+.widthIcon {
+    border-radius: 50%;
+    background-color: #000;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .title {
@@ -63,6 +77,8 @@
     box-sizing: border-box;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
+    border-radius: 0 10px 10px 0;
 }
 
 .inputContainer.inputBottom {
@@ -71,7 +87,7 @@
 }
 
 .inputMargin {
-    margin: 15px;
+    margin: 18px;
 }
 
 .inputCenter {
@@ -84,12 +100,13 @@
 // }
 
 .inputContainerRotated {
-    // transform: rotate(-90deg) translateX(-100%);
-    // transform-origin: top left;
-    // width: auto;
-    // padding: 10px;
-    // height: 4.8rem;
-    // flex-direction: row;
+    transform: rotate(-90deg) translateX(-100%);
+    transform-origin: top left;
+    width: auto;
+    padding: 10px;
+    height: 4.8rem;
+    flex-direction: row;
+    border-radius: 0 0 10px 10px;
 }
 
 .inputOpen {
@@ -97,6 +114,6 @@
 }
 
 .dashImg {
-    width: 24px;
-    height: 24px;
+    width: 20px;
+    height: 20px;
 }
