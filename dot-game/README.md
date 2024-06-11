@@ -10,4 +10,4 @@ A fun little experiment in animation and physics using only web standard technol
 
 ## Live host
 
-Check it out at [miketyler.us/fun](https://www.miketyler.us/fun)
+Check it out at [miketyler.us/play](https://www.miketyler.us/play)

@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
-import classes from './browser-article.module.scss';
 import { IntroText } from '../IntroText';
+import classes from './browser-article.module.scss';
 
 export enum ArticleTopic {
     Home,
@@ -62,7 +62,6 @@ const topics = new Map<ArticleTopic, ReactNode>([
             <li>REST Principles</li>
             <li>UX/UI Fundamentals</li>
             <li>Design Systems</li>
-            <li>Generative AI</li>
             <li>Prompt Design</li>
             <li>Competitor Analysis</li>
             <li>User Research</li>
