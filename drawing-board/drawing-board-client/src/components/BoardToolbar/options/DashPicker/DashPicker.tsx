@@ -9,7 +9,7 @@ import lineLongSvg from "../../../../assets/line-Long.svg";
 import classes from '../../board-toolbar.module.scss';
 
 export const DashPicker = () => {
-    
+
     const lineContext = useContext(LineContextInstance);
     const registerClickOutside = useClickOutside();
 
@@ -18,7 +18,7 @@ export const DashPicker = () => {
     const [dashOpen, setDashOpen] = useState(false);
 
     const lineSvg = (() => {
-        switch(lineContext.dashType) {
+        switch (lineContext.dashType) {
             case LineDash.none:
                 return lineNoneSvg;
             case LineDash.short:
@@ -34,10 +34,19 @@ export const DashPicker = () => {
 
     return (
         <div ref={dashRef} className={classes.option}>
-            <label title="Line type" tabIndex={0} onClick={() => setDashOpen(!dashOpen)} className={classes.label + (dashOpen ? ' ' + classes.labelOpen : '')}>
+            <label
+                title="Line type"
+                tabIndex={0}
+                onClick={() => setDashOpen(!dashOpen)}
+                onKeyDown={(e) => (e.key === 'Enter') && setDashOpen(!dashOpen)}
+                className={classes.label + (dashOpen ? ' ' + classes.labelOpen : '')}
+                role="button"
+                aria-haspopup="true"
+                aria-expanded={dashOpen}
+                aria-controls="dash-picker">
                 <img alt="Line type icon" className={classes.dashImg} src={lineSvg} />
             </label>
-            <div className={classes.inputContainer + (dashOpen ? ' ' + classes.inputOpen : '')}>
+            <div id="dash-picker" className={classes.inputContainer + (dashOpen ? ' ' + classes.inputOpen : '')}>
                 <LineDashPicker onSelect={() => setDashOpen(false)} />
             </div>
         </div>

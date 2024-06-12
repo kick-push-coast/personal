@@ -35,7 +35,7 @@ export const BoardCanvas = (props: BoardCanvasProps) => {
 
     return (
         <>
-            <div ref={containerRef} className={classes.container}>
+            <div tabIndex={0} ref={containerRef} className={classes.container}>
                 <canvas ref={canvasRef} className={classes.canvas}></canvas>
             </div>
             <ShareButton canvas={canvasRef}/>

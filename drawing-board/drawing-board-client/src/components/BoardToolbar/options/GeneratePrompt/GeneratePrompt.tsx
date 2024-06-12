@@ -74,10 +74,19 @@ export const GeneratePrompt = (props: GeneratePromptProps) => {
     
     return (
         <div ref={generateRef} className={classes.option}>
-            <label title="Drawing generator" tabIndex={0} onClick={() => setGenerateOpen(!generateOpen)} className={classes.label + (generateOpen ? ' ' + classes.labelOpen : '')}>
+            <label
+                title="Drawing generator"
+                tabIndex={0}
+                onClick={() => setGenerateOpen(!generateOpen)}
+                onKeyDown={(e) => (e.key === 'Enter') && setGenerateOpen(!generateOpen)}
+                className={classes.label + (generateOpen ? ' ' + classes.labelOpen : '')}
+                role="button"
+                aria-haspopup="true"
+                aria-expanded={generateOpen}
+                aria-controls="drawing-generator-prompt">
                 <img alt="Drawing generator icon" className={classes.dashImg} src={openAiSvg} />
             </label>
-            <div className={classes.inputContainer + ' ' + (generateOpen ? ' ' + classes.inputOpen : '')}>
+            <div id="drawing-generator-prompt" className={classes.inputContainer + ' ' + (generateOpen ? ' ' + classes.inputOpen : '')}>
                 <form onSubmit={handleSubmit} className={classes.inputMargin}>
                     <h2 className={classes.title}>Describe a drawing to generate ✨</h2>
                     <input disabled={generateLoading} required className={formClasses.input} name="prompt" type='text' autoComplete='off' placeholder='i.e. "evil monkey on a horse"' />

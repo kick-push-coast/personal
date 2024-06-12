@@ -12,7 +12,7 @@ export default function useClickOutside() {
         registeredRefs.current.push({element: el, callback: fn});
     }
     
-    function handleClickOutside(e: MouseEvent) {
+    function handleClickOutside(e: MouseEvent | KeyboardEvent) {
         registeredRefs.current.forEach(ref => {
             if (ref.element && isClickOutside(e, ref.element)) {
                 ref.callback();
@@ -20,16 +20,22 @@ export default function useClickOutside() {
         })
     }
 
-    function isClickOutside(e: MouseEvent, el: HTMLElement) {
-        // Check if click is on non-HTML element OR on HTML element outside of registered element
-        return e.target instanceof Node && !el.contains(e.target);
+    function isClickOutside(e: MouseEvent | KeyboardEvent, el: HTMLElement) {
+        if (e instanceof KeyboardEvent && e.key !== 'Enter') {
+            return false;
+        } else {
+            return e.target instanceof Node && !el.contains(e.target);
+        }
     }
 
     useEffect(() => {
         document.removeEventListener("mousedown", handleClickOutside);
         document.addEventListener("mousedown", handleClickOutside);
+        document.removeEventListener("keydown", handleClickOutside);
+        document.addEventListener("keydown", handleClickOutside);
         return () => {
             document.removeEventListener("mousedown", handleClickOutside);
+            document.removeEventListener("keydown", handleClickOutside);
         };
     }, [registeredRefs]);
 

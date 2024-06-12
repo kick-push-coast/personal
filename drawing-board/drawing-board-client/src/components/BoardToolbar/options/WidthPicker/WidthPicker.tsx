@@ -15,7 +15,7 @@ export const WidthPicker = () => {
     useEffect(() => {
         widthRef.current && registerClickOutside(widthRef.current, () => setWidthOpen(false));
     }, [])
-    
+
     function handleWidthChange(value: number) {
         lineContext.updateWidth(value);
         setLineWidth(value);
@@ -23,7 +23,16 @@ export const WidthPicker = () => {
 
     return (
         <div ref={widthRef} className={classes.option}>
-            <label title="Line width" tabIndex={0} onClick={() => setWidthOpen(!widthOpen)} className={classes.label + (widthOpen ? ' ' + classes.labelOpen : '')}>
+            <label
+                title="Line width"
+                tabIndex={0}
+                onClick={() => setWidthOpen(!widthOpen)}
+                onKeyDown={(e) => (e.key === 'Enter') && setWidthOpen(!widthOpen)}
+                className={classes.label + (widthOpen ? ' ' + classes.labelOpen : '')}
+                role="button"
+                aria-haspopup="true"
+                aria-expanded={widthOpen}
+                aria-controls="width-picker">
                 <div className={classes.widthIconContainer}>
                     <div className={classes.widthIcon} style={{
                         width: lineWidth,
@@ -33,7 +42,7 @@ export const WidthPicker = () => {
                 <span>{lineWidth}px</span>
 
             </label>
-            <div className={classes.inputContainer + ' ' + classes.inputContainerRotated + (widthOpen ? ' ' + classes.inputOpen : '')}>
+            <div id="width-picker" className={classes.inputContainer + ' ' + classes.inputContainerRotated + (widthOpen ? ' ' + classes.inputOpen : '')}>
                 <div className={classes.inputCenter}>
                     <div style={{
                         backgroundColor: '#000',

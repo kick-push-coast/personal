@@ -9,7 +9,7 @@ export interface ClearPromptProps {
 }
 
 export const ClearPrompt = (props: ClearPromptProps) => {
-        
+
     const registerClickOutside = useClickOutside();
     const clearRef = useRef<HTMLDivElement>(null);
     const [clearOpen, setClearOpen] = useState(false);
@@ -22,13 +22,22 @@ export const ClearPrompt = (props: ClearPromptProps) => {
         props.onImageClear();
         setClearOpen(false);
     }
-	
-	return (
+
+    return (
         <div ref={clearRef} className={classes.option}>
-            <label title="Clear" tabIndex={0} onClick={() => setClearOpen(!clearOpen)} className={classes.label + ' ' + classes.labelBottom + (clearOpen ? ' ' + classes.labelOpen : '')}>
+            <label
+                title="Clear"
+                tabIndex={0}
+                onClick={() => setClearOpen(!clearOpen)}
+                onKeyDown={(e) => (e.key === 'Enter') && setClearOpen(!clearOpen)}
+                className={classes.label + ' ' + classes.labelBottom + (clearOpen ? ' ' + classes.labelOpen : '')}
+                role="button"
+                aria-haspopup="true"
+                aria-expanded={clearOpen}
+                aria-controls="clear-prompt">
                 <img alt="Trash can icon" className={classes.dashImg} src={trashSvg} />
             </label>
-            <div className={classes.inputContainer + ' ' + classes.inputBottom + ' ' + (clearOpen ? ' ' + classes.inputOpen : '')}>
+            <div id="clear-prompt" className={classes.inputContainer + ' ' + classes.inputBottom + ' ' + (clearOpen ? ' ' + classes.inputOpen : '')}>
                 <div className={classes.inputMargin}>
                     <h2 className={classes.title}>Clear drawing board? ☠️</h2>
                     <div className={promptClasses.options}>
@@ -42,5 +51,5 @@ export const ClearPrompt = (props: ClearPromptProps) => {
                 </div>
             </div>
         </div>
-	);
+    );
 };
