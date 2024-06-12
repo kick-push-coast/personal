@@ -38,10 +38,11 @@
 .widthIconContainer {
     position: relative;
     margin-bottom: 1px;
-    height: 19px;
-    width: 19px;
+    height: 24px;
+    width: 24px;
     border: 2px solid #000;
     border-radius: 50%;
+    box-sizing: border-box;
 }
 
 .widthIcon {
@@ -114,6 +115,6 @@
 }
 
 .dashImg {
-    width: 20px;
-    height: 20px;
+    width: 24px;
+    height: 24px;
 }
