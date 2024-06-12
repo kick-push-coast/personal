@@ -20,7 +20,7 @@ export const Avatar = () => {
 	
 	return (
 		<div className={classes.container}>
-            <img onLoad={() => { globalLoadedStateContext.setAssetsLoaded(true) }} className={classes.avatarImage} src={avatar} />
+            <img onLoad={() => { globalLoadedStateContext.setAssetsLoaded(true) }} className={classes.avatarImage} src={avatar} alt="A portrait illustration of Mike Tyler" />
             <header className={classes.avatarHeader}>
                 <h1>
                     Mike Tyler

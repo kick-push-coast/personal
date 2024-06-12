@@ -27,7 +27,7 @@ export const LineDashPicker = (props: {onSelect?: Function}) => {
                 type="radio"
                 value={LineDash.none} />
             <label className={classes.labelRadio} htmlFor="dash-input-none">
-                <img src={lineNoneSvg}/>
+                <img alt="Solid line type icon" src={lineNoneSvg}/>
             </label>
             <input
                 onChange={(e) => handleChange(e.target.value as LineDash)}
@@ -38,7 +38,7 @@ export const LineDashPicker = (props: {onSelect?: Function}) => {
                 type="radio"
                 value={LineDash.long} />
             <label className={classes.labelRadio} htmlFor="dash-input-long">
-                <img src={lineLongSvg}/>
+                <img alt="Long dash line type icon" src={lineLongSvg}/>
             </label>
             <input
                 onChange={(e) => handleChange(e.target.value as LineDash)}
@@ -49,7 +49,7 @@ export const LineDashPicker = (props: {onSelect?: Function}) => {
                 type="radio"
                 value={LineDash.short} />
             <label className={classes.labelRadio} htmlFor="dash-input-short">
-                <img src={lineShortSvg}/>
+                <img alt="Short dash line type icon" src={lineShortSvg}/>
             </label>
         </>
     );

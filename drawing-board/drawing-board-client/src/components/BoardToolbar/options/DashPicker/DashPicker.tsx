@@ -35,7 +35,7 @@ export const DashPicker = () => {
     return (
         <div ref={dashRef} className={classes.option}>
             <label title="Line type" tabIndex={0} onClick={() => setDashOpen(!dashOpen)} className={classes.label + (dashOpen ? ' ' + classes.labelOpen : '')}>
-                <img className={classes.dashImg} src={lineSvg} />
+                <img alt="Line type icon" className={classes.dashImg} src={lineSvg} />
             </label>
             <div className={classes.inputContainer + (dashOpen ? ' ' + classes.inputOpen : '')}>
                 <LineDashPicker onSelect={() => setDashOpen(false)} />

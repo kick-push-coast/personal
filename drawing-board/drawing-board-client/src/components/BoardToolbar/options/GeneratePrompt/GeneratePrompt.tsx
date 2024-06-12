@@ -75,7 +75,7 @@ export const GeneratePrompt = (props: GeneratePromptProps) => {
     return (
         <div ref={generateRef} className={classes.option}>
             <label title="Drawing generator" tabIndex={0} onClick={() => setGenerateOpen(!generateOpen)} className={classes.label + (generateOpen ? ' ' + classes.labelOpen : '')}>
-                <img className={classes.dashImg} src={openAiSvg} />
+                <img alt="Drawing generator icon" className={classes.dashImg} src={openAiSvg} />
             </label>
             <div className={classes.inputContainer + ' ' + (generateOpen ? ' ' + classes.inputOpen : '')}>
                 <form onSubmit={handleSubmit} className={classes.inputMargin}>

@@ -26,7 +26,7 @@ export const ClearPrompt = (props: ClearPromptProps) => {
 	return (
         <div ref={clearRef} className={classes.option}>
             <label title="Clear" tabIndex={0} onClick={() => setClearOpen(!clearOpen)} className={classes.label + ' ' + classes.labelBottom + (clearOpen ? ' ' + classes.labelOpen : '')}>
-                <img className={classes.dashImg} src={trashSvg} />
+                <img alt="Trash can icon" className={classes.dashImg} src={trashSvg} />
             </label>
             <div className={classes.inputContainer + ' ' + classes.inputBottom + ' ' + (clearOpen ? ' ' + classes.inputOpen : '')}>
                 <div className={classes.inputMargin}>
