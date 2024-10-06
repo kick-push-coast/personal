@@ -1,5 +1,5 @@
 import path from 'path'
-import { defineConfig } from 'vite'
+import { defineConfig } from 'vitest/config'
 import react from '@vitejs/plugin-react-swc'
 import dts from "vite-plugin-dts";
 import cssInjectedByJsPlugin from "vite-plugin-css-injected-by-js";
@@ -26,5 +26,10 @@ export default defineConfig({
             insertTypesEntry: true,
         }),
         react()
-    ]
+    ],
+    test: {
+        environment: 'jsdom',
+        globals: true,
+        setupFiles: './src/tests/setup.js',
+    }
 })
