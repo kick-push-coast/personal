@@ -3,8 +3,8 @@ import classes from './mobile-display.module.scss';
 
 const topics = [
     ArticleTopic.Home,
-    ArticleTopic.Skills,
     ArticleTopic.Experience,
+    ArticleTopic.Skills,
     ArticleTopic.Education
 ]
 

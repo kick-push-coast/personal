@@ -21,12 +21,92 @@
         &:after {
             height: 1.4rem;
         }
+        &.intro {
+            border: 2px solid black;
+            padding: 6px;
+            margin-bottom: 40px;
+            line-height: 1.5;
+        }
+        & .emphasize {
+            background-color: #e6e6e6;
+        }
     }
     ul {
         font-size: 1.5rem;
+        padding-left: 18px;
+        &.columns {
+            columns: 2;
+        }
+    }
+    & > ul {
+        font-size: 1.8rem;
     }
     ul li ul li {
         margin: 1.2rem 0;
+    }
+    .featuredLinks {
+        list-style: none;
+        margin-bottom: 25px;
+        p {
+            font-weight: bold;
+        }
+        div {
+            display: flex;
+            column-gap: 20px;
+            a {
+                flex-grow: 1;
+                flex-basis: 0;
+                padding: 10px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                border: 2px solid black;
+                transform: translate(-5px, 5px);
+                box-shadow: 0 0  0 0 #666666;
+                position: relative;
+                background-color: #f1f1f1;
+                &:hover, &:focus {
+                    animation: press 0.3s ease 0s forwards;
+                    &::after {
+                        animation: point 0.3s ease 0s forwards;
+                    }
+                }
+                &::after {
+                    content: "↗";
+                    position: absolute;
+                    top: 6px;
+                    right: 5px;
+                    bottom: 6px;
+                    font-size: 2rem;
+                    color: black;
+                    font-weight: bold;
+                    opacity: 0;
+                    border: 2px solid black;
+                    width: 22px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                }
+                @keyframes press {
+                    0% {
+                        transform: translate(-5px, 5px);
+                        box-shadow: 0 0 0 0 #666666;
+                    }
+                    100% {
+                        transform: translate(0px, 0px);
+                        box-shadow: -5px 5px 0 0 #b3b3b3;
+                    }
+                }
+                @keyframes point {
+                    0% {
+                        opacity: 0;
+                    }
+                    100% {
+                        opacity: 1;
+                    }
+                }
+            }
+        }
     }
     .hideDesktop {
         display: none;

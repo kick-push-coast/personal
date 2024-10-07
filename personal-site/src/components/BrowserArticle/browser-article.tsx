@@ -19,7 +19,7 @@ const topics = new Map<ArticleTopic, ReactNode>([
         <h3>
             Languages & Frameworks
         </h3>
-        <ul>
+        <ul className={classes.columns}>
             <li>JavaScript</li>
             <li>TypeScript</li>
             <li>React</li>
@@ -37,7 +37,7 @@ const topics = new Map<ArticleTopic, ReactNode>([
         <h3>
             Tools & Platforms
         </h3>
-        <ul>
+        <ul className={classes.columns}>
             <li>Git</li>
             <li>GitHub</li>
             <li>NPM</li>
@@ -55,7 +55,7 @@ const topics = new Map<ArticleTopic, ReactNode>([
         <h3>
             Concepts
         </h3>
-        <ul>
+        <ul className={classes.columns}>
             <li>Accessibility</li>
             <li>Responsive Design</li>
             <li>Software Design Patterns</li>
@@ -81,38 +81,55 @@ const topics = new Map<ArticleTopic, ReactNode>([
         <h2>
             Experience 🔧
         </h2>
+        <p className={classes.intro}>
+            Over the past <strong className={classes.emphasize}>7+ years</strong>, I've been exposed to all stages of the PDLC/SDLC. My work has spanned from consumer-facing web implementations to SaaS app development to a recent focus of leading design and delivery of developer tools.
+        </p>
         <h3>
             Cludo
         </h3>
         <p>
-            Sep 2017 - Present
-        </p>
-        <p>
         A B2B SaaS provider specialized in enterprise search – data indexing, AI-enabled content discovery, and client SDKs for creating search UIs.
         </p>
+        <br/>
+        <br/>
         <ul>
             <li>
-                <strong>Technical Product Manager</strong><span className={classes.hideMobile}> | </span><span className={classes.hideDesktop}><br/></span>Jan 2023 - Present
+                <strong>Technical Product Manager</strong><span className={classes.hideMobile}> / </span><span className={classes.hideDesktop}><br/></span>JAN2023 → PRESENT
                 <ul>
-                    <li>Led a team of engineers to develop a React SDK for creating custom search UIs (documented at: <a href="//react.cludo.com" target="_blank">react.cludo.com</a>)</li>
+                    <li>Led a team of engineers to develop a React SDK for creating custom search UIs</li>
                     <li>Conducted user research and iterated on technical designs for components and APIs</li>
                     <li>Contributed code and mentored junior engineers throughout the process</li>
+                    <li className={classes.featuredLinks}>
+                        <div>
+                            <a href="//react.cludo.com" target="_blank">React SDK Docs</a>
+                        </div>
+                    </li>
                     <li>Saw a transformation in how developers interface with Cludo search, with the SDK becoming the method of choice for most</li>
-                    <li>Authored public-facing technical documentation for the SDK and other developer resources (cataloged at: <a href="//www.cludo.com/cludo-developer-experience-0?hs_preview=PCthItJq-87790382543" target="_blank">cludo.com/cludo-developer-experience</a>)</li>
+                    <li>Authored public-facing technical documentation for the SDK and other developer resources</li>
+                    <li className={classes.featuredLinks}>
+                        <div>
+                            <a href="//www.cludo.com/cludo-developer-experience" target="_blank">REST API Docs</a>
+                        </div>
+                    </li>
                 </ul>
             </li>
             <br/>
             <li>
-                <strong>Senior UX Engineer</strong><span className={classes.hideMobile}> | </span><span className={classes.hideDesktop}><br/></span>May 2021 - Jan 2023
+                <strong>Software Engineer II, UX</strong><span className={classes.hideMobile}> / </span><span className={classes.hideDesktop}><br/></span>MAY2021 → JAN2023
                 <ul>
                     <li>Collaborated with designers on a partial redesign of the Cludo web app</li>
                     <li>Improved critical user journeys and introduced a new onboarding process to help new users learn the app</li>
                     <li>Maintained parity between Figma-designed components and code</li>
+                    <li className={classes.featuredLinks}>
+                        <div>
+                            <a href="//www.cludo.com/new-ui" target="_blank">Admin App Design</a>
+                        </div>
+                    </li>
                 </ul>
             </li>
             <br/>
             <li>
-                <strong>Product Software Engineer</strong><span className={classes.hideMobile}> | </span><span className={classes.hideDesktop}><br/></span>Jun 2019 - May 2021
+                <strong>Software Engineer</strong><span className={classes.hideMobile}> / </span><span className={classes.hideDesktop}><br/></span>JUN2019 → MAY2021
                 <ul>
                     <li>Contributed as a core engineer for the admin web app using Angular and TypeScript</li>
                     <li>Applied suitable software design patterns to keep the web app robust and maintainable</li>
@@ -121,11 +138,16 @@ const topics = new Map<ArticleTopic, ReactNode>([
             </li>
             <br/>
             <li>
-                <strong>Frontend Developer</strong><span className={classes.hideMobile}> | </span><span className={classes.hideDesktop}><br/></span>Sep 2017 - Jun 2019
+                <strong>Frontend Developer</strong><span className={classes.hideMobile}> / </span><span className={classes.hideDesktop}><br/></span>SEP2017 → JUN2019
                 <ul>
                     <li>Worked jointly with clients to create custom search implementations</li>
                     <li>Developed reusable, portable search UIs with ASP.NET templates and vanilla JavaScript</li>
                     <li>Offered ongoing technical support and consultation for clients</li>
+                    <li className={classes.featuredLinks}>
+                        <div>
+                            <a href="//www.cludo.com/search-results#?cludoquery=crawlers&cludopage=1&cludoinputtype=standard" target="_blank">SERP Implementation</a>
+                        </div>
+                    </li>
                 </ul>
             </li>
         </ul>
@@ -135,7 +157,7 @@ const topics = new Map<ArticleTopic, ReactNode>([
             LeeT Web Services
         </h3>
         <p>
-            Dec 2015 - Aug 2017
+            DEC2015 → AUG2017
         </p>
         <p>
             Provided freelance web development services primarily focused on CMS-backed content websites for small company clients.
@@ -146,7 +168,7 @@ const topics = new Map<ArticleTopic, ReactNode>([
             Siemens | SysAdmin/Integrations Internship
         </h3>
         <p>
-            Jan 2014 - Sep 2014
+            JAN2014 → SEP2014
         </p>
         <p>
             Helped maintain development servers and assisted in hardware migrations. Wrote and managed build scripts for various developer environments.
