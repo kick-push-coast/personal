@@ -1,10 +1,10 @@
 import { useRef, useState, useEffect, FormEvent } from 'react';
+import { generateImage } from '../../../../helpers/generate-helpers';
 import useClickOutside from '../../../../hooks/use-click-outside';
+import useRecaptcha from '../../../../hooks/use-recaptcha';
 import openAiSvg from '../../../../assets/openai.svg';
 import classes from '../../board-toolbar.module.scss';
 import formClasses from './generate-prompt.module.scss';
-import { generateImage } from '../../../../helpers/generate-helpers';
-import useRecaptcha from '../../../../hooks/use-recaptcha';
 
 interface GeneratePromptProps {
     onImageGenerate: (image: ImageData | undefined) => void
@@ -90,7 +90,7 @@ export const GeneratePrompt = (props: GeneratePromptProps) => {
                 <form onSubmit={handleSubmit} className={classes.inputMargin}>
                     <h2 className={classes.title}>Describe a drawing to generate ✨</h2>
                     <input disabled={generateLoading} required className={formClasses.input} name="prompt" type='text' autoComplete='off' placeholder='i.e. "evil monkey on a horse"' />
-                    <button className={formClasses.submit} type='submit'>
+                    <button disabled={generateLoading} className={formClasses.submit} type='submit'>
                         {generateLabel}
                     </button>
                     { errorMsg && 
