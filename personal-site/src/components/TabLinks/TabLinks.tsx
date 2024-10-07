@@ -10,12 +10,12 @@ const links = [
         }
     },
     {
-        url: '/skills',
-        label: 'Skills'
-    },
-    {
         url: '/experience',
         label: 'Experience'
+    },
+    {
+        url: '/skills',
+        label: 'Skills'
     },
     {
         url: '/education',
