@@ -82,7 +82,7 @@ const topics = new Map<ArticleTopic, ReactNode>([
             Experience 🔧
         </h2>
         <p className={classes.intro}>
-            Over the past <strong className={classes.emphasize}>7+ years</strong>, I've been exposed to all stages of the PDLC/SDLC. My work has spanned from consumer-facing web implementations to SaaS app development to a recent focus of leading design and delivery of developer tools.
+            Over the past <strong className={classes.emphasize}>7+ years</strong>, I've been exposed to all stages of the PDLC/SDLC. My work has spanned from consumer-facing web implementations to SaaS app development to a recent focus on leading design and delivery of developer tools.
         </p>
         <h3>
             Cludo
@@ -94,7 +94,7 @@ const topics = new Map<ArticleTopic, ReactNode>([
         <br/>
         <ul>
             <li>
-                <strong>Technical Product Manager</strong><span className={classes.hideMobile}> / </span><span className={classes.hideDesktop}><br/></span>JAN2023 → PRESENT
+                <strong>Technical Product Manager</strong><span className={classes.hideMobile}> / </span><span className={classes.hideDesktop}><br/></span>Jan 2023 → Present
                 <ul>
                     <li>Led a team of engineers to develop a React SDK for creating custom search UIs</li>
                     <li>Conducted user research and iterated on technical designs for components and APIs</li>
@@ -115,7 +115,7 @@ const topics = new Map<ArticleTopic, ReactNode>([
             </li>
             <br/>
             <li>
-                <strong>Software Engineer II, UX</strong><span className={classes.hideMobile}> / </span><span className={classes.hideDesktop}><br/></span>MAY2021 → JAN2023
+                <strong>Software Engineer II, UX</strong><span className={classes.hideMobile}> / </span><span className={classes.hideDesktop}><br/></span>May 2021 → Jan 2023
                 <ul>
                     <li>Collaborated with designers on a partial redesign of the Cludo web app</li>
                     <li>Improved critical user journeys and introduced a new onboarding process to help new users learn the app</li>
@@ -129,7 +129,7 @@ const topics = new Map<ArticleTopic, ReactNode>([
             </li>
             <br/>
             <li>
-                <strong>Software Engineer</strong><span className={classes.hideMobile}> / </span><span className={classes.hideDesktop}><br/></span>JUN2019 → MAY2021
+                <strong>Software Engineer</strong><span className={classes.hideMobile}> / </span><span className={classes.hideDesktop}><br/></span>Jun 2019 → May 2021
                 <ul>
                     <li>Contributed as a core engineer for the admin web app using Angular and TypeScript</li>
                     <li>Applied suitable software design patterns to keep the web app robust and maintainable</li>
@@ -138,7 +138,7 @@ const topics = new Map<ArticleTopic, ReactNode>([
             </li>
             <br/>
             <li>
-                <strong>Frontend Developer</strong><span className={classes.hideMobile}> / </span><span className={classes.hideDesktop}><br/></span>SEP2017 → JUN2019
+                <strong>Frontend Developer</strong><span className={classes.hideMobile}> / </span><span className={classes.hideDesktop}><br/></span>Sep 2017 → Jun 2019
                 <ul>
                     <li>Worked jointly with clients to create custom search implementations</li>
                     <li>Developed reusable, portable search UIs with ASP.NET templates and vanilla JavaScript</li>
@@ -157,7 +157,7 @@ const topics = new Map<ArticleTopic, ReactNode>([
             LeeT Web Services
         </h3>
         <p>
-            DEC2015 → AUG2017
+            Dec 2015 → Aug 2017
         </p>
         <p>
             Provided freelance web development services primarily focused on CMS-backed content websites for small company clients.
@@ -168,7 +168,7 @@ const topics = new Map<ArticleTopic, ReactNode>([
             Siemens | SysAdmin/Integrations Internship
         </h3>
         <p>
-            JAN2014 → SEP2014
+            Jan 2014 → Sep 2014
         </p>
         <p>
             Helped maintain development servers and assisted in hardware migrations. Wrote and managed build scripts for various developer environments.

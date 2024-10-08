@@ -3,6 +3,8 @@
 .container {
     font-family: monospace;
     padding: 70px 90px;
+    max-width: 640px;
+    margin: 0 auto;
     h2 {
         font-size: 2.6rem;
         line-height: 1.2;
@@ -23,6 +25,7 @@
         }
         &.intro {
             border: 2px solid black;
+            border-radius: 4px;
             padding: 6px;
             margin-bottom: 40px;
             line-height: 1.5;
@@ -32,14 +35,11 @@
         }
     }
     ul {
-        font-size: 1.5rem;
+        font-size: 1.6rem;
         padding-left: 18px;
         &.columns {
             columns: 2;
         }
-    }
-    & > ul {
-        font-size: 1.8rem;
     }
     ul li ul li {
         margin: 1.2rem 0;
@@ -61,15 +61,18 @@
                 justify-content: center;
                 align-items: center;
                 border: 2px solid black;
-                transform: translate(-5px, 5px);
-                box-shadow: 0 0  0 0 #666666;
                 position: relative;
-                background-color: #f1f1f1;
+                border: 2px solid #000;
+                border-radius: 4px;
+                box-shadow: #f1f1f1 -4px 4px 0 0, #000 -4px 4px 0 2px;
                 &:hover, &:focus {
-                    animation: press 0.3s ease 0s forwards;
                     &::after {
-                        animation: point 0.3s ease 0s forwards;
+                        opacity: 1;
                     }
+                }
+                &:active {
+                    box-shadow: #f1f1f1 -2px 2px 0 0, #000 -2px 2px 0 2px;
+                    transform: translate(-2px, 2px);
                 }
                 &::after {
                     content: "↗";
@@ -82,28 +85,11 @@
                     font-weight: bold;
                     opacity: 0;
                     border: 2px solid black;
+                    border-radius: 4px;
                     width: 22px;
                     display: flex;
                     align-items: center;
                     justify-content: center;
-                }
-                @keyframes press {
-                    0% {
-                        transform: translate(-5px, 5px);
-                        box-shadow: 0 0 0 0 #666666;
-                    }
-                    100% {
-                        transform: translate(0px, 0px);
-                        box-shadow: -5px 5px 0 0 #b3b3b3;
-                    }
-                }
-                @keyframes point {
-                    0% {
-                        opacity: 0;
-                    }
-                    100% {
-                        opacity: 1;
-                    }
                 }
             }
         }
@@ -112,7 +98,7 @@
         display: none;
     }
     @media (max-width: $screen-lg) {
-        padding: 40px;
+        padding: 70px;
     }
     @media (max-width: $screen-md) {
         padding: 0;
