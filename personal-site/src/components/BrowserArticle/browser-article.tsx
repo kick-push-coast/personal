@@ -1,6 +1,7 @@
 import { ReactNode } from 'react';
 import { IntroText } from '../IntroText';
 import classes from './browser-article.module.scss';
+import { ProjectDetails } from '../ProjectDetails';
 
 export enum ArticleTopic {
     Home,
@@ -68,13 +69,6 @@ const topics = new Map<ArticleTopic, ReactNode>([
             <li>CI/CD</li>
             <li>Agile</li>
         </ul>
-        <br/>
-        <br/>
-        <h3 className={classes.hideMobile}>
-            <a href="./resume.pdf" target="_blank">
-                Full resume &#8594;
-            </a>
-        </h3>
     </>],
     [ArticleTopic.Experience,
     <>
@@ -173,13 +167,6 @@ const topics = new Map<ArticleTopic, ReactNode>([
         <p>
             Helped maintain development servers and assisted in hardware migrations. Wrote and managed build scripts for various developer environments.
         </p>
-        <br/>
-        <br/>
-        <h3 className={classes.hideMobile}>
-            <a href="./resume.pdf" target="_blank">
-                Full resume &#8594;
-            </a>
-        </h3>
     </>],
     [ArticleTopic.Education,
     <>
@@ -194,20 +181,17 @@ const topics = new Map<ArticleTopic, ReactNode>([
             Class of 2015<br/>
             Minor: New Media Studies
         </p>
-        <br/>
-        <br/>
-        <h3>
-            <a href="./resume.pdf" target="_blank">
-                Full resume &#8594;
-            </a>
-        </h3>
     </>]
 ])
 
 export const BrowserArticle = (props: { topic: ArticleTopic }) => {
     return (
-        <article className={classes.container}>
-            { topics.get(props.topic) }
-        </article>
+        <>
+            <article className={classes.container}>
+                { topics.get(props.topic) }
+            </article>
+            {props.topic !== ArticleTopic.Home && 
+                <ProjectDetails link='./resume.pdf' linkLabel='View full resume' />}
+        </>
     );
 };

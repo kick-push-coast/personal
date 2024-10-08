@@ -1,7 +1,6 @@
 import { DotGame } from '../DotGame';
-import { ProjectDetails } from '../ProjectDetails';
+import { ProjectDetails, ProjectDetailsProps } from '../ProjectDetails';
 import { BoardContainer } from 'drawing-board-client';
-// import { BoardContainer } from '../../../../drawing-board/drawing-board-client/src/components/BoardContainer';
 import classes from './browser-fun.module.scss';
 
 export enum FunMode {
@@ -9,10 +8,8 @@ export enum FunMode {
     drawingBoard
 }
 
-interface FunDetails {
+interface FunDetails extends ProjectDetailsProps {
     component: React.ReactNode;
-    tech: string[];
-    githubLink: string;
 }
 
 const FunMap = new Map<FunMode, FunDetails>([
@@ -21,7 +18,8 @@ const FunMap = new Map<FunMode, FunDetails>([
         {
             component: <DotGame />,
             tech: ['Vanilla JS', 'HTML Canvas', 'Web Components'],
-            githubLink: 'https://github.com/kick-push-coast/personal/tree/master/dot-game'
+            link: 'https://github.com/kick-push-coast/personal/tree/master/dot-game',
+            linkLabel: 'View on GitHub'
         }
     ],
     [
@@ -29,7 +27,8 @@ const FunMap = new Map<FunMode, FunDetails>([
         {
             component: <BoardContainer />,
             tech: ['React', 'Node.js', 'OpenAI API', 'Web Sockets'],
-            githubLink: 'https://github.com/kick-push-coast/personal/tree/master/drawing-board'
+            link: 'https://github.com/kick-push-coast/personal/tree/master/drawing-board',
+            linkLabel: 'View on GitHub'
         }
     ]
 ]);
@@ -40,14 +39,12 @@ export const BrowserFun = (props: {mode: FunMode}) => {
 	
 	return (
         selectedFun ?
-		<div className={classes.container}>
-            <div className={classes.content}>
+        <>
+            <div className={classes.container}>
                 {selectedFun.component}
             </div>
-            <div className={classes.details}>
-                <ProjectDetails tech={selectedFun.tech} githubLink={selectedFun.githubLink} />
-            </div>
-        </div> : null
+            <ProjectDetails tech={selectedFun.tech} link={selectedFun.link} linkLabel={selectedFun.linkLabel} />
+        </> : null
 	);
 
 };

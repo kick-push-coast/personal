@@ -93,6 +93,7 @@ export class GameMenu extends HTMLElement {
                 min-width: 60px;
                 max-width: 60px;
                 padding-left: 32px;
+                text-align: right;
               }
               
               .directionsText:last-child {
@@ -124,7 +125,7 @@ export class GameMenu extends HTMLElement {
               }
               
               .space {
-                width: 90px;
+                width: 86px;
                 display: flex;
                 justify-content: center;
                 align-items: center;

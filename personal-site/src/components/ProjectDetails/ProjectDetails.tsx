@@ -2,8 +2,9 @@ import { Fragment } from 'react';
 import classes from './project-details.module.scss';
 
 export interface ProjectDetailsProps {
-    tech: string[];
-    githubLink: string;
+    tech?: string[];
+    link: string;
+    linkLabel: string;
 }
 
 export const ProjectDetails = (props: ProjectDetailsProps) => {
@@ -12,7 +13,7 @@ export const ProjectDetails = (props: ProjectDetailsProps) => {
 		<div className={classes.container}>
             <p className={classes.details}>
                 {
-                    props.tech.map((t, i) => {
+                    props.tech && props.tech.map((t, i) => {
                         return (
                             <Fragment key={i}>
                                 {
@@ -25,7 +26,7 @@ export const ProjectDetails = (props: ProjectDetailsProps) => {
                     })
                 }
             </p>
-            <a href={props.githubLink} target="_blank">View on GitHub &#8594;</a>
+            <a href={props.link} target="_blank">{props.linkLabel} &#8594;</a>
         </div>
 	);
 };
