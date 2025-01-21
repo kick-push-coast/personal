@@ -15,11 +15,7 @@ const links = [
     },
     {
         url: '/skills',
-        label: 'Skills'
-    },
-    {
-        url: '/education',
-        label: 'Education'
+        label: 'Skills & Education'
     },
     {
         url: '/play',

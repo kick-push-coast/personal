@@ -32,11 +32,11 @@ export const Avatar = () => {
                     <button ref={emailBtn} onClick={handleEmailClick} className={classes.contactBtn} title="Copy mktyler01@gmail.com">
                         Copy email
                     </button>
-                    &nbsp;|&nbsp;
+                    &nbsp;&nbsp;&nbsp;
                     <a className={classes.contactLink} href="https://www.linkedin.com/in/michael-tyler-569159147/" target="_blank" title="Mike Tyler's LinkedIn page">
                         LinkedIn
                     </a>
-                    &nbsp;|&nbsp;
+                    &nbsp;&nbsp;&nbsp;
                     <a className={classes.contactLink} href="https://github.com/kick-push-coast/personal/tree/master" target="_blank" title="Mike Tyler's GitHub page">
                         GitHub
                     </a>

@@ -1,0 +1,46 @@
+
+.retroBtn {
+    flex-grow: 1;
+    flex-basis: 0;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    border: 1px solid #000;
+    border-radius: 4px;
+    box-shadow: #f1f1f1 -4px 4px 0 0, #000 -4px 4px 0 1px;
+    transform: translate(0, 0);
+    background-color: #fff;
+    box-sizing: border-box;
+    cursor: pointer;
+    &.external:hover, &.external:focus {
+        &::after {
+            opacity: 1;
+        }
+    }
+    &:active {
+        box-shadow: #f1f1f1 -2px 2px 0 0, #000 -2px 2px 0 1px;
+        transform: translate(-2px, 2px);
+    }
+    &:hover, &:focus {
+        background-color: #f1f1f1;
+    }
+    &::after {
+        content: "↗";
+        position: absolute;
+        top: 6px;
+        right: 6px;
+        bottom: 6px;
+        font-size: 2rem;
+        color: black;
+        font-weight: bold;
+        opacity: 0;
+        border: 1px solid black;
+        border-radius: 4px;
+        aspect-ratio: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}

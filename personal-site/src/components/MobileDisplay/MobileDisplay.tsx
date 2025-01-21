@@ -4,8 +4,7 @@ import classes from './mobile-display.module.scss';
 const topics = [
     ArticleTopic.Home,
     ArticleTopic.Experience,
-    ArticleTopic.Skills,
-    ArticleTopic.Education
+    ArticleTopic.Skills
 ]
 
 export const MobileDisplay = () => {

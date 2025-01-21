@@ -1,5 +1,9 @@
 @import '../../styles/variables.scss';
+@import '../../styles/shared.scss';
 
+.emphasize {
+    background-color: #e6e6e6;
+}
 .container {
     font-family: monospace;
     padding: 70px 90px;
@@ -8,6 +12,7 @@
     h2 {
         font-size: 2.6rem;
         line-height: 1.2;
+        margin-bottom: 40px;
         &:after {
             height: 2rem;
         }
@@ -30,9 +35,6 @@
             margin-bottom: 40px;
             line-height: 1.5;
         }
-        & .emphasize {
-            background-color: #e6e6e6;
-        }
     }
     ul {
         font-size: 1.6rem;
@@ -42,63 +44,31 @@
         }
     }
     ul li ul li {
-        margin: 1.2rem 0;
+        margin: 12px 0;
     }
     .featuredLinks {
         list-style: none;
-        margin-bottom: 25px;
-        p {
-            font-weight: bold;
-        }
+        margin-top: 18px;
         div {
             display: flex;
             column-gap: 20px;
-            a {
-                flex-grow: 1;
-                flex-basis: 0;
-                padding: 10px;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                border: 2px solid black;
-                position: relative;
-                border: 2px solid #000;
-                border-radius: 4px;
-                box-shadow: #f1f1f1 -4px 4px 0 0, #000 -4px 4px 0 2px;
-                &:hover, &:focus {
-                    &::after {
-                        opacity: 1;
-                    }
-                }
-                &:active {
-                    box-shadow: #f1f1f1 -2px 2px 0 0, #000 -2px 2px 0 2px;
-                    transform: translate(-2px, 2px);
-                }
-                &::after {
-                    content: "↗";
-                    position: absolute;
-                    top: 6px;
-                    right: 5px;
-                    bottom: 6px;
-                    font-size: 2rem;
-                    color: black;
-                    font-weight: bold;
-                    opacity: 0;
-                    border: 2px solid black;
-                    border-radius: 4px;
-                    width: 22px;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                }
-            }
+        }
+        a {
+            @extend .external;
+            @extend .retroBtn;
+        }
+    }
+    section {
+        margin-bottom: 60px;
+        & > ul.spaced > li {
+            margin-bottom: 40px;
         }
     }
     .hideDesktop {
         display: none;
     }
     @media (max-width: $screen-lg) {
-        padding: 70px;
+        padding: 30px 50px;
     }
     @media (max-width: $screen-md) {
         padding: 0;

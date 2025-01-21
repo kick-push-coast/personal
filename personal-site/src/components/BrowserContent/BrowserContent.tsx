@@ -4,6 +4,14 @@ import { BrowserArticle, ArticleTopic } from '../BrowserArticle';
 import { BrowserFun, FunMode } from '../BrowserFun';
 import classes from './browser-content.module.scss';
 
+enum Paths {
+    Home = '/',
+    Skills = '/skills',
+    Experience = '/experience',
+    Play = '/play',
+    Draw = '/draw',
+}
+
 export const BrowserContent = () => {
 
     const container = useRef<HTMLElement>(null);
@@ -14,19 +22,20 @@ export const BrowserContent = () => {
         }
     }
 
+    console.log(location);
+
     useEffect(() => {
         scrollOnNavigate()
     }, [location]);
 	
 	return (
-		<main ref={container} className={classes.container}>
+		<main ref={container} className={classes.container + (location.pathname === Paths.Home ? ` ${classes.noDetails}` : '')}>
             <Routes>
-                <Route path="/" element={<BrowserArticle topic={ArticleTopic.Home} />} />
-                <Route path="/skills" element={<BrowserArticle topic={ArticleTopic.Skills} />} />
-                <Route path="/experience" element={<BrowserArticle topic={ArticleTopic.Experience} />} />
-                <Route path="/education" element={<BrowserArticle topic={ArticleTopic.Education} />} />
-                <Route path="/play" element={<BrowserFun mode={FunMode.dotGame} />} />
-                <Route path="/draw" element={<BrowserFun mode={FunMode.drawingBoard} />} />
+                <Route path={Paths.Home} element={<BrowserArticle topic={ArticleTopic.Home} />} />
+                <Route path={Paths.Skills} element={<BrowserArticle topic={ArticleTopic.Skills} />} />
+                <Route path={Paths.Experience} element={<BrowserArticle topic={ArticleTopic.Experience} />} />
+                <Route path={Paths.Play} element={<BrowserFun mode={FunMode.dotGame} />} />
+                <Route path={Paths.Draw} element={<BrowserFun mode={FunMode.drawingBoard} />} />
             </Routes>
         </main>
 	);

@@ -26,7 +26,7 @@ const FunMap = new Map<FunMode, FunDetails>([
         FunMode.drawingBoard,
         {
             component: <BoardContainer />,
-            tech: ['React', 'Node.js', 'OpenAI API', 'Web Sockets'],
+            tech: ['React', 'Node.js', 'HTML Canvas', 'OpenAI API', 'Web Sockets'],
             link: 'https://github.com/kick-push-coast/personal/tree/master/drawing-board',
             linkLabel: 'View on GitHub'
         }

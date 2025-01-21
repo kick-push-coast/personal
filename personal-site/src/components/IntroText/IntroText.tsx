@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { GlobalLoadedStateContext } from '../LayoutContainer';
+import { Ducks } from '../Ducks/Ducks';
 import useTypingEffect from '../../hooks/use-typing-effect';
 import classes from './intro-text.module.scss';
 
@@ -9,7 +10,8 @@ enum TextSections {
     greeting = 'Howdy 👋',
     intro = 'My name is Mike.',
     summary = 'I\'m an experienced, frontend-focused software engineer who enjoys practical code, web technologies, and fluid user experiences.',
-    signoff = 'Tab around a bit to get to know me :-)'
+    signoff = 'Tab around a bit to get to know me :-)',
+    duck = 'What are you still doing here?'
 }
 
 export const IntroText = () => {
@@ -18,6 +20,7 @@ export const IntroText = () => {
     const shouldAnimate = !location?.state?.introWasTyped;
 
     const [hasTyped, setHasTyped] = useState(false);
+    const [showDucks, setShowDucks] = useState(false);
     const [currentlyTyping, setCurrentlyTyping] = useState(TextSections.none);
 
     const greetingTyper = useTypingEffect();
@@ -56,8 +59,12 @@ export const IntroText = () => {
     useEffect(() => {
         if (signoffTyper.isAnimating && shouldAnimate) {
             setCurrentlyTyping(TextSections.signoff);
+            setTimeout(() => {
+                setShowDucks(true);
+            }, 7000);
         }
     }, [signoffTyper.isAnimating])
+
 
     return (
         <>
@@ -71,8 +78,11 @@ export const IntroText = () => {
                 {shouldAnimate ? summaryTyper.text : TextSections.summary}
             </p>
             <p className={classes.hideMobile + ' ' + (currentlyTyping === TextSections.signoff ? classes.typing : '')}>
-                {shouldAnimate? signoffTyper.text : TextSections.signoff}
+                {shouldAnimate ? signoffTyper.text : TextSections.signoff}
             </p>
+            { ((shouldAnimate && showDucks) || !shouldAnimate) &&
+                <Ducks />
+            }
         </>
     );
 }
