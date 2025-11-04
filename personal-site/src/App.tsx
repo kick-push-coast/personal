@@ -4,7 +4,7 @@ import { Avatar } from './components/Avatar'
 import { BrowserDisplay } from './components/BrowserDisplay'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { MobileDisplay } from './components/MobileDisplay'
-import { Playground } from './components/Playground'
+// import { Playground } from './components/Playground'
 
 function App() {
 
@@ -21,7 +21,7 @@ function App() {
                         </LayoutContainer>
                     }
                 />
-                <Route path='/playground' element={<Playground />} />
+                {/* <Route path='/playground' element={<Playground />} /> */}
             </Routes>
         </BrowserRouter>
     )
