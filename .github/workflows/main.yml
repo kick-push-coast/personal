@@ -1,34 +1,61 @@
 name: Build and Deploy
+
 on:
   push:
     branches:
       - master
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [12.x]
+
     steps:
-      - uses: actions/checkout@main
-      - name: Deploy
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build project
+        run: npm run build
+
+      - name: Install SSH and rsync
         run: |
-          which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y  )
-          which rsync || ( apt-get update -y && apt-get install rsync -y )
-          eval $(ssh-agent -s)
-          ssh-add <(echo "$SSH_PRIVATE_KEY" | base64 --decode)
+          sudo apt-get update -y
+          sudo apt-get install -y openssh-client rsync
+
+      - name: Configure SSH
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_KEY }}
+          SERVER_IP: ${{ secrets.SERVER_IP_X64 }}
+        run: |
           mkdir -p ~/.ssh
-          chmod 700 ~/.ssh
-          ssh-keyscan $SERVER_IP >> ~/.ssh/known_hosts
-          chmod 644 ~/.ssh/known_hosts
-          scp -r * root@$SERVER_IP:/srv/www/miketyler.us
-      - name: Start node server
+          echo "$SSH_PRIVATE_KEY" | base64 --decode > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H "$SERVER_IP" >> ~/.ssh/known_hosts
+
+      - name: Deploy to server
+        env:
+          SERVER_IP: ${{ secrets.SERVER_IP_X64 }}
         run: |
-          npm install forever -g
-          forever stopall
-          forever start server.js
-        working-directory: ./drawing-board/drawing-board-server
-    env:
-      SSH_PRIVATE_KEY: ${{secrets.SSH_KEY}}
-      SERVER_IP: ${{secrets.SERVER_IP_X64}}
-      CI: false
+          rsync -avz --delete \
+            --exclude ".git" \
+            --exclude ".github" \
+            --exclude "node_modules" \
+            ./ root@"$SERVER_IP":/srv/www/miketyler.us/
+
+      - name: Start node server
+        env:
+          SERVER_IP: ${{ secrets.SERVER_IP_X64 }}
+        run: |
+          ssh root@"$SERVER_IP" << 'EOF'
+            cd /srv/www/miketyler.us/drawing-board/drawing-board-server
+            npm install --production
+            npx forever stopall || true
+            npx forever start server.js
+          EOF
