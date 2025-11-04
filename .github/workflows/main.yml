@@ -19,11 +19,11 @@ jobs:
           node-version: 18
 
       - name: Install dependencies
-        working-directory: /personal-site
+        working-directory: ./personal-site
         run: npm install
 
       - name: Build project
-        working-directory: /personal-site
+        working-directory: ./personal-site
         run: npm run build
 
       - name: Install SSH and rsync
