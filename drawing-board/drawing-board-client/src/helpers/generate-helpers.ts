@@ -1,6 +1,6 @@
 
 interface DallEDataResponse {
-    created: Number,
+    created: number,
     data: {
         b64_json: string;
     } []
@@ -8,24 +8,35 @@ interface DallEDataResponse {
 
 export async function generateImage(prompt: string, recaptchaToken: string) {
     const requestBody = {
-        prompt: prompt,
-        recaptchaToken: recaptchaToken
+        prompt,
+        recaptchaToken
     };
-    const response = await fetch('https://miketyler.us/generate-drawing',
-        {
-            method: 'POST',
-            body: JSON.stringify(requestBody),
-            headers: {
-                'Content-Type': 'application/json'
-            }
+
+    const response = await fetch('https://miketyler.us/generate-drawing', {
+    // const response = await fetch('http://localhost:3000/generate-drawing', {
+        method: 'POST',
+        body: JSON.stringify(requestBody),
+        headers: {
+            'Content-Type': 'application/json'
         }
-    );
+    });
+
+    // Throw if the response is not OK (status not in the 200–299 range)
+    if (!response.ok) {
+        const errorText = await response.text().catch(() => '');
+        throw new Error(`Request failed with status ${response.status}: ${errorText}`);
+    }
+
     const res = await response.json() as DallEDataResponse;
-    if (res?.data[0]?.b64_json) {
+
+    if (res?.data?.[0]?.b64_json) {
         const processedImage = await processAndReturnImage(res.data[0].b64_json);
         return processedImage;
     }
+
+    throw new Error('No image data returned from API');
 }
+
 
 async function processAndReturnImage(b64String: string) {
     const imageData = await getImageDataFromB64(b64String);
@@ -58,8 +69,8 @@ function removeWhiteFromImage(imageData: ImageData): ImageData {
     const pixelData = imageData.data;
     const transparentColor = { r: 0, g: 0, b: 0, a: 0 };
 
-    for (var i = 0, n = pixelData.length; i < n; i += 4) {
-        let r = pixelData[i],
+    for (let i = 0, n = pixelData.length; i < n; i += 4) {
+        const r = pixelData[i],
             g = pixelData[i + 1],
             b = pixelData[i + 2];
 

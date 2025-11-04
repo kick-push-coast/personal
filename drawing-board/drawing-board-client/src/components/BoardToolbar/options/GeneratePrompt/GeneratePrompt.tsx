@@ -11,6 +11,7 @@ interface GeneratePromptProps {
 }
 
 let generateTimer: NodeJS.Timeout;
+const genericError = 'Whoops, something happened :-/ Give it another try or wait until later to try again';
 
 export const GeneratePrompt = (props: GeneratePromptProps) => {
     
@@ -31,19 +32,25 @@ export const GeneratePrompt = (props: GeneratePromptProps) => {
         const form = e.target as HTMLFormElement;
         const input = form.elements[0] as HTMLInputElement;
         setGenerateLoading(true);
-        let recaptchaToken = await getToken();
+        setErrorMsg(null);
+        const recaptchaToken = await getToken();
         if (recaptchaToken) {
             handleGenerateImage(input.value, recaptchaToken);
         } else {
-            handleError();
+            handleError(genericError);
         }
     }
 
     async function handleGenerateImage(prompt: string, token: string) {
-        const image = await generateImage(prompt, token);
-        setGenerateLoading(false);
-        props.onImageGenerate(image);
-        setGenerateOpen(false);
+        try {
+            const image = await generateImage(prompt, token);
+            setGenerateLoading(false);
+            props.onImageGenerate(image);
+            setGenerateOpen(false);
+        } catch {
+            setGenerateLoading(false);
+            handleError(genericError);
+        }
     }
 
     function handleError(message?: string) {
@@ -94,7 +101,7 @@ export const GeneratePrompt = (props: GeneratePromptProps) => {
                         {generateLabel}
                     </button>
                     { errorMsg && 
-                        <span>
+                        <span className={formClasses.error}>
                             {errorMsg}
                         </span>
                     }

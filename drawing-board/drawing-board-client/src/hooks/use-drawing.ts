@@ -59,7 +59,7 @@ export default function useDrawing() {
 
     function setCanvasImage(data: string) {
         if (!data) return;
-        let image = new Image();
+        const image = new Image();
         image.onload = () => {
             ctxRef.current && ctxRef.current.drawImage(image, 0, 0);
         }

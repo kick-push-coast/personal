@@ -1,4 +1,4 @@
-import express from 'express';
+import express, { response } from 'express';
 import OpenAI from "openai";
 import cors from 'cors';
 import fetch from 'node-fetch';
@@ -29,20 +29,26 @@ app.post('/generate-drawing', async (req, res) => {
         `https://www.google.com/recaptcha/api/siteverify?secret=${recaptchaSecretKey}&response=${recaptchaToken}`;
 
     // RECAPTCHA VERIFY REQUEST
-    fetch(recaptchaVerifyUrl, {
+    console.log('requesting captcha');
+    await fetch(recaptchaVerifyUrl, {
         method: "post",
     })
     .then((response) => response.json())
     .then((google_response) => {
         if (google_response.success !== true || google_response.score < 0.6) {
-            return res.send({ response: 'error' });
+            console.error('captcha failed');
+            return res.status(500).send({ response: 'error' });
         }
+        console.log('captcha succeeded');
     })
-    .catch(() => {
-        return res.send({ response: 'error' });
+    .catch((error) => {
+        console.error('captcha failed');
+        console.error(error);
+        return res.status(500).send({ response: 'error' });
     });
 
     // OPENAI GEN REQUEST
+    console.log('generating image');
     try {
         const response = await openai.images.generate({
             model: "dall-e-2",
@@ -51,9 +57,13 @@ app.post('/generate-drawing', async (req, res) => {
             size: "1024x1024",
             response_format: "b64_json"
         });
-    
+        
+        console.log('image generation succeeded');
         return res.send(response);
-    } catch {
+    } catch (error) {
+        console.error('image generation failed');
+        console.error(error);
+        return res.status(500).send({ response: 'error' });
     }
 });
 

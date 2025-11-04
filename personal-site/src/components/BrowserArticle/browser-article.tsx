@@ -96,7 +96,7 @@ const topics = new Map<ArticleTopic, ReactNode>([
             Experience 🔧
         </h2>
         <p className={classes.intro}>
-            Over the past <strong className={classes.emphasize}>7+ years</strong>, I've been lucky enough to contribute in all stages of the PDLC/SDLC. My work has spanned from consumer-facing web implementations to SaaS webapp development to a recent focus on leading design and delivery of developer tools.
+            Over the past <strong className={classes.emphasize}>8+ years</strong>, I've been fortunate to contribute in all stages of the product and software dev lifecycles. My work has spanned from end user-facing web implementations to admin web app development to a recent focus on leading design and delivery of developer tools.
         </p>
         <section>
             <h3>
@@ -109,12 +109,12 @@ const topics = new Map<ArticleTopic, ReactNode>([
             <br/>
             <ul className={classes.spaced}>
                 <li>
-                    <strong className={classes.emphasize}>Technical Product Manager</strong><span className={classes.hideMobile}> / </span><span className={classes.hideDesktop}><br/></span>Jan 2023 → Present
+                    <strong className={classes.emphasize}>Senior Product Engineer</strong><span className={classes.hideMobile}> / </span><span className={classes.hideDesktop}><br/></span>Jan 2023 → Present
                     <ul>
                         <li>Led a team of engineers to develop a React SDK for creating custom search UIs</li>
-                        <li>Conducted user research and iterated on technical designs for components and APIs</li>
+                        <li>Conducted user interviews with external devs and used interview findings to iterate on technical designs</li>
                         <li>Contributed code and mentored junior engineers throughout the process</li>
-                        <li>Saw a transformation in how developers interface with Cludo search, with the SDK becoming the method of choice for most</li>
+                        <li>Saw widespread adoption - 40% of client search requests now come from SDK implementations one year after initial release</li>
                         <li>Authored public-facing technical documentation for the SDK and other developer resources</li>
                         <li className={classes.featuredLinks}>
                             <div>
@@ -132,7 +132,7 @@ const topics = new Map<ArticleTopic, ReactNode>([
                 <li>
                     <strong className={classes.emphasize}>Software Engineer II, UX</strong><span className={classes.hideMobile}> / </span><span className={classes.hideDesktop}><br/></span>May 2021 → Jan 2023
                     <ul>
-                        <li>Collaborated with designers on a partial redesign of the Cludo web app</li>
+                        <li>Collaborated with designers on a partial redesign of the Cludo admin web app</li>
                         <li>Improved critical user journeys and introduced a new onboarding process to help new users learn the app</li>
                         <li>Maintained parity between Figma components and code</li>
                         <li className={classes.featuredLinks}>

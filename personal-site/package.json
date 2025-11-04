@@ -11,7 +11,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "drawing-board-client": "^1.0.16",
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.0",
+    "drawing-board-client": "^1.0.17",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.21.1"

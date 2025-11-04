@@ -6,14 +6,15 @@ export class SocketContext {
     initialCanvasState: InitialCanvasState | undefined;
     private drawTimeout: NodeJS.Timeout | undefined;
     private socket: Socket;
-    private drawEventCallbacks: ((image: string) => any)[] = [];
+    private drawEventCallbacks: ((image: string) => unknown)[] = [];
 
     constructor() {
         this.socket = io('https://miketyler.us');
+        // this.socket = io('http://localhost:3000');
     }
 
 
-    createSocketRoom(initialState: InitialCanvasState, callback?: Function) {
+    createSocketRoom(initialState: InitialCanvasState, callback?: (id: string) => void) {
         const roomId = crypto.randomUUID();
         this.roomId = roomId;
         this.initialCanvasState = initialState;
@@ -26,7 +27,7 @@ export class SocketContext {
         console.log('Created drawing session: ' + roomId);
     }
 
-    joinSocketRoom(roomId: string, callback?: Function) {
+    joinSocketRoom(roomId: string, callback?: () => void) {
         this.socket.emit(
             'drawing-room-join',
             roomId,
@@ -63,7 +64,7 @@ export class SocketContext {
         }, 200);
     }
 
-    registerDrawEventListener(fn: (image: string) => any) {
+    registerDrawEventListener(fn: (image: string) => unknown) {
         this.drawEventCallbacks.push(fn);
     }
 
