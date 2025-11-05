@@ -40,7 +40,7 @@ export async function generateImage(prompt: string, recaptchaToken: string) {
     // If OK, parse and handle the JSON response
     const res = await response.json() as DallEDataResponse;
 
-    if (res?.data?.[0]?.b64_json) {
+    if (res && res.data && res.data[0] && res.data[0].b64_json) {
         const processedImage = await processAndReturnImage(res.data[0].b64_json);
         return processedImage;
     }
