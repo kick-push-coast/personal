@@ -7,26 +7,37 @@ interface DallEDataResponse {
 }
 
 export async function generateImage(prompt: string, recaptchaToken: string) {
-    const requestBody = {
-        prompt,
-        recaptchaToken
-    };
+    const requestBody = { prompt, recaptchaToken };
 
     const response = await fetch('https://miketyler.us/generate-drawing', {
     // const response = await fetch('http://localhost:3000/generate-drawing', {
         method: 'POST',
         body: JSON.stringify(requestBody),
-        headers: {
-            'Content-Type': 'application/json'
-        }
+        headers: { 'Content-Type': 'application/json' }
     });
 
-    // Throw if the response is not OK (status not in the 200–299 range)
+    // Throw if the response is not OK
     if (!response.ok) {
-        const errorText = await response.text().catch(() => '');
-        throw new Error(`Request failed with status ${response.status}: ${errorText}`);
+        let errorMessage = `Request failed with status ${response.status}`;
+
+        // Try to parse JSON first
+        try {
+            const errorData = await response.json();
+            if (errorData?.response) {
+                errorMessage += `: ${errorData.response}`;
+            } else {
+                errorMessage += `: ${JSON.stringify(errorData)}`;
+            }
+        } catch {
+            // Fall back to plain text if not JSON
+            const text = await response.text().catch(() => '');
+            if (text) errorMessage += `: ${text}`;
+        }
+
+        throw new Error(errorMessage);
     }
 
+    // If OK, parse and handle the JSON response
     const res = await response.json() as DallEDataResponse;
 
     if (res?.data?.[0]?.b64_json) {
@@ -36,6 +47,7 @@ export async function generateImage(prompt: string, recaptchaToken: string) {
 
     throw new Error('No image data returned from API');
 }
+
 
 
 async function processAndReturnImage(b64String: string) {
