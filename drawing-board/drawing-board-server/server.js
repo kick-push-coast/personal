@@ -1,4 +1,4 @@
-import express, { response } from 'express';
+import express from 'express';
 import OpenAI from "openai";
 import cors from 'cors';
 import fetch from 'node-fetch';
@@ -19,7 +19,7 @@ const io = new Server(server, {
 
 let roomInitialStates = {};
 
-app.post('/generate-drawing', async (req, res) => {
+app.post('/generate-drawing', async (req, res, next) => {
     const { prompt, recaptchaToken } = req.body;
     const recaptchaSecretKey = process.env.RECAPTCHA_SECRET_KEY;
     const promptPrefix = 'simple 2-color logo-style one-line drawing of ';
@@ -37,14 +37,14 @@ app.post('/generate-drawing', async (req, res) => {
     .then((google_response) => {
         if (google_response.success !== true || google_response.score < 0.6) {
             console.error('captcha failed');
-            return res.status(500).send({ response: 'error' });
+            next(error);
         }
         console.log('captcha succeeded');
     })
     .catch((error) => {
         console.error('captcha failed');
         console.error(error);
-        return res.status(500).send({ response: 'error' });
+        next(error);
     });
 
     // OPENAI GEN REQUEST
@@ -63,7 +63,7 @@ app.post('/generate-drawing', async (req, res) => {
     } catch (error) {
         console.error('image generation failed');
         console.error(error);
-        return res.status(500).send({ response: 'error' });
+        next(error);
     }
 });
 

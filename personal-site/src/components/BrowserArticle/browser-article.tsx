@@ -158,11 +158,11 @@ const topics = new Map<ArticleTopic, ReactNode>([
                         <li>Worked jointly with clients to create custom search implementations</li>
                         <li>Developed reusable, portable search UIs with ASP.NET templates and vanilla JavaScript</li>
                         <li>Offered ongoing technical support and consultation for clients</li>
-                        <li className={classes.featuredLinks}>
+                        {/* <li className={classes.featuredLinks}>
                             <div>
                                 <a href="//www.cludo.com/search-results#?cludoquery=crawlers&cludopage=1&cludoinputtype=standard" target="_blank">SERP Implementation</a>
                             </div>
-                        </li>
+                        </li> */}
                     </ul>
                 </li>
             </ul>
