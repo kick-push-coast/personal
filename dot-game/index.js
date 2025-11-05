@@ -55,7 +55,7 @@ export class DotGame extends HTMLElement {
     }
 
     disconnectedCallback() {
-        console.log('disconnected', this);
+        return;
     }
 
     addEventListeners() {
