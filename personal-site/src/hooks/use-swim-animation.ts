@@ -28,7 +28,7 @@ const useSwimAnimation = (container: MutableRefObject<HTMLElement>, swimmer: Mut
     useEffect(() => {
         if (!swimmer.current || !isStarted) {
             return;
-        };
+        }
         let leftOffset = currentOffset;
         let isSwimmingForward = currentSwimmingForward;
         if (!isPaused) {

@@ -1,1 +1,1 @@
-export * from './browser-article';
+export * from './BrowserArticle';

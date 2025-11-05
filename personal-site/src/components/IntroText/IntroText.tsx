@@ -4,6 +4,7 @@ import { GlobalLoadedStateContext } from '../LayoutContainer';
 import { Ducks } from '../Ducks/Ducks';
 import useTypingEffect from '../../hooks/use-typing-effect';
 import classes from './intro-text.module.scss';
+import useIsMobile from '../../hooks/use-is-mobile';
 
 enum TextSections {
     none = '',
@@ -17,10 +18,11 @@ enum TextSections {
 export const IntroText = () => {
     const globalLoadedStateContext = useContext(GlobalLoadedStateContext);
     const location = useLocation();
+    const isMobile = useIsMobile();
     const shouldAnimate = !location?.state?.introWasTyped;
 
     const [hasTyped, setHasTyped] = useState(false);
-    const [showDucks, setShowDucks] = useState(false);
+    const [showDucks, setShowDucks] = useState(!shouldAnimate && !isMobile);
     const [currentlyTyping, setCurrentlyTyping] = useState(TextSections.none);
 
     const greetingTyper = useTypingEffect();
@@ -29,38 +31,38 @@ export const IntroText = () => {
     const signoffTyper = useTypingEffect();
 
     useEffect(() => {
-        if (globalLoadedStateContext.loaded && !hasTyped) {
+        if (globalLoadedStateContext.loaded && shouldAnimate && !hasTyped && !isMobile) {
             greetingTyper.startTyping(TextSections.greeting, 1000, 2, 60);
             introTyper.startTyping(TextSections.intro, 2600, 1, 40);
             summaryTyper.startTyping(TextSections.summary, 5200, 2, 60);
             signoffTyper.startTyping(TextSections.signoff, 10600, 2, 80);
             setHasTyped(true);
         }
-    }, [globalLoadedStateContext.loaded])
+    }, [globalLoadedStateContext.loaded, isMobile])
 
     useEffect(() => {
-        if (greetingTyper.isAnimating && shouldAnimate) {
+        if (greetingTyper.isAnimating) {
             setCurrentlyTyping(TextSections.greeting);
         }
     }, [greetingTyper.isAnimating])
 
     useEffect(() => {
-        if (introTyper.isAnimating && shouldAnimate) {
+        if (introTyper.isAnimating) {
             setCurrentlyTyping(TextSections.intro);
         }
     }, [introTyper.isAnimating])
 
     useEffect(() => {
-        if (summaryTyper.isAnimating && shouldAnimate) {
+        if (summaryTyper.isAnimating) {
             setCurrentlyTyping(TextSections.summary);
         }
     }, [summaryTyper.isAnimating])
     
     useEffect(() => {
-        if (signoffTyper.isAnimating && shouldAnimate) {
+        if (signoffTyper.isAnimating) {
             setCurrentlyTyping(TextSections.signoff);
             setTimeout(() => {
-                setShowDucks(true);
+                setShowDucks(!isMobile);
             }, 7000);
         }
     }, [signoffTyper.isAnimating])
@@ -69,19 +71,19 @@ export const IntroText = () => {
     return (
         <>
             <h2 className={currentlyTyping === TextSections.greeting ? classes.typing : ''}>
-                {shouldAnimate ? greetingTyper.text : TextSections.greeting}
+                {shouldAnimate && !isMobile ? greetingTyper.text : TextSections.greeting}
             </h2>
             <h3 className={currentlyTyping === TextSections.intro ? classes.typing : ''}>
-                {shouldAnimate ? introTyper.text : TextSections.intro}
+                {shouldAnimate && !isMobile ? introTyper.text : TextSections.intro}
             </h3>
             <p className={currentlyTyping === TextSections.summary ? classes.typing : ''}>
-                {shouldAnimate ? summaryTyper.text : TextSections.summary}
+                {shouldAnimate && !isMobile ? summaryTyper.text : TextSections.summary}
             </p>
             <p className={classes.hideMobile + ' ' + (currentlyTyping === TextSections.signoff ? classes.typing : '')}>
-                {shouldAnimate ? signoffTyper.text : TextSections.signoff}
+                {shouldAnimate && !isMobile ? signoffTyper.text : TextSections.signoff}
             </p>
-            { ((shouldAnimate && showDucks) || !shouldAnimate) &&
-                <Ducks />
+            { showDucks ?
+                <Ducks /> : <></>
             }
         </>
     );
