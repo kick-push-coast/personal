@@ -8,6 +8,7 @@ import { Server } from "socket.io";
 const app = express();
 app.use(express.json({ type: '*/*' }));
 app.use(cors());
+
 const server = createServer(app);
 
 const openai = new OpenAI();
@@ -28,28 +29,24 @@ app.post('/generate-drawing', async (req, res) => {
     const recaptchaVerifyUrl =
         `https://www.google.com/recaptcha/api/siteverify?secret=${recaptchaSecretKey}&response=${recaptchaToken}`;
 
-    // RECAPTCHA VERIFY REQUEST
-    console.log('requesting captcha');
-    await fetch(recaptchaVerifyUrl, {
-        method: "post",
-    })
-    .then((response) => response.json())
-    .then((google_response) => {
-        if (google_response.success !== true || google_response.score < 0.6) {
-            console.error('captcha failed');
-            return res.status(500).send({ response: 'error' });
-        }
-        console.log('captcha succeeded');
-    })
-    .catch((error) => {
-        console.error('captcha failed');
-        console.error(error);
-        return res.status(500).send({ response: 'error' });
-    });
-
-    // OPENAI GEN REQUEST
-    console.log('generating image');
     try {
+        console.log('requesting captcha');
+        const captchaRes = await fetch(recaptchaVerifyUrl, { method: "POST" });
+        const google_response = await captchaRes.json();
+
+        if (google_response.success !== true || google_response.score < 0.6) {
+            console.error('captcha failed', google_response);
+            return res.status(500).json({ error: 'captcha_failed' });
+        }
+
+        console.log('captcha succeeded');
+    } catch (error) {
+        console.error('captcha request failed', error);
+        return res.status(500).json({ error: 'captcha_request_failed' });
+    }
+
+    try {
+        console.log('generating image');
         const response = await openai.images.generate({
             model: "dall-e-2",
             prompt: fullPrompt,
@@ -57,15 +54,15 @@ app.post('/generate-drawing', async (req, res) => {
             size: "1024x1024",
             response_format: "b64_json"
         });
-        
+
         console.log('image generation succeeded');
-        return res.send(response);
+        return res.status(200).json(response);
     } catch (error) {
-        console.error('image generation failed');
-        console.error(error);
-        return res.status(500).send({ response: 'error' });
+        console.error('image generation failed', error);
+        return res.status(500).json({ error: 'image_generation_failed' });
     }
 });
+
 
 io.on('connection', (socket) => {
     console.log('a user connected');
