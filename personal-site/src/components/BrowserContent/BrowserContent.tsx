@@ -22,8 +22,6 @@ export const BrowserContent = () => {
         }
     }
 
-    console.log(location);
-
     useEffect(() => {
         scrollOnNavigate()
     }, [location]);
