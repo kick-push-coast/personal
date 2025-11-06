@@ -9,8 +9,8 @@ export class SocketContext {
     private drawEventCallbacks: ((image: string) => unknown)[] = [];
 
     constructor() {
-        // this.socket = io('https://miketyler.us');
-        this.socket = io('http://localhost:3000');
+        this.socket = io('https://miketyler.us');
+        // this.socket = io('http://localhost:3000');
     }
 
 
