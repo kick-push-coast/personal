@@ -9,8 +9,8 @@ interface DallEDataResponse {
 export async function generateImage(prompt: string, recaptchaToken: string) {
     const requestBody = { prompt, recaptchaToken };
 
-    const response = await fetch('https://miketyler.us/generate-drawing', {
-    // const response = await fetch('http://localhost:3000/generate-drawing', {
+    // const response = await fetch('https://miketyler.us/generate-drawing', {
+    const response = await fetch('http://localhost:3000/generate-drawing', {
         method: 'POST',
         body: JSON.stringify(requestBody),
         headers: { 'Content-Type': 'application/json' }

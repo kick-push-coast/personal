@@ -1,7 +1,7 @@
 import { useContext, useRef } from 'react';
 import { GlobalLoadedStateContext } from '../LayoutContainer';
 import classes from './avatar.module.scss';
-import avatar from '../../assets/me.svg';
+import avatar from '../../assets/me.png';
 
 export const Avatar = () => {
 
@@ -28,15 +28,13 @@ export const Avatar = () => {
                 <p>
                     Software Engineer
                 </p>
-                <nav>
+                <nav className={classes.contactContainer}>
                     <button ref={emailBtn} onClick={handleEmailClick} className={classes.contactBtn} title="Copy mktyler01@gmail.com">
                         Copy email
                     </button>
-                    &nbsp;&nbsp;&nbsp;
                     <a className={classes.contactLink} href="https://www.linkedin.com/in/michael-tyler-569159147/" target="_blank" title="Mike Tyler's LinkedIn page">
                         LinkedIn
                     </a>
-                    &nbsp;&nbsp;&nbsp;
                     <a className={classes.contactLink} href="https://github.com/kick-push-coast/personal/tree/master" target="_blank" title="Mike Tyler's GitHub page">
                         GitHub
                     </a>

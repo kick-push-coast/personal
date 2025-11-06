@@ -23,8 +23,9 @@ let roomInitialStates = {};
 app.post('/generate-drawing', async (req, res) => {
     const { prompt, recaptchaToken } = req.body;
     const recaptchaSecretKey = process.env.RECAPTCHA_SECRET_KEY;
-    const promptPrefix = 'simple 2-color logo-style one-line drawing of ';
-    const fullPrompt = promptPrefix + prompt;
+    const promptPrefix = 'A very simple child\'s drawing of ';
+    const promptSuffix = ' made with thick markers with only two colors at most. Outline only, no shading, drawn by a 5-year-old. Wobbly uneven lines, simple shapes, white background, no text, no background';
+    const fullPrompt = promptPrefix + prompt + promptSuffix;
 
     const recaptchaVerifyUrl =
         `https://www.google.com/recaptcha/api/siteverify?secret=${recaptchaSecretKey}&response=${recaptchaToken}`;
@@ -48,7 +49,7 @@ app.post('/generate-drawing', async (req, res) => {
     try {
         console.log('generating image');
         const response = await openai.images.generate({
-            model: "dall-e-2",
+            model: "dall-e-3",
             prompt: fullPrompt,
             n: 1,
             size: "1024x1024",

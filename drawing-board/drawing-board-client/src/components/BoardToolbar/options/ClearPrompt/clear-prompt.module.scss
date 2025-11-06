@@ -1,3 +1,5 @@
+@import '../../../../styles/shared.scss';
+
 .options {
     display: flex;
     flex-direction: column;
@@ -5,16 +7,21 @@
 }
 
 .button {
+    @extend .retroBtn;
+    font-size: 1.2rem;
+    line-height: 1.4;
+    width: 120px;
+    padding: 3px 6px;
+}
+
+.cancel {
+    background-color: transparent;
+    border: none;
+    margin-top: 12px;
     font-size: 1.2rem;
     line-height: 1.4;
     cursor: pointer;
     font-family: monospace;
     min-width: 120px;
     text-align: center;
-}
-
-.button.cancel {
-    background-color: transparent;
-    border: none;
-    margin-top: 5px;
 }

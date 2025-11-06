@@ -1,3 +1,4 @@
+@import './variables.scss';
 
 .retroBtn {
     flex-grow: 1;
@@ -42,5 +43,19 @@
         display: flex;
         align-items: center;
         justify-content: center;
+    }
+    &:disabled:hover {
+        background-color: #fff;
+        cursor: default;
+    }
+    &:disabled:active {
+        box-shadow: #f1f1f1 -4px 4px 0 0, #000 -4px 4px 0 1px;
+        transform: translate(0, 0);
+    }
+}
+
+.hideMobile {
+    @media (max-width: $screen-md) {
+        display: none;
     }
 }

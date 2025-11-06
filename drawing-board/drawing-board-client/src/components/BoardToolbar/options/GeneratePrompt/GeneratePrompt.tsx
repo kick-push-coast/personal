@@ -11,7 +11,7 @@ interface GeneratePromptProps {
 }
 
 let generateTimer: NodeJS.Timeout;
-const genericError = 'Whoops, something happened :-/ Give it another try or wait until later to try again';
+const genericError = 'Whoops, something went awry :-/';
 
 export const GeneratePrompt = (props: GeneratePromptProps) => {
     
@@ -94,7 +94,7 @@ export const GeneratePrompt = (props: GeneratePromptProps) => {
                 <img alt="Drawing generator icon" className={classes.dashImg} src={openAiSvg} />
             </label>
             <div id="drawing-generator-prompt" className={classes.inputContainer + ' ' + (generateOpen ? ' ' + classes.inputOpen : '')}>
-                <form onSubmit={handleSubmit} className={classes.inputMargin}>
+                <form onSubmit={handleSubmit} className={classes.inputMargin + ' ' + classes.form}>
                     <h2 className={classes.title}>Describe a drawing to generate ✨</h2>
                     <input disabled={generateLoading} required className={formClasses.input} name="prompt" type='text' autoComplete='off' placeholder='i.e. "evil monkey on a horse"' />
                     <button disabled={generateLoading} className={formClasses.submit} type='submit'>

@@ -93,10 +93,10 @@ const topics = new Map<ArticleTopic, ReactNode>([
     [ArticleTopic.Experience,
     <>
         <h2>
-            Experience 🔧
+            Experience 🛠️
         </h2>
         <p className={classes.intro}>
-            Over the past <strong className={classes.emphasize}>8+ years</strong>, I've been fortunate to contribute in all stages of the product and software dev lifecycles. My work has spanned from end user-facing web implementations to admin web app development to a recent focus on leading design and delivery of developer tools.
+            For <strong className={classes.emphasize}>8+ years</strong>, I've been fortunate to contribute in all stages of the product and software dev lifecycles. My work has spanned from end user-facing web implementations to admin web app development to a recent focus on leading design and delivery of developer tools.
         </p>
         <section>
             <h3>

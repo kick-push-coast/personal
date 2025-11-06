@@ -16,19 +16,18 @@
 .avatarImage {
     width: 100%;
     height: auto;
-    padding-right: 24px;
-    margin-bottom: 12px;
+    margin-bottom: 10px;
 }
 
 .avatarHeader {
     font-family: monospace;
     text-align: center;
-    padding-left: 24px;
     h1 {
         font-size: 3.2rem;
-        margin-bottom: 12px;
+        margin-bottom: 10px;
     }
     p {
+        margin: 0;
         font-size: 1.8rem;
     }
     nav {
@@ -45,6 +44,12 @@
     }
 }
 
+.contactContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .contactBtn, .contactLink {
     font-size: 1.2rem;
     line-height: 1.4;
@@ -56,5 +61,14 @@
 .contactBtn {
     @extend .retroBtn;
     padding: 3px 6px;
-    min-width: 82px;
+    max-width: 100%;
+    width: 180px;
+    margin-bottom: 6px;
+    @media (max-width: $screen-lg) {
+        width: 140px;
+    }
+}
+
+.contactLink {
+    margin-top: 10px;
 }

@@ -38,13 +38,13 @@ export const ClearPrompt = (props: ClearPromptProps) => {
                 <img alt="Trash can icon" className={classes.dashImg} src={trashSvg} />
             </label>
             <div id="clear-prompt" className={classes.inputContainer + ' ' + classes.inputBottom + ' ' + (clearOpen ? ' ' + classes.inputOpen : '')}>
-                <div className={classes.inputMargin}>
+                <div className={classes.inputMargin + ' ' + classes.form}>
                     <h2 className={classes.title}>Clear drawing board? ☠️</h2>
                     <div className={promptClasses.options}>
                         <button className={promptClasses.button} onClick={handleClear}>
                             Yes, clear
                         </button>
-                        <button className={promptClasses.button + ' ' + promptClasses.cancel} onClick={() => setClearOpen(false)}>
+                        <button className={promptClasses.cancel} onClick={() => setClearOpen(false)}>
                             Cancel
                         </button>
                     </div>

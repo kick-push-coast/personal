@@ -1,17 +1,33 @@
+@import '../../../../styles/shared.scss';
+
 .input {
     width: 100%;
     font-family: monospace;
     box-sizing: border-box;
+    border: 0;
+    border-bottom: 2px solid #747474;
+    margin-bottom: 10px;
+    background-color: transparent;
+    &::placeholder {
+        color: #575757;
+    }
+    &:focus {
+        outline: 0;
+        border-color: #000;
+    }
 }
 
 .submit {
+    @extend .retroBtn;
     font-size: 1.2rem;
     line-height: 1.4;
-    cursor: pointer;
-    font-family: monospace;
     width: 100%;
-    text-align: center;
     margin-top: 6px;
+    padding: 3px 6px;
+    width: 120px;
+    &:disabled {
+        color: #616161;
+    }
 }
 
 .error {
@@ -19,5 +35,5 @@
     color: #880000;
     text-align: center;
     display: block;
-    margin-top: 6px;
+    margin-top: 16px;
 }
