@@ -4,10 +4,10 @@ My name is Mike Tyler and this is a small collection of side projects I've put t
 
 ## Projects
 
-* [Personal site](https://github.com/kick-push-coast/personal/tree/master/personal-site): A collection of info about me, my professional work, and a showcase of a couple fun projects.
-* [Dot game](https://github.com/kick-push-coast/personal/tree/master/dot-game): A fun interactive game using only web standard technologies.
-* [Drawing board](https://github.com/kick-push-coast/personal/tree/master/drawing-board): A simple drawing app with support for remote collaboration and creating drawings with generative AI.
-* Wedding site: A site for wedding guests to RSVP to my wife and I's wedding. Not a serious project, but a fun excuse to stretch the animation and graphic design muscles. No public source code because it contains some PII, but you can see an anonymized version at [miketyler.us/wedding-rsvp](https://miketyler.us/wedding-rsvp/).
+* __[Personal site](https://github.com/kick-push-coast/personal/tree/master/personal-site)__: A collection of info about me, my professional work, and a showcase of a couple fun projects.
+* __[Dot game](https://github.com/kick-push-coast/personal/tree/master/dot-game)__: A fun interactive game using only web standard technologies.
+* __[Drawing board](https://github.com/kick-push-coast/personal/tree/master/drawing-board)__: A simple drawing app with support for remote collaboration and creating drawings with generative AI.
+* __Wedding site__: A site for wedding guests to RSVP to my wife and I's wedding. Not a serious project, but a fun excuse to stretch the animation and graphic design muscles. No public source code because it contains some PII, but you can see an anonymized version at [miketyler.us/wedding-rsvp](https://miketyler.us/wedding-rsvp/).
 
 ## Get in touch
 
