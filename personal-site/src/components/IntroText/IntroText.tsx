@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { GlobalLoadedStateContext } from '../LayoutContainer';
-import { Ducks } from '../Ducks/Ducks';
+// import { Ducks } from '../Ducks/Ducks';
 import useTypingEffect from '../../hooks/use-typing-effect';
 import classes from './intro-text.module.scss';
 import useIsMobile from '../../hooks/use-is-mobile';
@@ -22,7 +22,7 @@ export const IntroText = () => {
     const shouldAnimate = !location?.state?.introWasTyped;
 
     const [hasTyped, setHasTyped] = useState(false);
-    const [showDucks, setShowDucks] = useState(!shouldAnimate && !isMobile);
+    // const [showDucks, setShowDucks] = useState(!shouldAnimate && !isMobile);
     const [currentlyTyping, setCurrentlyTyping] = useState(TextSections.none);
 
     const greetingTyper = useTypingEffect();
@@ -61,9 +61,9 @@ export const IntroText = () => {
     useEffect(() => {
         if (signoffTyper.isAnimating) {
             setCurrentlyTyping(TextSections.signoff);
-            setTimeout(() => {
-                setShowDucks(!isMobile);
-            }, 7000);
+            // setTimeout(() => {
+            //     setShowDucks(!isMobile);
+            // }, 7000);
         }
     }, [signoffTyper.isAnimating])
 
