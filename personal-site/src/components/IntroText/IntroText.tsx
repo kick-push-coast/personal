@@ -82,9 +82,9 @@ export const IntroText = () => {
             <p className={classes.hideMobile + ' ' + (currentlyTyping === TextSections.signoff ? classes.typing : '')}>
                 {shouldAnimate && !isMobile ? signoffTyper.text : TextSections.signoff}
             </p>
-            { showDucks ?
+            {/* { showDucks ?
                 <Ducks /> : <></>
-            }
+            } */}
         </>
     );
 }
