@@ -76,6 +76,7 @@ export const GeneratePrompt = (props: GeneratePromptProps) => {
             clearInterval(generateTimer);
             setGenerateLabel(<>Generate</>);
         }
+        return (() => clearInterval(generateTimer));
     }, [generateLoading])
     
     
