@@ -24,7 +24,7 @@ app.post('/generate-drawing', async (req, res) => {
     const { prompt, recaptchaToken } = req.body;
     const recaptchaSecretKey = process.env.RECAPTCHA_SECRET_KEY;
     const promptPrefix = 'A very simple child\'s drawing of ';
-    const promptSuffix = ' made with thick markers with only two colors at most. Outline only, no shading, drawn by a 5-year-old. Wobbly uneven lines, simple shapes, white background, no text, no background';
+    const promptSuffix = ' made with thick markers with only two colors at most. Outline only, no shading, drawn by a 5-year-old. Wobbly uneven lines, simple shapes, white background, no text, no background, no realistic elements including the hand or marker drawing the image';
     const fullPrompt = promptPrefix + prompt + promptSuffix;
 
     const recaptchaVerifyUrl =
@@ -52,7 +52,7 @@ app.post('/generate-drawing', async (req, res) => {
             model: "dall-e-3",
             prompt: fullPrompt,
             n: 1,
-            size: "1024x1024",
+            size: "1792x1024",
             response_format: "b64_json"
         });
 

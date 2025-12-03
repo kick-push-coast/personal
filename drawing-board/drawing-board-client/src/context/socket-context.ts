@@ -10,7 +10,6 @@ export class SocketContext {
 
     constructor() {
         this.socket = io('https://miketyler.us');
-        // this.socket = io('http://localhost:3000');
     }
 
 
