@@ -24,54 +24,65 @@ const topics = new Map<ArticleTopic, ReactNode>([
                 <li>JavaScript</li>
                 <li>TypeScript</li>
                 <li>React</li>
-                <li>Angular</li>
+                <li>Next.js</li>
                 <li>Node.js</li>
-                <li>PHP</li>
+                <li>Angular</li>
                 <li>HTML</li>
                 <li>CSS</li>
-                <li>SCSS</li>
+                <li>SASS/SCSS</li>
+                <li>CSS Module</li>
                 <li>Bootstrap</li>
                 <li>Tailwind</li>
-                <li>C#</li>
-                <li>ASP.NET</li>
+                <li>styled-components</li>
+                <li>Emotion</li>
             </ul>
         </section>
         <section>
             <h3>
-                Tools & Platforms
+                Tooling, Testing, & Platforms
             </h3>
             <ul className={classes.columns}>
                 <li>Git</li>
-                <li>GitHub</li>
+                <li>GitHub Actions</li>
+                <li>AWS</li>
                 <li>NPM</li>
                 <li>Webpack</li>
                 <li>Vite</li>
-                <li>OpenAI</li>
-                <li>Jest</li>
-                <li>Jasmine + Karma</li>
-                <li>Swagger</li>
-                <li>Figma</li>
+                <li>Jest + RTL</li>
                 <li>Storybook</li>
+                <li>Figma</li>
                 <li>Jira</li>
-                <li>TeamCity</li>
+                <li>Kibana</li>
+                <li>Claude Code</li>
+
             </ul>
         </section>
         <section>
             <h3>
-                Concepts
+                Data & State
             </h3>
             <ul className={classes.columns}>
-                <li>Accessibility</li>
-                <li>Responsive Design</li>
-                <li>Software Design Patterns</li>
+                <li>TanStack Query</li>
+                <li>Redux</li>
+                <li>RxJS</li>
+                <li>Zod</li>
+                <li>GraphQL</li>
                 <li>REST Principles</li>
-                <li>UX/UI Fundamentals</li>
+            </ul>
+        </section>
+        <section>
+            <h3>
+                Engineering Practices
+            </h3>
+            <ul className={classes.columns}>
+                <li>Accessibility (WCAG)</li>
+                <li>Performance Optimization</li>
+                <li>SSR</li>
                 <li>Design Systems</li>
-                <li>Prompt Design</li>
-                <li>Competitor Analysis</li>
-                <li>User Research</li>
+                <li>UX/UI Fundamentals</li>
                 <li>CI/CD</li>
                 <li>Agile</li>
+                <li>GDPR</li>
             </ul>
         </section>
         <br/>
@@ -109,13 +120,18 @@ const topics = new Map<ArticleTopic, ReactNode>([
             <br/>
             <ul className={classes.spaced}>
                 <li>
-                    <strong className={classes.emphasize}>Senior Product Engineer</strong><span className={classes.hideMobile}> / </span><span className={classes.hideDesktop}><br/></span>Jan 2023 → Present
+                    <strong className={classes.emphasize}>Senior Software Engineer</strong><span className={classes.hideMobile}> / </span><span className={classes.hideDesktop}><br/></span>Jan 2023 → Present
                     <ul>
-                        <li>Led a team of engineers to develop a React SDK for creating custom search UIs</li>
-                        <li>Conducted user interviews with external devs and used interview findings to iterate on technical designs</li>
-                        <li>Contributed code and mentored junior engineers throughout the process</li>
-                        <li>Saw widespread adoption - 40% of client search requests now come from SDK implementations one year after initial release</li>
-                        <li>Authored public-facing technical documentation for the SDK and other developer resources</li>
+                        <li>Architected and built a React component library powering 40% of customer search traffic.</li>
+                        <li>Maintained core JavaScript client services used by millions of users daily.</li>
+                        <li>Developed internal Node.js services (scraping, analytics pipelines, revenue attribution).</li>
+                        <li>Collaborated with backend teams on API design using TypeScript & Zod.</li>
+                        <li>Owned accessibility (WCAG 2.2), privacy (GDPR), performance, and CI/CD initiatives.</li>
+                        <li>Delivered tailored technical demos and proof-of-concept integrations for enterprise prospects.</li>
+                        <li>Conducted technical feasibility assessments and translated requirements into integration plans.</li>
+                        <li>Built pre-built templates and onboarding workflows that reduced integration time from weeks to days.</li>
+                        <li>Partnered with sales, product, and implementation teams to influence roadmap and close deals.</li>
+                        <li>Authored integration guides, RFP documentation, and architecture proposals.</li>
                         <li className={classes.featuredLinks}>
                             <div>
                                 <a href="//react.cludo.com" target="_blank">React SDK Docs</a>
@@ -153,7 +169,7 @@ const topics = new Map<ArticleTopic, ReactNode>([
                 </li>
                 <br/>
                 <li>
-                    <strong className={classes.emphasize}>Frontend Developer</strong><span className={classes.hideMobile}> / </span><span className={classes.hideDesktop}><br/></span>Sep 2017 → Jun 2019
+                    <strong className={classes.emphasize}>Implementations Developer</strong><span className={classes.hideMobile}> / </span><span className={classes.hideDesktop}><br/></span>Sep 2017 → Jun 2019
                     <ul>
                         <li>Worked jointly with clients to create custom search implementations</li>
                         <li>Developed reusable, portable search UIs with ASP.NET templates and vanilla JavaScript</li>
