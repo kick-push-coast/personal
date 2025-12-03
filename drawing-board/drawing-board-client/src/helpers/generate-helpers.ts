@@ -10,7 +10,6 @@ export async function generateImage(prompt: string, recaptchaToken: string) {
     const requestBody = { prompt, recaptchaToken };
 
     const response = await fetch('https://miketyler.us/generate-drawing', {
-    // const response = await fetch('http://localhost:3000/generate-drawing', {
         method: 'POST',
         body: JSON.stringify(requestBody),
         headers: { 'Content-Type': 'application/json' }
@@ -58,17 +57,17 @@ export async function generateImage(prompt: string, recaptchaToken: string) {
 
 async function processAndReturnImage(b64String: string) {
     const imageData = await getImageDataFromB64(b64String);
-    const whiteRemovedImage = removeWhiteFromImage(imageData);
+    const whiteRemovedImage = removeNearWhite(imageData);
     return whiteRemovedImage;
 }
 
 async function getImageDataFromB64(b64String: string): Promise<ImageData> {
     const b64Prefix = 'data:image/png;base64,';
-    const canvasDimension = 1024;
     const b64Image = b64Prefix + b64String;
 
     const canvas = document.createElement("canvas");
-    canvas.width = canvas.height = canvasDimension;
+    canvas.width = 1792;
+    canvas.height = 1024;
     const ctx = canvas.getContext("2d");
 
     const image = new Image();
@@ -77,26 +76,25 @@ async function getImageDataFromB64(b64String: string): Promise<ImageData> {
 
     if (ctx) {
         ctx.drawImage(image, 0, 0);
-        return ctx.getImageData(0, 0, canvasDimension, canvasDimension);
+        return ctx.getImageData(0, 0, 1792, 1024);
     } else {
         return new ImageData(0, 0);
     }
 }
 
-function removeWhiteFromImage(imageData: ImageData): ImageData {
-    const pixelData = imageData.data;
-    const transparentColor = { r: 0, g: 0, b: 0, a: 0 };
+function removeNearWhite(imageData: ImageData, brightnessThreshold = 0.65): ImageData {
+    const data = imageData.data;
 
-    for (let i = 0, n = pixelData.length; i < n; i += 4) {
-        const r = pixelData[i],
-            g = pixelData[i + 1],
-            b = pixelData[i + 2];
+    for (let i = 0; i < data.length; i += 4) {
+        const r = data[i] / 255;
+        const g = data[i + 1] / 255;
+        const b = data[i + 2] / 255;
 
-        if (r >= 230 && g >= 230 && b >= 230) {
-            pixelData[i] = transparentColor.r;
-            pixelData[i + 1] = transparentColor.g;
-            pixelData[i + 2] = transparentColor.b;
-            pixelData[i + 3] = transparentColor.a;
+        // perceived brightness (ITU-R BT.709)
+        const brightness = 0.2126 * r + 0.7152 * g + 0.0722 * b;
+
+        if (brightness >= brightnessThreshold) {
+            data[i + 3] = 0; // transparent
         }
     }
 

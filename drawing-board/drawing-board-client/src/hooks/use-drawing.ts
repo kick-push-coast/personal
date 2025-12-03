@@ -90,16 +90,40 @@ export default function useDrawing() {
     function setCanvasImageData(imageData: ImageData) {
         const tempCanvas = document.createElement('canvas');
         const tempContext = tempCanvas.getContext('2d');
+
+        // Original image dimensions
         tempCanvas.width = imageData.width;
         tempCanvas.height = imageData.height;
-        const finalImageDimension = canvasRef.current?.height || 1024;
-        const currentCanvasWidth = canvasRef.current?.width || 1024;
-        const xOffset = (currentCanvasWidth - finalImageDimension) / 2;
 
-        tempContext && tempContext.putImageData(imageData, 0, 0);
-        ctxRef.current && ctxRef.current.drawImage(tempCanvas, xOffset, 0, finalImageDimension, finalImageDimension);
-        canvasRef.current && socketContext.emitDrawing(canvasRef.current.toDataURL('image/png'));
+        tempContext?.putImageData(imageData, 0, 0);
+
+        const canvas = canvasRef.current;
+        const ctx = ctxRef.current;
+        if (!canvas || !ctx) return;
+
+        const canvasWidth = canvas.width;
+        const canvasHeight = canvas.height;
+
+        // Scale so the image fills the canvas HEIGHT
+        const scale = canvasHeight / imageData.height;
+
+        const displayWidth = imageData.width * scale;  // scaled width
+        const displayHeight = canvasHeight;            // scaled height = full height
+
+        // Center horizontally
+        const xOffset = (canvasWidth - displayWidth) / 2;
+
+        ctx.drawImage(
+            tempCanvas,
+            xOffset,
+            0,
+            displayWidth,
+            displayHeight
+        );
+
+        socketContext.emitDrawing(canvas.toDataURL('image/png'));
     }
+
 
     function clearImage() {
         if (ctxRef.current && canvasRef.current) {
